@@ -14,12 +14,11 @@ export class MnemonicComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
-    this.getSeed();
+    this.getAccountInfo();
   }
 
-  getSeed() {
-    this.dataService.getSeed({
-    }).subscribe((data) => {
+  getAccountInfo() {
+    this.dataService.getAccountInfo().subscribe((data) => {
       this.mnemonicSeed = data;
     });
   }

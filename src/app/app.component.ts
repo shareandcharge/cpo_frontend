@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     limit: 5,
     timeout: 6000
   });
-  title = 'MSP Dashboard app';
+  title = 'CPO Dashboard app';
   accountInfo: any = [];
 
   constructor (

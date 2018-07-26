@@ -15,12 +15,3 @@ export const routes: Routes = [
   { path: 'mnemonic', component: MnemonicComponent, canActivate: [AuthGuard]},
   { path: 'stations', component: StationsComponent, canActivate: [AuthGuard]}
 ];
-
-// export const routes: Routes = [
-//   {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthLoginGuard] },
-//   { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuard] },
-//   { path: 'myEnergy', component: MyEnergyComponent, canActivate: [AuthGuard] },
-//   { path: 'myCommunity', component: MyCommunityComponent, canActivate: [AuthGuard] },
-//   { path: 'myInstallation', component: MyInstallationComponent, canActivate: [AuthGuard] },
-//   { path: 'myAccount', component: MyAccountComponent, canActivate: [AuthGuard] },
-// ];

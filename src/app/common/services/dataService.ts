@@ -42,50 +42,18 @@ export class DataService {
         return this.execPOSTRequest(this.baseUrl + 'cpo');
     }
 
-    // getAccountWallet(): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'account/wallet');
-    // }
-
-    // getAccountHistory(): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'account/history');
-    // }
-
-    // getStations(): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'stations');
-    // }
-
-
-// GET    /api/v1/cpo
-// POST   /api/v1/cpo
-// POST   /api/v1/cpo/wallet/generate
-// GET    /api/v1/cpo/wallet/seed
-// GET    /api/v1/cpo/history
-
-    // MSP
-
-    // getAccountInfo(): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'msp');
-    // }
-
-    // setAccountInfo(params): Observable<any> {
-    //     return this.execPOSTRequest(this.baseUrl + 'msp');
-    // }
-
-    // getDrivers(params): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'drivers');
-    // }
-
-    getSeed(params): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'msp/wallet/seed');
+    getWalletSeed(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/wallet/seed');
     }
 
-    // getWallet(walletId): Observable<any> {
-    //   return this.execGETRequest(this.baseUrl + 'wallet/' + walletId);
-    // }
+    getHistory(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/history');
+    }
 
-    // topUpWallet(walletId, ammount): Observable<any> {
-    //   return this.execPOSTRequest(this.baseUrl + 'token/mint/' + walletId + '?amount=' + ammount);
-    // }
+    generateWallet(): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/wallet/generate');
+    }
+
 
     /********************* Handling Requests ***********************/
 
@@ -136,7 +104,7 @@ export class DataService {
 
     private logError(error: any): Observable<any> {
         return this.http.post('/log/js/message', {
-            origin: 'MSP-web-app',
+            origin: 'CPO-web-app',
             userAgent: navigator ? navigator.userAgent : undefined,
             browser: navigator ? navigator.userAgent : undefined,
             url: window.location.href,
