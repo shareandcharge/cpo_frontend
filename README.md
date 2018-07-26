@@ -1,6 +1,6 @@
 # CPO Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+After cloning the git repo, do a `npm install`.
 
 ## Development server
 
