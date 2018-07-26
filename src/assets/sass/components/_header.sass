@@ -1,0 +1,284 @@
+label
+  display: inline-block
+  margin-bottom: 7px
+  color: #4c5356
+
+a
+  -webkit-transition-duration: 350ms
+  transition-duration: 350ms
+  -webkit-transition-property: all
+  transition-property: all
+  -webkit-transition-timing-function: ease
+  transition-timing-function: ease
+  color: #004666
+  &:hover
+    color: #4c5356
+
+.c-brand-logo
+  display: inline-block
+  width: 180px
+  height: 108px
+  padding-left: 20px
+  padding-right: 20px
+  position: absolute
+  top: 0
+  left: 0
+  background-image: linear-gradient(45deg, #003b57 0%, #0b6e8e 100%)
+  svg
+    width: 140px
+    height: 108px
+    fill: #fff
+
+@media (max-width: 45em)
+  .c-brand-logo
+    width: 170px
+    height: 48px
+
+@media (max-width: 45em)
+  .c-brand-logo svg
+    width: 130px
+    height: 48px
+
+@media (min-width: 45.01em)
+  .c-brand-logo.c-brand-logo--small-screen
+    display: none
+
+@media (max-width: 45em)
+  .c-brand-logo.c-brand-logo--large-screen
+    display: none
+
+.c-page-head
+  width: 100%
+  position: fo
+  top: 0
+  left: 0
+  z-index: 1030
+  height: 68px
+  background-color: rgba(255, 255, 255, 0.6)
+  &.c-page-head--no-hero
+    position: relative
+    height: 164px
+
+@media (max-width: 45em)
+  .c-page-head
+    height: 48px
+
+@media (max-width: 45em)
+  .c-page-head.c-page-head--no-hero
+    height: 104px
+
+.c-page-head__inner
+  padding-left: 208px
+  position: relative
+
+@media (max-width: 45em)
+  .c-page-head__inner
+    padding-left: 184px
+
+.c-page-head-nav
+  margin: 0
+  text-align: right
+  text-transform: uppercase
+  font-weight: bold
+  list-style: none
+  &::after
+    content: "" !important
+    display: block !important
+    clear: both !important
+
+@media (max-width: 45em)
+  .c-page-head-nav
+    line-height: 48px
+
+.c-page-head-nav__item
+  display: inline-block
+  position: relative
+  vertical-align: top
+  &.c-page-head-nav__item--left
+    float: left
+  &:not(:first-child)
+    margin-left: 30px
+
+@media (max-width: 45em)
+  .c-page-head-nav__item:not(:first-child)
+    margin-left: 15px
+
+@media (max-width: 30em)
+  .c-page-head-nav__item:not(:first-child)
+    margin-left: 7.5px
+
+@media (max-width: 45em)
+  .c-page-head-nav__item
+    position: static
+
+.c-page-head-nav__link
+  font-size: .83333rem
+  line-height: 68px
+  display: block
+  line-height: 68px
+  text-decoration: none
+  &:hover .c-page-head-nav__link-text::after,
+  &:focus .c-page-head-nav__link-text::after,
+  &:active .c-page-head-nav__link-text::after
+    width: 100%
+
+a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
+  width: 100%
+
+@media (min-width: 30.01em)
+  .c-page-head-nav__link
+    font-size: .83333rem
+    line-height: 68px
+
+@media (min-width: 45.01em)
+  .c-page-head-nav__link
+    font-size: .83333rem
+    line-height: 68px
+
+@media (min-width: 60.01em)
+  .c-page-head-nav__link
+    font-size: .83333rem
+    line-height: 68px
+
+@media (min-width: 80.01em)
+  .c-page-head-nav__link
+    font-size: .83333rem
+    line-height: 68px
+
+@media (min-width: 120.0725em)
+  .c-page-head-nav__link
+    font-size: 1rem
+    line-height: 68px
+
+@media (max-width: 45em)
+  .c-page-head-nav__link
+    line-height: 48px
+
+.c-page-head-nav__link-text
+  display: inline-block
+  position: relative
+  &::before
+    -webkit-transition-duration: 350ms
+    transition-duration: 350ms
+    -webkit-transition-property: all
+    transition-property: all
+    -webkit-transition-timing-function: ease
+    transition-timing-function: ease
+    display: block
+    width: 16px
+    height: 16px
+    position: absolute
+    bottom: 0
+    left: 50%
+    -webkit-transform: translateX(-50%)
+    transform: translateX(-50%)
+    border-color: transparent
+    border-style: solid
+    border-width: 8px
+    border-bottom-width: 0
+    content: ""
+
+.c-page-head-nav__link-text::after
+  -webkit-transition-duration: 350ms
+  transition-duration: 350ms
+  -webkit-transition-property: all
+  transition-property: all
+  -webkit-transition-timing-function: ease
+  transition-timing-function: ease
+  display: block
+  height: 1px
+  width: 0
+  position: absolute
+  top: calc(50% + 9px)
+  left: 50%
+  -webkit-transform: translateX(-50%)
+  transform: translateX(-50%)
+  background-color: currentColor
+  content: ""
+
+.o-page-wrap
+  max-width: 1320px
+  margin-left: auto
+  margin-right: auto
+  padding-left: 20px
+  padding-right: 20px
+
+@media (max-width: 45em)
+  .o-page-wrap
+    padding-left: 10px
+    padding-right: 10px
+
+@media (min-width: 120.0725em)
+  .o-page-wrap
+    max-width: 1640px
+
+.c-brand-logo
+  display: inline-block
+  width: 180px
+  height: 108px
+  padding-left: 20px
+  padding-right: 20px
+  position: absolute
+  top: 0
+  left: 0
+  // background-image: linear-gradient(45deg, #003b57 0%, #0b6e8e 100%)
+  background-image: none
+  svg
+    width: 140px
+    height: 108px
+    fill: #fff
+  img
+    height: 48px
+    margin: 10px 0px
+
+@media (max-width: 45em)
+  .c-brand-logo
+    width: 170px
+    height: 48px
+    img
+      height: 40px
+      margin: 4px 0px
+
+@media (max-width: 45em)
+  .c-brand-logo svg
+    width: 130px
+    height: 48px
+
+@media (min-width: 45.01em)
+  .c-brand-logo.c-brand-logo--small-screen
+    display: none
+
+@media (max-width: 45em)
+  .c-brand-logo.c-brand-logo--large-screen
+    display: none
+
+.c-page-head
+  width: 100%
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1030
+  height: 68px
+  background-color: rgba(255, 255, 255, 0.6)
+  &.c-page-head--no-hero
+    position: relative
+    height: 164px
+
+@media (max-width: 45em)
+  .c-page-head
+    height: 48px
+
+@media (max-width: 45em)
+  .c-page-head.c-page-head--no-hero
+    height: 104px
+
+.c-page-head__inner
+  padding-left: 208px
+  position: relative
+
+@media (max-width: 45em)
+  .c-page-head__inner
+    padding-left: 184px
+
+.c-page-head--no-nav
+  background-color: transparent

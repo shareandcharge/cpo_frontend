@@ -1,0 +1,81 @@
+<h2 class="page-title">My Account</h2>
+
+    <div class="">
+
+      <ul class="account-info-list">
+          <li>
+              <span>Name: </span>
+              <span>{{accountInfo.name}}</span>
+          </li>
+          <li>
+              <span>Address line 1: </span>
+              <span>{{accountInfo.address_1}}</span>
+          </li>
+          <li>
+              <span>Address line 2: </span>
+              <span>{{accountInfo.address_2}}</span>
+          </li>
+          <li>
+            <span>Town: </span>
+            <span>{{accountInfo.town}}</span>
+        </li>
+          <li>
+              <span>Town postcode: </span>
+              <span>{{accountInfo.postcode}} </span>
+          </li>
+          <li>
+              <span>E-Mail address: </span>
+              <span>{{accountInfo.mail_addr}}</span>
+          </li>
+          <li>
+              <span>Website: </span>
+              <span>{{accountInfo.website}}</span>
+          </li>
+          <li>
+              <span>VAT number: </span>
+              <span>{{accountInfo.vat_number}}</span>
+          </li>
+      </ul>
+    </div>
+
+    <div class="wallet-wrapper">
+      <div class="wallet-info">
+        <h2>Wallet: </h2>
+        <!-- <p>{{accountInfo.wallet}}</p> -->
+        <p class="wallet-info__ammount">18.25</p>
+        <p>Network Tokens</p>
+      </div>
+      <div>
+          <h2>Recent Transactions: </h2>
+          <ul class="transaction-list">
+              <li *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
+                <span>0.32 Tokens</span>
+                <span>7.7.2018, 22:45</span>
+              </li>
+          </ul>
+      </div>
+    </div>
+
+
+    <!-- {{accountInfo}} -->
+
+    <!-- <br> -->
+
+    <!-- <li *ngFor="let accountWalletItem of accountHistory">
+        {{accountWalletItem.amount}},
+        {{accountWalletItem.currency}},
+        {{accountWalletItem.timestamp}}
+
+        {{accountWalletItem.amount}},
+        {{accountWalletItem.currency}},
+        {{accountWalletItem.timestamp}}
+    </li> -->
+
+    <!-- <br> -->
+
+    <!-- <li *ngFor="let accountHistoryItem of accountHistory">
+        {{accountHistoryItem}}
+    </li> -->
+
+    <!-- <br> -->
+

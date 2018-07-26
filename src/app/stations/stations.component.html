@@ -1,0 +1,151 @@
+<h2 class="page-title" *ngIf="!driverDetailActive">Stations</h2>
+
+<!-- <div *ngIf="!driverDetailActive">
+    <ngx-datatable
+      [rows]="driversRows"
+      [columns]="driversColumns"
+      class="material striped"
+      [columnMode]="'force'"
+      [headerHeight]="48"
+      [footerHeight]="48"
+      [rowHeight]="48"
+      [limit]="10"
+      (select)="onSelect($event)"
+      [selected]="selected"
+      [selectionType]="'single'"
+      (select)='onSelect($event)'
+      [sortType]="'multi'">
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+            Name
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.about">{{row.about.firstname}} {{row.about.lastname}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+            Address
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span *ngIf="row.about">{{row.about.zipcode}} {{row.about.city}}, {{row.about.street}} </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+            S & C Address
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.address}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+           E-mail
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.email}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+            Phone
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span *ngIf="row.about">{{row.about.phone}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template let-column="column" ngx-datatable-header-template>
+            S & C Tokens
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.balance}} {{row.token}}
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+
+
+    <h2 class="page-title clickable" (click)="backToDrivers()" *ngIf="driverDetailActive">
+      <i class="fas fa-chevron-left"></i>
+      <span class="first-name" *ngIf="driverDetail.about.firstname">{{driverDetail.about.firstname}}</span>
+      <span class="last-name" *ngIf="driverDetail.about.lastname">{{driverDetail.about.lastname}}</span>
+    </h2>
+
+    <div class="driver-detail-wrapper" *ngIf="driverDetailActive">
+
+        <ul>
+            <li>
+                <span>Address:</span>
+                <span>{{driverDetail.about.zipcode}} {{driverDetail.about.city}}, {{driverDetail.about.street}}</span>
+            </li>
+            <li>
+                <span>E Mail Address:</span>
+                <span>{{driverDetail.about.email}}</span>
+            </li>
+            <li>
+                <span>Phone:</span>
+                <span>{{driverDetail.about.phone}}</span>
+            </li>
+        </ul>
+
+        <div>
+          <div class="wallet-info wallet-info--driver-detail">
+            <h2>Wallet: </h2>
+            <p class="wallet-info__ammount">{{driverDetail.balance}}</p>
+            <p>Network Tokens</p>
+          <div class="wallet-info__buttons">
+            <div class="wallet-info__buttons__inner-wrapper">
+              <button type="button" (click)="transactionsActive = !transactionsActive; tokensActive = false;">
+                  <i class="fas fa-info-circle"></i>
+              </button>
+              <div [hidden]="!transactionsActive" class="wallet-info__transactions">
+                <p class="bold">Latest transactions</p>
+                <ul class="transaction-list">
+                    <li *ngFor="let number of [0,1,2,3,4,5]">
+                        <span>1.45 CF</span>
+                        <span>
+                          <i class="fas fa-car"></i>
+                          <i class="fas fa-bolt"></i>
+                        </span>
+                        <span>7.7.2018, 22:45</span>
+                    </li>
+                </ul>
+              </div>
+            </div>
+            <div class="wallet-info__buttons__inner-wrapper">
+              <button type="button" (click)="tokensActive = !tokensActive; transactionsActive = false;" >
+                  <i class="fas fa-plus-circle"></i>
+              </button>
+              <div [hidden]="!tokensActive" class="wallet-info__tokens">
+                  <p class="bold">Provide new tokens</p>
+                  <div class="token-ammount__input-wrapper">
+                    <input type="text" name="tokenAmmount" [(ngModel)]="tokenValue">
+                    <span class="token-ammount-wrapper">
+                        <button type="button" (click)="addTokens()">
+                          <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button type="button" (click)="removeTokens()">
+                          <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </span>
+                  </div>
+                  <button type="button" (click)="topUpWallet()" [disabled]="this.tokenValue < 100">
+                      Add
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="driver-detail-overlay" [hidden]="!transactionsActive && !tokensActive" (click)="transactionsActive = false; tokensActive = false"></div> -->

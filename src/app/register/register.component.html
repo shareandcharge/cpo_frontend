@@ -1,0 +1,54 @@
+<form>
+
+  <div class="pilot-project-wrapper">
+    <img src="../../assets/img/share-and-charge.png" class="motionwerk-logo">
+    <div class="pilot-project-text">
+      <span>UK Pilot Project</span>
+      <span>Dashboard</span>
+    </div>
+  </div>
+
+  <div class="register-form">
+
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Name" name="name" [(ngModel)]="accountInfo.name">
+    </div>
+    <div>
+      <label for="adress1">Address line 1</label>
+      <input type="text" id="address1" placeholder="Address line 1" name="address1" [(ngModel)]="accountInfo.address1">
+    </div>
+    <div>
+      <label for="adress2">Address line 2</label>
+      <input type="text" id="address2" placeholder="Address line 2" name="address2" [(ngModel)]="accountInfo.address2">
+    </div>
+    <div>
+      <label for="town">Town</label>
+      <input type="text" id="town" placeholder="Town" name="town" [(ngModel)]="accountInfo.town">
+    </div>
+    <div>
+      <label for="townPostcode">Town postcode</label>
+      <input type="text" id="townPostcode" placeholder="Town postcode" name="townPostcode" [(ngModel)]="accountInfo.townPostcode">
+    </div>
+    <div>
+      <label for="email">Mail-adress</label>
+      <input type="text" id="email" placeholder="Mail-adress" name="email" [(ngModel)]="accountInfo.email">
+    </div>
+    <div>
+      <label for="website">Website</label>
+      <input type="text" id="website" placeholder="Website" name="website" [(ngModel)]="accountInfo.website">
+    </div>
+    <div>
+      <label for="vatNumber">VAT number</label>
+      <input type="text" id="vatNumber" placeholder="VAT number" name="vatNumber" [(ngModel)]="accountInfo.vatNumber">
+    </div>
+    <div>
+      <input type="submit" id="submit" value="Register" (click)="setAccountInfo()">
+    </div>
+
+  </div>
+
+</form>
+
+
+

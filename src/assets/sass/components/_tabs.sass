@@ -1,0 +1,31 @@
+.tabset
+    width: 100%
+    .nav.nav-tabs
+        @extend %clearfix
+        width: 100%
+        max-width: 400px
+        margin: auto
+        display: flex
+        justify-content: center
+        li
+            @include transition(all, 100ms, ease-in-out)
+            flex-direction: row
+            flex-grow: 1
+            text-align: center
+            border-bottom: 1px solid #DEDEDE
+            text-transform: uppercase
+            &.active
+                border-bottom: 1px solid $lightGreen
+                box-shadow: 0px 2px 0px 0px $lightGreen, 0px -2px 0px 0px $lightGreen inset
+                z-index: 1
+                a
+                    color: $lightGreen
+            a
+                padding: 20px
+                cursor: pointer
+                display: block
+                color: #B3B3B3
+                font-weight: bold
+    .tabset-content
+        @extend %clearfix
+        width: 100%
