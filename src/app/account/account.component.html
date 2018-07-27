@@ -48,34 +48,13 @@
       <div>
           <h2>Recent Transactions: </h2>
           <ul class="transaction-list">
-              <li *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">
-                <span>0.32 Tokens</span>
-                <span>7.7.2018, 22:45</span>
+              <li *ngFor="let historyItem of accountHistory">
+                <span>{{historyItem.amount}} {{historyItem.currency}}</span>
+                <span>{{historyItem.timestamp}}</span>
               </li>
           </ul>
       </div>
     </div>
 
 
-    <!-- {{accountInfo}} -->
-
-    <!-- <br> -->
-
-    <!-- <li *ngFor="let accountWalletItem of accountHistory">
-        {{accountWalletItem.amount}},
-        {{accountWalletItem.currency}},
-        {{accountWalletItem.timestamp}}
-
-        {{accountWalletItem.amount}},
-        {{accountWalletItem.currency}},
-        {{accountWalletItem.timestamp}}
-    </li> -->
-
-    <!-- <br> -->
-
-    <!-- <li *ngFor="let accountHistoryItem of accountHistory">
-        {{accountHistoryItem}}
-    </li> -->
-
-    <!-- <br> -->
 

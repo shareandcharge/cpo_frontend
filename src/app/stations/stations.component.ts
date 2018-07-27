@@ -11,6 +11,14 @@ export class StationsComponent implements OnInit {
 
   private toasterService: ToasterService;
 
+  stations: any = [];
+  selectedEvse: any = [];
+  selectedEvseIndex: any;
+  showEvses: boolean = false;
+  connectors: any = [];
+  selectedConnectorsIndex: any;
+  showConnectors: boolean = false;
+
   constructor(toasterService: ToasterService,
               private dataService: DataService,
               public router: Router) {
@@ -18,6 +26,35 @@ export class StationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getStations();
+  }
+
+  getStations() {
+    this.dataService.getStations().subscribe((data) => {
+        this.stations = data;
+        console.log(data);
+    });
+  }
+
+  getEvses(index) {
+    this.selectedEvse = this.stations[index].data.evses;
+    this.selectedEvseIndex = index;
+    this.showEvses = !this.showEvses;
+    this.showConnectors = false;
+    console.log(this.selectedEvse);
+  }
+
+  getConnectors(index) {
+    this.connectors = this.selectedEvse[index].connectors;
+    this.selectedConnectorsIndex = index;
+    this.showConnectors = !this.showConnectors;
+    // console.log(this.connectors);
+  }
+
+  closeAllLists(index) {
+    this.showEvses = false;
+    this.showConnectors = false;
+    console.log('radi');
   }
 
 }

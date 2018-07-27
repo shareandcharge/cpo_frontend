@@ -55,19 +55,9 @@ body
 
 html
     // height: 100%
-    @include background-image-cover('https://i.imgur.com/Fk334Vk.jpg')
-
-
-    // background: url('../img/share-and-charge.png') no-repeat center center
-    // -webkit-background-size: cover
-    // -moz-background-size: cover
-    // -o-background-size: cover
-    // background-size: cover
+    @include background-image-cover('../src/assets/img/bg.jpg')
     background-attachment: fixed
     font-family: $lato
-    &.not-login
-        // background: url('../src/assets/img/bg-blur.png') no-repeat center center
-        background-attachment: fixed
 
 *,
 *:before,
@@ -449,6 +439,10 @@ input[type=submit],
     font-weight: bold
     margin: 10px 0
 .transaction-list
+  max-height: 300px
+  overflow-y: auto
+  padding-right: 24px
+  margin-top: 16px
   li
     @extend %clearfix
     padding: 10px 0
@@ -466,7 +460,6 @@ input[type=submit],
   color: #fff
   padding: 24px
   font-size: 0
-  color: #fff
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
   span:first-child,
   span:last-child
@@ -600,3 +593,80 @@ span.datatable-header-cell-label,
 .ngx-datatable.material.multi-click-selection .datatable-body-row.active,
 .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group
   background-color: inherit
+
+
+
+// cpo
+
+.stations-overlay
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 1031
+
+div.stations-container-wrapper
+  width: 360px
+  position: relative
+  z-index: 1032
+  background: rgba(0,70,102,0.8)
+  color: #fff
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+  .station-header
+    @extend %clearfix
+    width: 100%
+    border-bottom: 1px solid #fff
+    padding: 8px 24px 10px 24px
+    display: block
+    i
+      cursor: pointer
+    .name
+      float: left
+      padding: 8px 16px 8px 0px
+      i:before
+        margin-right: 8px
+    .actions
+      float: right
+      i
+        padding: 8px 0px 8px 16px
+  .station-row
+    width: 100%
+    padding: 24px
+    display: block
+  div.stations-container
+    position: relative
+    border-bottom: 1px solid #fff
+    span
+      display: inline-block
+    &:last-child
+      border-bottom: 0
+    .evse-container-wrapper
+      position: absolute
+      top: -16px
+      left: 346px
+      width: 360px
+      background: rgba(96, 0, 102, 0.8)
+      color: #fff
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+      margin: 16px
+      div.evse-container
+        position: relative
+        border-bottom: 1px solid #fff
+        &:last-child
+          border-bottom: 0
+        div.connectors-container-wrapper
+          position: absolute
+          top: -16px
+          left: 346px
+          width: 360px
+          background: rgba(0, 78, 102, 0.8)
+          color: #fff
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+          margin: 16px
+          .connectors-container
+            border-bottom: 1px solid #fff
+            &:last-child
+              border-bottom: 0

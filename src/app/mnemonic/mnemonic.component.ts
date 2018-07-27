@@ -18,7 +18,7 @@ export class MnemonicComponent implements OnInit {
   }
 
   getAccountInfo() {
-    this.dataService.getAccountInfo().subscribe((data) => {
+    this.dataService.getWalletSeed().subscribe((data) => {
       this.mnemonicSeed = data;
     });
   }

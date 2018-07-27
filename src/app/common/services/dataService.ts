@@ -27,10 +27,6 @@ export class DataService {
         return prop ? this.cache[prop] : this.cache;
     }
 
-    /********************* AUTH0 ***************************/
-
-    /********************* END AUTH0 ***********************/
-
 
     // CPO
 
@@ -40,6 +36,10 @@ export class DataService {
 
     setAccountInfo(params): Observable<any> {
         return this.execPOSTRequest(this.baseUrl + 'cpo');
+    }
+
+    getWallet(walletId): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/wallet/' + walletId);
     }
 
     getWalletSeed(): Observable<any> {
@@ -52,6 +52,18 @@ export class DataService {
 
     generateWallet(): Observable<any> {
       return this.execPOSTRequest(this.baseUrl + 'cpo/wallet/generate');
+    }
+
+    getStations(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/locations');
+    }
+
+    postStations(): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/locations');
+    }
+
+    putStations(): Observable<any> {
+      return this.execPUTRequest(this.baseUrl + 'cpo/locations');
     }
 
 
@@ -82,6 +94,13 @@ export class DataService {
         return this.http.get(url, {params})
             .map((response: Response) => this.handleResponse(response))
             .catch((error: any) => this.handleError(error));
+    }
+
+    private execPUTRequest(url: string, params: Object = {}): Observable<any> {
+      this.broadcaster.broadcast('httpRequest', true);
+      return this.http.put(url, {params})
+          .map((response: Response) => this.handleResponse(response))
+          .catch((error: any) => this.handleError(error));
     }
 
     handleResponse(response: Response) {
