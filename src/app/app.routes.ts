@@ -8,7 +8,7 @@ import { MnemonicComponent } from './mnemonic/mnemonic.component';
 import { StationsComponent } from './stations/stations.component';
 
 export const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '', redirectTo: 'register', pathMatch: 'full'},
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
