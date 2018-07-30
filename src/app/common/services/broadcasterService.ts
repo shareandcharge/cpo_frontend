@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { IBroadcastEvent } from '../interfaces/index';
+import { IBroadcastEvent } from '../interfaces';
 import '../rxjs-operators';
 
 @Injectable()

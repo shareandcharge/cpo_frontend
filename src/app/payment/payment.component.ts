@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../common/index';
+import {DataService} from '../common';
 
 @Component({
   selector: 'app-payment',

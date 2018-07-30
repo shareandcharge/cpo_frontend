@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../common/index';
+import { DataService } from '../common';
 
 @Component({
   selector: 'app-account',
@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
   getAccountInfo() {
     this.dataService.getAccountInfo().subscribe((data) => {
          this.accountInfo = data;
-         // this.getWallet(data.wallet);
+         this.getWallet(data.wallet);
          console.log(this.accountInfo);
     });
   }

@@ -30,6 +30,10 @@ export class DataService {
 
     // CPO
 
+    testGet(): Observable<any> {
+      return this.execDELETERequest('https://httpbin.org/delete');
+    }
+
     getAccountInfo(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo');
     }
@@ -58,12 +62,16 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/locations');
     }
 
-    postStations(): Observable<any> {
-      return this.execPOSTRequest(this.baseUrl + 'cpo/locations');
+    postStation(params): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/location');
+  }
+
+    putStation(params): Observable<any> {
+      return this.execPUTRequest(this.baseUrl + 'cpo/location');
     }
 
-    putStations(): Observable<any> {
-      return this.execPUTRequest(this.baseUrl + 'cpo/locations');
+    deleteStation(scId): Observable<any> {
+      return this.execDELETERequest(this.baseUrl + 'cpo/location/' + scId);
     }
 
 
@@ -99,6 +107,13 @@ export class DataService {
     private execPUTRequest(url: string, params: Object = {}): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
       return this.http.put(url, {params})
+          .map((response: Response) => this.handleResponse(response))
+          .catch((error: any) => this.handleError(error));
+    }
+
+    private execDELETERequest(url: string, params: Object = {}): Observable<any> {
+      this.broadcaster.broadcast('httpRequest', true);
+      return this.http.delete(url, {params})
           .map((response: Response) => this.handleResponse(response))
           .catch((error: any) => this.handleError(error));
     }

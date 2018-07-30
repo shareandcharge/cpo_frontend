@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../common/index';
+import { DataService } from '../common';
 
 @Component({
   selector: 'app-mnemonic',

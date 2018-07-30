@@ -7,14 +7,18 @@ import 'hammerjs';
 import { TabsModule } from 'ngx-tabs';
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/appRouting.module';
+import { AppRoutingModule } from './appRouting.module';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 
-import { ServicesModule} from './common/index';
+import { ServicesModule} from './common';
 
-import { ModalDialogComponent } from './common/components/session-timeout/session-timeout-modal.component';
+// import { ModalDialogComponent } from './common/components/session-timeout/session-timeout-modal.component';
+
+import { AddStationsModalDialogComponent } from './stations/add-stations-dialog/add-stations-dialog.component';
+import { UpdateStationsModalDialogComponent } from './stations/update-stations-dialog/update-stations-dialog.component';
+import { DeleteStationsModalDialogComponent } from './stations/delete-stations-dialog/delete-stations-dialog.component';
 
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
@@ -35,7 +39,9 @@ registerLocaleData(localeDE);
     PaymentComponent,
     MnemonicComponent,
     StationsComponent,
-    ModalDialogComponent
+    AddStationsModalDialogComponent,
+    UpdateStationsModalDialogComponent,
+    DeleteStationsModalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,11 @@ registerLocaleData(localeDE);
   providers: [
     { provide: LOCALE_ID, useValue: 'en-EN' }
   ],
-  entryComponents: [ModalDialogComponent],
+  entryComponents: [
+        AddStationsModalDialogComponent,
+        UpdateStationsModalDialogComponent,
+        DeleteStationsModalDialogComponent
+      ],
   bootstrap: [AppComponent]
 })
 

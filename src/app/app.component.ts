@@ -1,9 +1,7 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToasterModule, ToasterService, ToasterConfig} from 'angular2-toaster';
-import {ModalDialogService, SimpleModalComponent} from 'ngx-modal-dialog';
-import {ModalDialogComponent} from './common/components/session-timeout/session-timeout-modal.component';
-import { DataService } from './common/index';
+import {DataService} from './common';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +22,6 @@ export class AppComponent implements OnInit {
   constructor (
     public router: Router,
     toasterService: ToasterService,
-    private modalDialogService: ModalDialogService,
     private viewContainer: ViewContainerRef,
     private dataService: DataService
   ) {
@@ -36,7 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   getAccountInfo() {
-    this.dataService.getAccountInfo().subscribe((data) => {
+    this.dataService.testGet().subscribe((data) => {
          this.accountInfo = data;
          console.log(this.accountInfo);
     });

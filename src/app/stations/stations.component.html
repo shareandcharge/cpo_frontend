@@ -7,47 +7,54 @@
   <div *ngFor="let station of stations; let i = index;" class="stations-container">
     <span (click)="getEvses(i)" class="station-row">{{station.data.name}}, {{station.data.address}}</span>
     <div class="evse-container-wrapper" *ngIf="showEvses && selectedEvseIndex === i">
-      <span class="station-header">
+      <div class="station-header">
         <span class="name">
           <i class="fas fa-chevron-left" (click)="showEvses = false"></i>
-          Evses
+          {{station.data.name}}
         </span>
         <span class="actions">
           <i class="fas fa-info-circle"></i>
-          <i class="fas fa-pencil-alt"></i>
-          <i class="fas fa-trash-alt"></i>
+          <i class="fas fa-pencil-alt" (click)="updateStationsDialog()"></i>
+          <i class="fas fa-trash-alt" (click)="deleteStationsDialog()"></i>
         </span>
-      </span>
+      </div>
+      <div class="sub-title">Evses</div>
       <div *ngFor="let evse of selectedEvse; let a = index;" [hidden]="selectedEvseIndex !== i" class="evse-container">
-        <span (click)="getConnectors(a)" class="station-row">{{evse.evse_id}}, {{evse.status}}</span>
+        <span (click)="getConnectors(a)" class="station-row"><span class="evse-id">{{evse.evse_id}}</span><span class="evse-status">{{evse.status}}</span></span>
         <div class="connectors-container-wrapper" *ngIf="showConnectors && selectedConnectorsIndex === a">
-            <span class="station-header">
+            <div class="station-header">
                 <span class="name">
                     <i class="fas fa-chevron-left" (click)="showConnectors = false"></i>
-                    Connectors
+                    {{evse.evse_id}}
                   </span>
                 <span class="actions">
                   <i class="fas fa-info-circle"></i>
                   <i class="fas fa-pencil-alt"></i>
                   <i class="fas fa-trash-alt"></i>
                 </span>
-              </span>
+              </div>
+              <div class="sub-title">Connectors</div>
           <div *ngFor="let connector of connectors; let u = index;" [hidden]="selectedConnectorsIndex !== a" class="connectors-container">
-            <span class="station-row">{{connector.standard}} ,
-            {{connector.power_type}} ,
-            {{connector.tariff_id}} ,
-            {{connector.voltage}}</span>
+            <span class="station-row">
+              <span class="power-type">
+                <i class="fas fa-plug"></i>
+                {{connector.power_type}}</span>
+              <span class="power-standard">{{connector.standard}}</span>
+              <span class="power-voltage">{{connector.voltage}}</span>
+              <span class="power-tariff-id">{{connector.tariff_id}}</span>
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <button class="sc-button">
-      Update
-  </button>
-  <button class="sc-button">
-      Update
-  </button> -->
+
+  <div class="stations-buttons">
+    <button class="sc-button" (click)="addStationsDialog()">
+      <!-- <i class="fas fa-plus"></i>  -->
+      + Add new
+    </button>
+  </div>
 </div>
 
 <div class="stations-overlay" *ngIf="showEvses" (click)="closeAllLists()"></div>
