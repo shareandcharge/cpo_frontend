@@ -10,8 +10,7 @@ export class AddStationsModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
   actionButtons: any = [];
-  modalInfo: any =
-    {
+  modalInfo: any = [{
       'id': 'Motionwerk-1',
       'type': 'OTHER',
       'name': 'Motionwerk 1',
@@ -73,7 +72,8 @@ export class AddStationsModalDialogComponent implements IModalDialog {
         'name': 'Motionwerk GmbH'
       },
       'last_updated': '2018-05-31T11:07:00Z'
-    };
+    }
+  ];
 
   constructor(private dataService: DataService) {
     this.actionButtons = [
