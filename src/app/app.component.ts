@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   getAccountInfo() {
-    this.dataService.testGet().subscribe((data) => {
+    this.dataService.getAccountInfo().subscribe((data) => {
          this.accountInfo = data;
          console.log(this.accountInfo);
     });

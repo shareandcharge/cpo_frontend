@@ -30,10 +30,6 @@ export class DataService {
 
     // CPO
 
-    testGet(): Observable<any> {
-      return this.execDELETERequest('https://httpbin.org/delete');
-    }
-
     getAccountInfo(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo');
     }
