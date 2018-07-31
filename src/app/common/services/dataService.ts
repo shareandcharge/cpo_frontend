@@ -6,11 +6,13 @@ import {ToasterModule, ToasterService, ToasterContainerComponent} from 'angular2
 import {Broadcaster} from './broadcasterService';
 declare let BroadcastChannel;
 import { environment } from '../../../environments/environment';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable()
 export class DataService {
     private cache = {};
     private errorObject: any = {};
+    @BlockUI() blockUI: NgBlockUI;
     baseUrl = environment.apiUrl;
 
     constructor(private http: Http,
@@ -71,6 +73,14 @@ export class DataService {
       return this.execDELETERequest(this.baseUrl + 'cpo/location/' + scId);
     }
 
+    getPaymentWallet(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/wallet');
+    }
+
+    getPaymentWalletHistory(walletId): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/cdr/' + walletId);
+    }
+
     /********************* Handling Requests ***********************/
 
     handleError(error: any, disabledToast?: boolean): Observable<Error> {
@@ -88,7 +98,7 @@ export class DataService {
 
     private execPOSTRequest(url: string, params: Object = {}, disabledToast?: boolean): Observable<any> {
         this.broadcaster.broadcast('httpRequest', true);
-        console.log(params);
+        this.blockUI.start();
         return this.http.post(url, params)
             .map((response: Response) => this.handleResponse(response))
             .catch((error: any) => this.handleError(error, disabledToast));
@@ -96,6 +106,7 @@ export class DataService {
 
     private execGETRequest(url: string, params: Object = {}): Observable<any> {
         this.broadcaster.broadcast('httpRequest', true);
+        this.blockUI.start();
         return this.http.get(url, {params})
             .map((response: Response) => this.handleResponse(response))
             .catch((error: any) => this.handleError(error));
@@ -103,7 +114,7 @@ export class DataService {
 
     private execPUTRequest(url: string, params): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
-      console.log(params);
+      this.blockUI.start();
       return this.http.put(url, params)
           .map((response: Response) => this.handleResponse(response))
           .catch((error: any) => this.handleError(error));
@@ -111,7 +122,7 @@ export class DataService {
 
     private execDELETERequest(url: string, params: Object = {}): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
-      console.log(params);
+      this.blockUI.start();
       return this.http.delete(url, {params})
           .map((response: Response) => this.handleResponse(response))
           .catch((error: any) => this.handleError(error));
@@ -125,6 +136,9 @@ export class DataService {
 
         }
         this.broadcaster.broadcast('httpRequest', false);
+        setTimeout(() => {
+          this.blockUI.stop();
+        }, 100);
 
         if (res.status === 'ERROR') {
            // Handle errors thrown by back end

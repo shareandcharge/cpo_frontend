@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {Router} from '@angular/router';
-import {ToasterModule, ToasterService, ToasterConfig} from 'angular2-toaster';
-import {DataService} from './common';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster';
+import { DataService } from './common';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import {DataService} from './common';
 })
 export class AppComponent implements OnInit {
 
+  @BlockUI() blockUI: NgBlockUI;
   private toasterService: ToasterService;
   public toasterConfig: ToasterConfig = new ToasterConfig ({
     showCloseButton: true,
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.getAccountInfo();
+    this.blockUI.start();
   }
 
   getAccountInfo() {
