@@ -18,13 +18,13 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.getAccountInfo();
-    this.getHistory();
   }
 
   getAccountInfo() {
     this.dataService.getAccountInfo().subscribe((data) => {
          this.accountInfo = data;
          this.getWallet(data.wallet);
+         this.getHistory(data.wallet);
          console.log(this.accountInfo);
     });
   }
@@ -36,8 +36,8 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  getHistory() {
-    this.dataService.getHistory().subscribe((data) => {
+  getHistory(walletID) {
+    this.dataService.getHistory(walletID).subscribe((data) => {
          this.accountHistory = data;
          console.log(this.accountHistory);
     });

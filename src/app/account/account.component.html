@@ -50,11 +50,9 @@
           <ul class="transaction-list">
               <li *ngFor="let historyItem of accountHistory">
                 <span>{{historyItem.amount}} {{historyItem.currency}}</span>
-                <span>{{historyItem.timestamp}}</span>
+                <span>{{(historyItem.timestamp * 1000) | date:'medium' }}</span>
               </li>
           </ul>
       </div>
     </div>
-
-
 

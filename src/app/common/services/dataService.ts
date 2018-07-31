@@ -46,8 +46,8 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/wallet/seed');
     }
 
-    getHistory(): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'cpo/history');
+    getHistory(walletId): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'wallet/' + walletId + '/history');
     }
 
     generateWallet(): Observable<any> {
