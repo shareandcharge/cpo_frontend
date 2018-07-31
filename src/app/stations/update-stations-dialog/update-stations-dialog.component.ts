@@ -1,6 +1,7 @@
 import { Component, ComponentRef } from '@angular/core';
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { DataService } from '../../common';
+import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-modal-dialog',
@@ -11,8 +12,11 @@ export class UpdateStationsModalDialogComponent implements IModalDialog {
   parentInfo: string;
   modalInfo: any = [];
   actionButtons: any = [];
+  toasterService: any;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+              toasterService: ToasterService) {
+    this.toasterService = toasterService;
     this.actionButtons = [
       {
         text: 'Cancel',
@@ -53,8 +57,9 @@ export class UpdateStationsModalDialogComponent implements IModalDialog {
   updateStation() {
     console.log(JSON.parse(this.modalInfo));
     this.modalInfo = JSON.parse(this.modalInfo);
-    this.dataService.putStation(this.modalInfo).subscribe((data) => {
+    this.dataService.putStation([this.modalInfo]).subscribe((data) => {
         console.log(data);
+        this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
     });
   }
 

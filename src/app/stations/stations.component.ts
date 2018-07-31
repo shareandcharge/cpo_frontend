@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
-import { DataService } from '../common';
+import { DataService, Broadcaster } from '../common';
 import {ModalDialogService, SimpleModalComponent} from 'ngx-modal-dialog';
 import {AddStationsModalDialogComponent} from './add-stations-dialog/add-stations-dialog.component';
 import {UpdateStationsModalDialogComponent} from './update-stations-dialog/update-stations-dialog.component';
@@ -15,6 +15,7 @@ import {DeleteStationsModalDialogComponent} from './delete-stations-dialog/delet
 export class StationsComponent implements OnInit {
 
   private toasterService: ToasterService;
+  private broadcaster: Broadcaster;
 
   stations: any = [];
   selectedStation: any = [];
@@ -38,6 +39,14 @@ export class StationsComponent implements OnInit {
 
   ngOnInit() {
     this.getStations();
+    // this.broadcaster.on('updateStations').subscribe((data: any) => {
+    //   setTimeout(() => {
+    //     this.getStations();
+    //   }, 10000);
+    // });
+    // this.broadcaster.on('httpRequest').subscribe((data: any) => {
+    //     console.log('BROADCAST');
+    // });
   }
 
   getStations() {
@@ -47,20 +56,13 @@ export class StationsComponent implements OnInit {
     });
   }
 
-  // generateWallet() {
-  //   this.dataService.generateWallet().subscribe((data) => {
-  //     console.log(data);
-  //   });
-  // }
-
   getEvses(index) {
-    this.selectedStation = this.stations[index].data;
+    this.selectedStation = this.stations[index];
     this.selectedEvse = this.stations[index].data.evses;
     this.selectedEvseIndex = index;
     this.selectedScId = this.stations[index].scId;
     this.showEvses = !this.showEvses;
     this.showConnectors = false;
-    // console.log(this.stations[index].scId);
     console.log(this.selectedEvse);
   }
 
@@ -112,6 +114,8 @@ export class StationsComponent implements OnInit {
       },
       data: this.selectedScId
     });
+    console.log(this.selectedScId);
   }
+
 
 }

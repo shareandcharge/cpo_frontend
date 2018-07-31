@@ -5,12 +5,13 @@ import '../rxjs-operators';
 import {ToasterModule, ToasterService, ToasterContainerComponent} from 'angular2-toaster';
 import {Broadcaster} from './broadcasterService';
 declare let BroadcastChannel;
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class DataService {
     private cache = {};
     private errorObject: any = {};
-    baseUrl = 'http://52.57.155.233:9090/api/v1/';
+    baseUrl = environment.apiUrl;
 
     constructor(private http: Http,
                 private broadcaster: Broadcaster,
@@ -27,7 +28,6 @@ export class DataService {
         return prop ? this.cache[prop] : this.cache;
     }
 
-
     // CPO
 
     getAccountInfo(): Observable<any> {
@@ -39,7 +39,7 @@ export class DataService {
     }
 
     getWallet(walletId): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'cpo/wallet/' + walletId);
+      return this.execGETRequest(this.baseUrl + 'wallet/' + walletId);
     }
 
     getWalletSeed(): Observable<any> {
@@ -59,17 +59,17 @@ export class DataService {
     }
 
     postStation(params): Observable<any> {
-      return this.execPOSTRequest(this.baseUrl + 'cpo/location');
-  }
+      return this.execPOSTRequest(this.baseUrl + 'cpo/location', params);
+    }
 
     putStation(params): Observable<any> {
-      return this.execPUTRequest(this.baseUrl + 'cpo/location');
+      console.log(params);
+      return this.execPUTRequest(this.baseUrl + 'cpo/location', params);
     }
 
     deleteStation(scId): Observable<any> {
       return this.execDELETERequest(this.baseUrl + 'cpo/location/' + scId);
     }
-
 
     /********************* Handling Requests ***********************/
 
@@ -88,6 +88,7 @@ export class DataService {
 
     private execPOSTRequest(url: string, params: Object = {}, disabledToast?: boolean): Observable<any> {
         this.broadcaster.broadcast('httpRequest', true);
+        console.log(params);
         return this.http.post(url, params)
             .map((response: Response) => this.handleResponse(response))
             .catch((error: any) => this.handleError(error, disabledToast));
@@ -100,15 +101,17 @@ export class DataService {
             .catch((error: any) => this.handleError(error));
     }
 
-    private execPUTRequest(url: string, params: Object = {}): Observable<any> {
+    private execPUTRequest(url: string, params): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
-      return this.http.put(url, {params})
+      console.log(params);
+      return this.http.put(url, params)
           .map((response: Response) => this.handleResponse(response))
           .catch((error: any) => this.handleError(error));
     }
 
     private execDELETERequest(url: string, params: Object = {}): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
+      console.log(params);
       return this.http.delete(url, {params})
           .map((response: Response) => this.handleResponse(response))
           .catch((error: any) => this.handleError(error));

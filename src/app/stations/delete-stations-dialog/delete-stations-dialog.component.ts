@@ -1,6 +1,7 @@
 import { Component, ComponentRef } from '@angular/core';
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { DataService } from '../../common';
+import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-modal-dialog',
@@ -11,8 +12,11 @@ export class DeleteStationsModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = [];
+  toasterService: any;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+    toasterService: ToasterService) {
+    this.toasterService = toasterService;
     this.actionButtons = [
       {
         text: 'Cancel',
@@ -47,17 +51,16 @@ export class DeleteStationsModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    this.modalInfo = JSON.stringify(this.modalInfo, null, 4);
-    console.log(this.modalInfo);
+    console.log(this.parentInfo);
   }
 
   deleteStation() {
-    console.log(JSON.parse(this.modalInfo));
-    this.modalInfo = JSON.parse(this.modalInfo);
-    this.dataService.postStation(this.modalInfo).subscribe((data) => {
+    this.dataService.deleteStation(this.parentInfo).subscribe((data) => {
         console.log(data);
+        this.toasterService.pop('success', 'Success', 'You have successfuly deleted this location.');
     });
   }
+
 }
 
 

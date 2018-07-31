@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve --port 4201 --aot",
     "extract": "ng xi18n --outputPath=src/locale",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

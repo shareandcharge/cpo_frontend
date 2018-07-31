@@ -1,6 +1,7 @@
-import { Component, ComponentRef } from '@angular/core';
+import { Component, ComponentRef} from '@angular/core';
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
-import { DataService } from '../../common';
+import { DataService, Broadcaster } from '../../common';
+import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-modal-dialog',
@@ -11,71 +12,75 @@ export class AddStationsModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = [{
-      'id': 'Motionwerk-1',
-      'type': 'OTHER',
-      'name': 'Motionwerk 1',
-      'address': 'Rüttenscheider Str. 120',
-      'city': 'Essen',
-      'postal_code': '45131',
-      'country': 'DE',
-      'coordinates': {
-        'latitude': '51.433012',
-        'longitude': '7.00419'
+      "id": "Motionwerk-25",
+      "type": "OTHER",
+      "name": "Motionwerk-25",
+      "address": "Rüttenscheider Str. 120",
+      "city": "Essen",
+      "postal_code": "45131",
+      "country": "DE",
+      "coordinates": {
+        "latitude": "59.434012",
+        "longitude": "2.00419"
       },
-      'evses': [
+      "evses": [
         {
-          'uid': '1',
-          'evse_id': 'BB-5958-01',
-          'status': 'AVAILABLE',
-          'status_schedule': [],
-          'capabilities': [],
-          'connectors': [
+          "uid": "1",
+          "evse_id": "BB-5958-01",
+          "status": "AVAILABLE",
+          "status_schedule": [],
+          "capabilities": [],
+          "connectors": [
             {
-              'id': '1',
-              'standard': 'IEC_61851-1_T2',
-              'format': 'CABLE',
-              'power_type': 'AC_3_PHASE',
-              'voltage': 224,
-              'amperage': 32,
-              'tariff_id': '1',
-              'last_updated': '2018-05-31T11:07:00Z'
+              "id": "1",
+              "standard": "IEC_61851-1_T2",
+              "format": "CABLE",
+              "power_type": "AC_3_PHASE",
+              "voltage": 224,
+              "amperage": 32,
+              "tariff_id": "1",
+              "last_updated": "2018-05-31T11:07:00Z"
             }
           ],
-          'physical_reference': '1',
-          'floor_level': '3',
-          'last_updated': '2018-05-31T11:07:00Z'
+          "physical_reference": "1",
+          "floor_level": "3",
+          "last_updated": "2018-05-31T11:07:00Z"
         },
         {
-          'uid': '2',
-          'evse_id': 'BB-5983-31',
-          'status': 'AVAILABLE',
-          'status_schedule': [],
-          'capabilities': [],
-          'connectors': [
+          "uid": "2",
+          "evse_id": "BB-5983-31",
+          "status": "AVAILABLE",
+          "status_schedule": [],
+          "capabilities": [],
+          "connectors": [
             {
-              'id': '1',
-              'standard': 'IEC_61851-1_T2',
-              'format': 'CABLE',
-              'power_type': 'AC_3_PHASE',
-              'voltage': 224,
-              'amperage': 32,
-              'tariff_id': '1',
-              'last_updated': '2018-05-31T11:07:00Z'
+              "id": "1",
+              "standard": "IEC_61851-1_T2",
+              "format": "CABLE",
+              "power_type": "AC_3_PHASE",
+              "voltage": 224,
+              "amperage": 32,
+              "tariff_id": "1",
+              "last_updated": "2018-05-31T11:07:00Z"
             }
           ],
-          'physical_reference': '2',
-          'floor_level': '3',
-          'last_updated': '2018-05-31T11:07:00Z'
+          "physical_reference": "2",
+          "floor_level": "3",
+          "last_updated": "2018-05-31T11:07:00Z"
         }
       ],
-      'operator': {
-        'name': 'Motionwerk GmbH'
+      "operator": {
+        "name": "Motionwerk GmbH"
       },
-      'last_updated': '2018-05-31T11:07:00Z'
+      "last_updated": "2018-05-31T11:07:00Z"
     }
   ];
+  toasterService: any;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+    private broadcaster: Broadcaster,
+    toasterService: ToasterService) {
+    this.toasterService = toasterService;
     this.actionButtons = [
       {
         text: 'Cancel',
@@ -118,8 +123,11 @@ export class AddStationsModalDialogComponent implements IModalDialog {
     this.modalInfo = JSON.parse(this.modalInfo);
     this.dataService.postStation(this.modalInfo).subscribe((data) => {
         console.log(data);
-    });
+        this.toasterService.pop('success', 'Success', 'You have successfuly added a new location.');
+        this.broadcaster.broadcast('updateStations', true);
+      });
   }
+
 
 }
 
