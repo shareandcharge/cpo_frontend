@@ -7,9 +7,6 @@
   </div>
 
   <form #registerForm="ngForm" (ngSubmit)="setAccountInfo()" class="register-form">
-<!--
-      <input placeholder='Email' type='text' [(ngModel)]="loginInfo.email" name="email" #userEmail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-      <input placeholder='Password' type='password' [(ngModel)]="loginInfo.password" name="Password" #userPassword="ngModel" required minlength="6"> -->
 
     <div>
       <label for="name">Name</label>
@@ -48,20 +45,3 @@
     </div>
 
   </form>
-
-
-<!-- <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit()">
-
-    <input placeholder='Email' type='text' [(ngModel)]="loginInfo.email" name="email" #userEmail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-    <input placeholder='Password' type='password' [(ngModel)]="loginInfo.password" name="Password" #userPassword="ngModel" required minlength="6">
-
-  <div [hidden]="userEmail.valid || userEmail.pristine" class="alert alert-danger"> Name is required </div>
-  <div [hidden]="userPassword.valid || userPassword.pristine" class="alert alert-danger"> Password is required </div>
-  ng-disabled="loginform.$invalid"
-  <div class="login-form__buttons">
-    <button class='animated infinite pulse register-button' type="button">Join</button>
-    <button class='animated infinite pulse login-button' type="submit"
-            [disabled]="!loginForm.form.valid"
-            [ngClass]="{'focus': loginInfo.email && loginInfo.password }">Log in</button>
-  </div>
-</form> -->
