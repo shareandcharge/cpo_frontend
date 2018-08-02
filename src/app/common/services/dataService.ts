@@ -87,6 +87,9 @@ export class DataService {
         const err = error || {};
         this.errorObject = JSON.parse(err._body);
         const errMessage = this.errorObject.error || 'Server error';
+        setTimeout(() => {
+          this.blockUI.stop();
+        }, 100);
         if (!disabledToast) {
           this.toasterService.pop('error', 'Error', errMessage);
           this.logError(err).subscribe();
