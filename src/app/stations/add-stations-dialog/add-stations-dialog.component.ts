@@ -123,8 +123,8 @@ export class AddStationsModalDialogComponent implements IModalDialog {
     this.modalInfo = JSON.parse(this.modalInfo);
     this.dataService.postStation(this.modalInfo).subscribe((data) => {
         console.log(data);
+        this.broadcaster.broadcast('refreshStations', true);
         this.toasterService.pop('success', 'Success', 'You have successfuly added a new location.');
-        this.broadcaster.broadcast('updateStations', true);
       });
   }
 

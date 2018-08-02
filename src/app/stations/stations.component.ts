@@ -15,7 +15,6 @@ import {DeleteStationsModalDialogComponent} from './delete-stations-dialog/delet
 export class StationsComponent implements OnInit {
 
   private toasterService: ToasterService;
-  private broadcaster: Broadcaster;
 
   stations: any = [];
   selectedStation: any = [];
@@ -33,20 +32,17 @@ export class StationsComponent implements OnInit {
               private dataService: DataService,
               public router: Router,
               private modalDialogService: ModalDialogService,
-              private viewContainer: ViewContainerRef) {
+              private viewContainer: ViewContainerRef,
+              private broadcaster: Broadcaster) {
     this.toasterService = toasterService;
   }
 
   ngOnInit() {
     this.getStations();
-    // this.broadcaster.on('updateStations').subscribe((data: any) => {
-    //   setTimeout(() => {
-    //     this.getStations();
-    //   }, 10000);
-    // });
-    // this.broadcaster.on('httpRequest').subscribe((data: any) => {
-    //     console.log('BROADCAST');
-    // });
+    this.broadcaster.on('refreshStations').subscribe((data: any) => {
+        this.getStations();
+        this.closeAllLists();
+    });
   }
 
   getStations() {
@@ -73,7 +69,7 @@ export class StationsComponent implements OnInit {
     // console.log(this.connectors);
   }
 
-  closeAllLists(index) {
+  closeAllLists() {
     this.showEvses = false;
     this.showConnectors = false;
   }
