@@ -1,1 +1,53 @@
 <h2 class="page-title">Payment</h2>
+
+<div class="payment-page">
+
+  <div class="payment-wallet-wrapper">
+    <div class="sub-title">
+      <i class="fas fa-wallet"></i>
+      <span>My Wallet</span>
+    </div>
+    <div class="payment-wallet__inner">
+      <div class="section-row header">
+          <span class="name">Name</span>
+          <span class="transactions">Transactions</span>
+          <span class="balance">Tokens</span>
+      </div>
+      <div *ngFor="let paymentWalletItem of paymentWallet; let i = index;"
+            class="section-row" (click)="getPaymentWalletHistory(i)">
+            <span class="name">{{paymentWalletItem.msp_name}}</span>
+            <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
+            <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-wallet-detail-wrapper" *ngIf="paymentWalletHistory.length !== 0">
+    <div class="sub-title">
+      <i class="fas fa-file-alt"></i>
+      <span>Charge Data Record</span>
+    </div>
+    <div class="payment-wallet-detail__inner">
+      <div class="section-row header">
+          <span class="date">Date</span>
+          <span class="name">Name</span>
+          <span class="balance">Tokens</span>
+          <span class="evseId">Station</span>
+      </div>
+      <div *ngFor="let paymentWalletHistoryItem of paymentWalletHistory; let i = index;"
+            class="section-row">
+            <span class="date">{{paymentWalletHistoryItem.date}}</span>
+            <span class="name">{{paymentWalletHistoryItem.driver_name}}</span>
+            <span class="balance">{{paymentWalletHistoryItem.amount}} {{paymentWalletHistoryItem.currency}}</span>
+            <span class="evseId">{{paymentWalletHistoryItem.evseid}}</span>
+      </div>
+    </div>
+    <div class="payment-wallet-detail__action-buttons">
+        <button class="sc-button white">
+          <i class="fas fa-download"></i>
+          <span>Download invoice</span>
+        </button>
+    </div>
+  </div>
+
+</div>
