@@ -26,11 +26,9 @@ export class RegisteredGuard implements CanActivate {
     if (this.registeredFlag !== 'true') {
       this.http.get('http://52.57.155.233:9090/api/v1/cpo').subscribe(
         data => {
-          console.log('Success' );
           this.canProceed = true;
         },
         err => {
-          console.log('Error occured.');
           this.canProceed = false;
 
         }
