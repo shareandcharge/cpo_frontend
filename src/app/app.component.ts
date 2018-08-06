@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster';
 import { DataService } from './common';
+import {Http, Response} from '@angular/http';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
     public router: Router,
     toasterService: ToasterService,
     private viewContainer: ViewContainerRef,
-    private dataService: DataService
+    private dataService: DataService,
+    private http: Http
   ) {
     this.toasterService = toasterService;
   }
@@ -34,13 +36,25 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.getAccountInfo();
     this.registeredFlag = localStorage.getItem('registeredCpo');
-    if (this.registeredFlag === 'true') {
+
+    if (this.registeredFlag !== 'true') {
+      this.http.get('http://52.57.155.233:9090/api/v1/cpo').subscribe(
+        data => {
+          localStorage.setItem('registeredCpo', 'true');
+          this.registeredFlag = localStorage.getItem('registeredCpo');
+          this.router.navigate(['stations']);
+          console.log(this.registeredFlag);
+        },
+        err => {
+            this.router.navigate(['register']);
+            console.log('nema flag');
+        }
+      );
+    } else {
       console.log('ima flag');
       this.router.navigate(['stations']);
-    } else {
-      this.router.navigate(['register']);
-      console.log('nema flag');
     }
+
   }
 
   getAccountInfo() {

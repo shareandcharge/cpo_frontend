@@ -25,7 +25,7 @@ export class UnregisteredGuard implements CanActivate {
     console.log(this.registeredFlag);
 
     if (this.registeredFlag !== 'true') {
-      this.http.get('http://18.195.223.26:9090/api/v1/msp').subscribe(
+      this.http.get('http://52.57.155.233:9090/api/v1/cpo').subscribe(
         data => {
           console.log('Success' );
           this.canProceed = false;
@@ -33,6 +33,7 @@ export class UnregisteredGuard implements CanActivate {
         err => {
           console.log('Error occured.');
           this.canProceed = true;
+          this.router.navigate(['register']);
         }
       );
     } else {

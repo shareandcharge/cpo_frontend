@@ -22,24 +22,24 @@ export class RegisteredGuard implements CanActivate {
   getAccountInfo() {
 
     this.registeredFlag = localStorage.getItem('registeredCpo');
-    console.log(this.registeredFlag);
 
     if (this.registeredFlag !== 'true') {
-      this.http.get('http://18.195.223.26:9090/api/v1/msp').subscribe(
+      this.http.get('http://52.57.155.233:9090/api/v1/cpo').subscribe(
         data => {
           console.log('Success' );
           this.canProceed = true;
-          localStorage.setItem('registeredCpo', 'true');
         },
         err => {
           console.log('Error occured.');
           this.canProceed = false;
+
         }
       );
     } else {
       this.canProceed = true;
     }
   }
+
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
