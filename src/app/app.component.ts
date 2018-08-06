@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   });
   title = 'CPO Dashboard app';
   accountInfo: any = [];
+  registeredFlag = '';
 
   constructor (
     public router: Router,
@@ -32,7 +33,14 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.getAccountInfo();
-    this.blockUI.start();
+    this.registeredFlag = localStorage.getItem('registeredCpo');
+    if (this.registeredFlag === 'true') {
+      console.log('ima flag');
+      this.router.navigate(['stations']);
+    } else {
+      this.router.navigate(['register']);
+      console.log('nema flag');
+    }
   }
 
   getAccountInfo() {

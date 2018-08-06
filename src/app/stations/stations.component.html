@@ -1,6 +1,6 @@
 <h2 class="page-title">Stations</h2>
 
-<div *ngIf="stations.length !== 0" class="stations-container-wrapper">
+<div class="stations-container-wrapper">
   <span class="station-header">
       <span class="name">Stations</span>
   </span>
@@ -38,10 +38,19 @@
             <span class="station-row">
               <span class="power-type">
                 <i class="fas fa-plug"></i>
-                {{connector.power_type}}
+                {{connector.power_type}},
               </span>
-              <span class="power-standard">{{connector.standard}}</span>
-              <span class="power-voltage">{{connector.voltage}}</span>
+              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1'">Type 1,</span>
+              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1_COMBO'">CHAdeMo,</span>
+              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2'">Type 2,</span>
+              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2_COMBO'">CCS,</span>
+              <span class="power-standard" *ngIf="connector.standard !== 'IEC_62196_T1' &&
+                                                  connector.standard !== 'IEC_62196_T1_COMBO' &&
+                                                  connector.standard !== 'IEC_62196_T2' &&
+                                                  connector.standard !== 'IEC_62196_T2_COMBO'">
+                {{connector.standard}},
+              </span>
+              <span class="power-voltage">{{(connector.voltage * connector.voltage)/1000}} kW,</span>
               <span class="power-tariff-id">{{connector.tariff_id}}</span>
             </span>
           </div>

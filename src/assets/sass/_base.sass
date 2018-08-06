@@ -679,18 +679,18 @@ div.stations-container-wrapper
       float: left
     .evse-status
       float: right
-    .power-type
-      width: 35%
-      float: left
-    .power-standard
-      width: 45%
-      float: left
-    .power-tariff-id
-      width: 10%
-      float: left
-    .power-voltage
-      width: 10%
-      float: left
+    // .power-type
+    //   width: 34%
+    //   float: left
+    // .power-standard
+    //   width: 33%
+    //   float: left
+    // .power-tariff-id
+    //   width: 10%
+    //   float: left
+    // .power-voltage
+    //   width: 23%
+    //   float: left
   div.stations-container
     position: relative
     border-bottom: 1px solid #fff
@@ -761,11 +761,16 @@ div.stations-container-wrapper
     .sub-title
       padding: 17px 24px 17px 24px
       border-bottom: 1px solid #fff
+      font-size: 16px
+      margin-top: 32px
+      &:first-child
+        margin-top: 0
       i
         margin-right: 4px
 
 .payment-wallet-wrapper
-  width: 525px
+  // width: 525px
+  width: 620px
   float: left
   position: relative
   background: rgba(0, 70, 102, 0.8)
@@ -782,13 +787,18 @@ div.stations-container-wrapper
           padding: 24px 8px 24px 24px
         &:last-child
           padding: 24px 24px 24px 8px
-      .name,
-      .transactions,
+      &.header
+        cursor: default
+      .name
+        width: 30%
+      .transactions
+        width: 30%
       .balance
-        width: 33.333333333%
+        width: 40%
 
 .payment-wallet-detail-wrapper
-  width: 735px
+  // width: 735px
+  width: 620px
   float: left
   position: relative
   background: rgba(96, 0, 102, 0.8)
@@ -803,25 +813,51 @@ div.stations-container-wrapper
     padding: 8px
     border-top: 1px solid #fff
     button
+      margin-left: 4px
       span,
       span:last-child
         padding: 0
   .section-row
+    padding: 13px 0
+    cursor: default !important
     span
       padding: 24px 8px
       &:first-child
         padding: 24px 8px 24px 24px
       &:last-child
         padding: 24px 24px 24px 8px
-    .date
-      width: 30%
-    .name
-      width: 25%
-    .balance
-      width: 20%
-    .evseId
-      width: 25%
+    &.header
+      padding: 0
+    div
+      padding: 8px 24px !important
+      span
+        padding: 0 !important
+        max-width: 400px
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        display: inline-block
+        vertical-align: middle
+        line-height: 22px
+        &:last-child
+          margin-left: 8px
+        a
+          text-decoration: none
+    span.transaction-details,
+    span.transaction-details:first-child
+      width: 100%
+      max-width: 100%
+      margin-left: 0
+      text-align: right
+      a
+        text-decoration: none
+        color: #fff
+        padding-top: 15px
+        &:hover
+          text-decoration: underline
 
+.evCoin
+  padding-left: 2px
 
 // blocking ui
 

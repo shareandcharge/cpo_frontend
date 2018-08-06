@@ -49,7 +49,7 @@ export class DataService {
     }
 
     getHistory(walletId): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'wallet/' + walletId + '/history');
+      return this.execGETRequest(this.baseUrl + 'wallet/' + walletId + '/history/evcoin');
     }
 
     generateWallet(): Observable<any> {
@@ -77,9 +77,18 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/wallet');
     }
 
-    getPaymentWalletHistory(walletId): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'cpo/payment/cdr/' + walletId);
+    getPaymentWalletHistory(token): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/cdr/' + token);
     }
+
+    getPaymentWalletPending(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/pending' );
+    }
+
+    getPaymentWalletCompleted(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/completed');
+    }
+
 
     /********************* Handling Requests ***********************/
 

@@ -3,22 +3,59 @@
 <div class="payment-page">
 
   <div class="payment-wallet-wrapper">
-    <div class="sub-title">
+    <!-- <div class="sub-title">
       <i class="fas fa-wallet"></i>
       <span>My Wallet</span>
-    </div>
+    </div> -->
     <div class="payment-wallet__inner">
-      <div class="section-row header">
-          <span class="name">Name</span>
-          <span class="transactions">Transactions</span>
-          <span class="balance">Tokens</span>
-      </div>
+
+      <div class="sub-title">
+          <i class="fas fa-wallet"></i>
+          <span>My Wallet</span>
+        </div>
+        <div class="section-row header">
+            <span class="name">Name</span>
+            <span class="transactions">Transactions</span>
+            <span class="balance">Tokens</span>
+        </div>
       <div *ngFor="let paymentWalletItem of paymentWallet; let i = index;"
             class="section-row" (click)="getPaymentWalletHistory(i)">
             <span class="name">{{paymentWalletItem.msp_name}}</span>
             <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
             <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
       </div>
+      <div class="sub-title" *ngIf="paymentWalletPending.length !== 0">
+          <i class="fas fa-wallet"></i>
+          <span>Pending</span>
+        </div>
+        <div class="section-row header" *ngIf="paymentWalletPending.length !== 0">
+            <span class="name">Name</span>
+            <span class="transactions">Transactions</span>
+            <span class="balance">Tokens</span>
+        </div>
+      <div *ngFor="let paymentWalletItem of paymentWalletPending; let i = index;"
+            class="section-row" (click)="getPaymentWalletHistory(i)">
+            <span class="name">{{paymentWalletItem.msp_name}}</span>
+            <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
+            <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
+      </div>
+
+      <div class="sub-title" *ngIf="paymentWalletCompleted.length !== 0">
+        <i class="fas fa-wallet"></i>
+        <span>Completed</span>
+      </div>
+      <div class="section-row header" *ngIf="paymentWalletCompleted.length !== 0">
+          <span class="name">Name</span>
+          <span class="transactions">Transactions</span>
+          <span class="balance">Tokens</span>
+      </div>
+      <div *ngFor="let paymentWalletItem of paymentWalletCompleted; let i = index;"
+            class="section-row" (click)="getPaymentWalletHistory(i)">
+            <span class="name">{{paymentWalletItem.msp_name}}</span>
+            <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
+            <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
+      </div>
+
     </div>
   </div>
 
@@ -28,24 +65,77 @@
       <span>Charge Data Record</span>
     </div>
     <div class="payment-wallet-detail__inner">
-      <div class="section-row header">
-          <span class="date">Date</span>
-          <span class="name">Name</span>
-          <span class="balance">Tokens</span>
-          <span class="evseId">Station</span>
-      </div>
+
       <div *ngFor="let paymentWalletHistoryItem of paymentWalletHistory; let i = index;"
             class="section-row">
-            <span class="date">{{paymentWalletHistoryItem.date}}</span>
-            <span class="name">{{paymentWalletHistoryItem.driver_name}}</span>
-            <span class="balance">{{paymentWalletHistoryItem.amount}} {{paymentWalletHistoryItem.currency}}</span>
-            <span class="evseId">{{paymentWalletHistoryItem.evseid}}</span>
+            <div>
+              <span class="bold">Start date: </span>
+              <span>{{paymentWalletHistoryItem.start | date}}</span>
+            </div>
+            <div>
+              <span class="bold">End date: </span>
+              <span>{{paymentWalletHistoryItem.end | date}}</span>
+            </div>
+            <div>
+              <span class="bold">Location: </span>
+              <span>{{paymentWalletHistoryItem.evseId}}</span>
+            </div>
+            <div>
+              <span class="bold">S&C Address: </span>
+              <span>{{paymentWalletHistoryItem.scId}}</span>
+            </div>
+            <div>
+              <span class="bold">Tariff: </span>
+              <span></span>
+            </div>
+            <div>
+              <span class="bold">Total cost: </span>
+              <span>{{paymentWalletHistoryItem.finalPrice}} {{paymentWalletHistoryItem.currency}}</span>
+            </div>
+            <div>
+              <span class="bold">Total energy: </span>
+              <span></span>
+            </div>
+            <div>
+              <span class="bold">Total time: </span>
+              <span></span>
+            </div>
+            <div>
+              <span class="transaction-details">
+                <a href="http://18.185.85.20:3000/tx/{{paymentWalletHistoryItem.transactionHash}}" target="_blank">
+                    Transaction details
+                </a>
+              </span>
+            </div>
+
+
+
+            <!-- <div>
+              <span class="bold">Controller: </span>
+              <span>{{paymentWalletHistoryItem.controller}}</span>
+            </div>
+            <div>
+              <span class="bold">token contract: </span>
+              <span>{{paymentWalletHistoryItem.tokenContract}}</span>
+            </div>
+            <div>
+              <span class="bold">Transaction hash: </span>
+              <span>{{paymentWalletHistoryItem.transactionHash}}</span>
+            </div> -->
       </div>
     </div>
     <div class="payment-wallet-detail__action-buttons">
         <button class="sc-button white">
+          <i class="fas fa-thumbs-up"></i>
+          <span>Payment Recieved</span>
+        </button>
+        <button class="sc-button white">
           <i class="fas fa-download"></i>
-          <span>Download invoice</span>
+          <span>Invoice</span>
+        </button>
+        <button class="sc-button white">
+          <i class="fas fa-download"></i>
+          <span>Download</span>
         </button>
     </div>
   </div>

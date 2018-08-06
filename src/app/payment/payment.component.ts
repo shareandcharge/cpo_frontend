@@ -8,6 +8,8 @@ import {DataService} from '../common';
 export class PaymentComponent implements OnInit {
 
   paymentWallet: any = [];
+  paymentWalletPending: any = [];
+  paymentWalletCompleted: any = [];
   paymentWalletHistory: any = [];
   activePaymentWallet: any = [];
 
@@ -21,14 +23,30 @@ export class PaymentComponent implements OnInit {
     this.dataService.getPaymentWallet().subscribe((data) => {
         this.paymentWallet = data;
         console.log(data);
-        // this.getPaymentWalletHistory(this.paymentWallet[0].token_address);
+        this.getPaymentWalletPending();
+        this.getPaymentWalletCompleted();
     });
   }
 
   getPaymentWalletHistory(index) {
     this.activePaymentWallet = this.paymentWallet[index].token_address;
+    console.log(this.activePaymentWallet);
     this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
         this.paymentWalletHistory = data;
+        console.log(data);
+    });
+  }
+
+  getPaymentWalletPending() {
+    this.dataService.getPaymentWalletPending().subscribe((data) => {
+        this.paymentWalletPending = data;
+        console.log(data);
+    });
+  }
+
+  getPaymentWalletCompleted() {
+    this.dataService.getPaymentWalletCompleted().subscribe((data) => {
+        this.paymentWalletCompleted = data;
         console.log(data);
     });
   }

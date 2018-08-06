@@ -47,8 +47,12 @@
           <h2>Recent Transactions: </h2>
           <ul class="transaction-list">
               <li *ngFor="let historyItem of accountHistory">
-                <span>{{historyItem.amount}} {{historyItem.currency}}</span>
-                <span>{{(historyItem.timestamp * 1000) | date:'medium' }}</span>
+                <span>
+                  <span>{{historyItem.amount / weiToEvCoin}}</span>
+                  <span class="evCoin" *ngIf="historyItem.currency ===  'wei'">EV Coin</span>
+                  <span class="evCoin" *ngIf="historyItem.currency !==  'wei'">{{historyItem.currency}}</span>
+                </span>
+                <span>{{(historyItem.created_at * 1000) | date:'medium' }}</span>
               </li>
           </ul>
       </div>

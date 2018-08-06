@@ -27,52 +27,43 @@ export class AddStationsModalDialogComponent implements IModalDialog {
         {
           "uid": "1",
           "evse_id": "BB-5958-01",
-          "status": "AVAILABLE",
-          "status_schedule": [],
           "capabilities": [],
           "connectors": [
             {
               "id": "1",
-              "standard": "IEC_61851-1_T2",
+              "standard": "IEC_62196_T2",
               "format": "CABLE",
               "power_type": "AC_3_PHASE",
               "voltage": 224,
               "amperage": 32,
-              "tariff_id": "1",
-              "last_updated": "2018-05-31T11:07:00Z"
+              "tariff_id": "1"
             }
           ],
           "physical_reference": "1",
-          "floor_level": "3",
-          "last_updated": "2018-05-31T11:07:00Z"
+          "floor_level": "3"
         },
         {
           "uid": "2",
           "evse_id": "BB-5983-31",
-          "status": "AVAILABLE",
-          "status_schedule": [],
           "capabilities": [],
           "connectors": [
             {
               "id": "1",
-              "standard": "IEC_61851-1_T2",
+              "standard": "IEC_62196_T2",
               "format": "CABLE",
               "power_type": "AC_3_PHASE",
               "voltage": 224,
               "amperage": 32,
-              "tariff_id": "1",
-              "last_updated": "2018-05-31T11:07:00Z"
+              "tariff_id": "1"
             }
           ],
           "physical_reference": "2",
-          "floor_level": "3",
-          "last_updated": "2018-05-31T11:07:00Z"
+          "floor_level": "3"
         }
       ],
       "operator": {
         "name": "Motionwerk GmbH"
-      },
-      "last_updated": "2018-05-31T11:07:00Z"
+      }
     }
   ];
   toasterService: any;

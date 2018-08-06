@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthLoginGuard } from './auth/authLogin.guard';
+import { RegisteredGuard } from './auth/registered.guard';
+import { UnregisteredGuard } from './auth/unregistered.guard';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -8,10 +8,10 @@ import { MnemonicComponent } from './mnemonic/mnemonic.component';
 import { StationsComponent } from './stations/stations.component';
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'stations', pathMatch: 'full'},
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
-  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
-  { path: 'mnemonic', component: MnemonicComponent, canActivate: [AuthGuard]},
-  { path: 'stations', component: StationsComponent, canActivate: [AuthGuard]}
+  {path: '', redirectTo: '', pathMatch: 'full'},
+  { path: 'register', component: RegisterComponent, canActivate: [UnregisteredGuard]},
+  { path: 'account', component: AccountComponent, canActivate: [RegisteredGuard]},
+  { path: 'payment', component: PaymentComponent, canActivate: [RegisteredGuard]},
+  { path: 'mnemonic', component: MnemonicComponent, canActivate: [UnregisteredGuard]},
+  { path: 'stations', component: StationsComponent, canActivate: [RegisteredGuard]}
 ];

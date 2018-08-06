@@ -13,6 +13,7 @@ export class AccountComponent implements OnInit {
     currency: ''
   };
   accountHistory = [];
+  weiToEvCoin = Math.pow(10, 18);
 
   constructor(private dataService: DataService) { }
 
@@ -38,8 +39,8 @@ export class AccountComponent implements OnInit {
 
   getHistory(walletID) {
     this.dataService.getHistory(walletID).subscribe((data) => {
-         this.accountHistory = data;
-         console.log(this.accountHistory);
+        this.accountHistory = data;
+        console.log(this.accountHistory);
     });
   }
 

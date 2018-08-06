@@ -12,6 +12,8 @@
         body {
             text-align: center;
             color: #777;
+            width: 210mm;
+            margin: auto;
         }
         body h1 {
             font-weight: 300;
@@ -39,7 +41,7 @@
         .invoice-box {
             max-width: 800px;
             margin: auto;
-            padding: 30px;
+            padding: 30px 5px;
             font-size: 16px;
             line-height: 24px;
             font-family: Arial,sans-serif;
@@ -98,7 +100,10 @@
             font-weight: bold;
         }
         .invoice-box table.balance tr td:nth-child(1) {
-            width: 360px;
+            width: 250px;
+        }
+        .invoice-box table.balance tr td:nth-child(4) {
+          width: 90px;
         }
         .invoice-box table.info.total {
             margin-top: 20px;
@@ -110,7 +115,7 @@
           margin: 0;
         }
         .invoice-box table.info.total table.footer {
-            margin-top: 40px;
+            margin-top: 80px;
         }
         .invoice-box table.info.total table.footer tr td {
             width: 33.3333%;
@@ -120,7 +125,7 @@
         }
         h4.vat-number-headline {
             margin-top: 40px;
-            text-align: left;
+            text-align: right;
         }
         h4.charge-point-headline {
             margin-bottom: 20px;

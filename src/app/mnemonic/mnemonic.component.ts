@@ -24,6 +24,7 @@ export class MnemonicComponent implements OnInit {
   }
 
   continueToDrivers() {
+    localStorage.setItem('registeredCpo', 'true');
     this.router.navigate(['stations']);
   }
 
