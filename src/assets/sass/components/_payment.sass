@@ -1,0 +1,123 @@
+.payment-page
+  @extend %clearfix
+  .payment-wallet-wrapper,
+  .payment-wallet-detail-wrapper
+    .section-row
+      width: 100%
+      display: block
+      cursor: pointer
+      border-bottom: 1px solid #fff
+      &:last-child
+        border-bottom: 0
+      &:hover
+        background: rgba(0, 0, 0, 0.2)
+      &.header
+        span
+          padding: 8px 8px
+          &:first-child
+            padding: 10px 8px 12px 24px
+          &:last-child
+            padding: 10px 24px 12px 8px
+      span
+        display: inline-block
+        font-size: 16px
+    .sub-title
+      padding: 17px 24px 17px 24px
+      border-bottom: 1px solid #fff
+      font-size: 16px
+      margin-top: 32px
+      &:first-child
+        margin-top: 0
+      i
+        margin-right: 4px
+
+.payment-wallet-wrapper
+  // width: 525px
+  width: 620px
+  float: left
+  position: relative
+  background: rgba(0, 70, 102, 0.8)
+  color: #fff
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+  .payment-wallet__inner
+    max-height: 550px
+    overflow-y: auto
+    font-size: 0
+    .section-row
+      span
+        padding: 24px 8px
+        &:first-child
+          padding: 24px 8px 24px 24px
+        &:last-child
+          padding: 24px 24px 24px 8px
+      &.header
+        cursor: default
+      .name
+        width: 30%
+      .transactions
+        width: 30%
+      .balance
+        width: 40%
+
+.payment-wallet-detail-wrapper
+  // width: 735px
+  width: 620px
+  float: left
+  position: relative
+  background: rgba(96, 0, 102, 0.8)
+  color: #fff
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+  .payment-wallet-detail__inner
+    max-height: 490px
+    overflow-y: auto
+    font-size: 0
+  .payment-wallet-detail__action-buttons
+    text-align: right
+    padding: 8px
+    border-top: 1px solid #fff
+    button
+      margin-left: 4px
+      span,
+      span:last-child
+        padding: 0
+  .section-row
+    padding: 13px 0
+    cursor: default !important
+    span
+      padding: 24px 8px
+      &:first-child
+        padding: 24px 8px 24px 24px
+      &:last-child
+        padding: 24px 24px 24px 8px
+    &.header
+      padding: 0
+    div
+      padding: 8px 24px !important
+      span
+        padding: 0 !important
+        max-width: 400px
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        display: inline-block
+        vertical-align: middle
+        line-height: 22px
+        &:last-child
+          margin-left: 8px
+        a
+          text-decoration: none
+    span.transaction-details,
+    span.transaction-details:first-child
+      width: 100%
+      max-width: 100%
+      margin-left: 0
+      text-align: right
+      a
+        text-decoration: none
+        color: #fff
+        padding-top: 15px
+        &:hover
+          text-decoration: underline
+
+.evCoin
+  padding-left: 2px

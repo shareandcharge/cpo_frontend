@@ -1,22 +1,22 @@
-import { Component, ComponentRef } from '@angular/core';
+import { Component, ComponentRef} from '@angular/core';
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { DataService, Broadcaster } from '../../common';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-modal-dialog',
-  templateUrl: './update-stations-dialog.component.html'
+  templateUrl: './add-tariff-dialog.component.html'
 })
-export class UpdateStationsModalDialogComponent implements IModalDialog {
+export class AddTariffModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
-  modalInfo: any = [];
   actionButtons: any = [];
+  modalInfo: any = [];
   toasterService: any;
 
   constructor(private dataService: DataService,
-              toasterService: ToasterService,
-              private broadcaster: Broadcaster) {
+    private broadcaster: Broadcaster,
+    toasterService: ToasterService) {
     this.toasterService = toasterService;
     this.actionButtons = [
       {
@@ -29,11 +29,11 @@ export class UpdateStationsModalDialogComponent implements IModalDialog {
           }, 20);
         })
       }, {
-        text: 'Update',
+        text: 'Add',
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {
-            this.updateStation();
+            this.addTariff();
             resolve();
           }, 20);
         })
@@ -52,18 +52,20 @@ export class UpdateStationsModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    this.modalInfo = JSON.stringify(this.parentInfo, null, 4);
+    this.modalInfo = JSON.stringify(this.modalInfo, null, 4);
   }
 
-  updateStation() {
+  addTariff() {
     console.log(JSON.parse(this.modalInfo));
     this.modalInfo = JSON.parse(this.modalInfo);
-    this.dataService.putStation([this.modalInfo]).subscribe((data) => {
-        console.log(data);
-        this.broadcaster.broadcast('refreshStations', true);
-        this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
-    });
+    // this.dataService.postStation(this.modalInfo).subscribe((data) => {
+    //   console.log(data);
+    this.broadcaster.broadcast('refreshTariffs', true);
+    //   this.toasterService.pop('success', 'Success', 'You have successfuly added a new location.');
+    // });
+    console.log('added');
   }
+
 
 }
 

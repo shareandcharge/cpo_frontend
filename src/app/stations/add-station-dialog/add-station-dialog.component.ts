@@ -5,9 +5,9 @@ import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angula
 
 @Component({
   selector: 'app-modal-dialog',
-  templateUrl: './add-stations-dialog.component.html'
+  templateUrl: './add-station-dialog.component.html'
 })
-export class AddStationsModalDialogComponent implements IModalDialog {
+export class AddStationModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
   actionButtons: any = [];

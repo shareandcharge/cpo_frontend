@@ -2,10 +2,13 @@ import { Component, OnInit, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 import { DataService, Broadcaster } from '../common';
-import {ModalDialogService, SimpleModalComponent} from 'ngx-modal-dialog';
-import {AddStationsModalDialogComponent} from './add-stations-dialog/add-stations-dialog.component';
-import {UpdateStationsModalDialogComponent} from './update-stations-dialog/update-stations-dialog.component';
-import {DeleteStationsModalDialogComponent} from './delete-stations-dialog/delete-stations-dialog.component';
+import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { AddStationModalDialogComponent } from '../stations/add-station-dialog/add-station-dialog.component';
+import { UpdateStationModalDialogComponent } from '../stations/update-station-dialog/update-station-dialog.component';
+import { DeleteStationModalDialogComponent } from '../stations/delete-station-dialog/delete-station-dialog.component';
+import { AddTariffModalDialogComponent } from '../stations/add-tariff-dialog/add-tariff-dialog.component';
+import { UpdateTariffModalDialogComponent } from '../stations/update-tariff-dialog/update-tariff-dialog.component';
+import { DeleteTariffModalDialogComponent } from '../stations/delete-tariff-dialog/delete-tariff-dialog.component';
 
 
 @Component({
@@ -27,6 +30,10 @@ export class StationsComponent implements OnInit {
   addStations: any = [];
   updateStations: any = [];
   selectedScId: string = '';
+  tabIndex: any = 0;
+  tariffs: any = [];
+  selectedTariffIndex: any;
+  showTariffs: boolean = false;
 
   constructor(toasterService: ToasterService,
               private dataService: DataService,
@@ -42,6 +49,9 @@ export class StationsComponent implements OnInit {
     this.broadcaster.on('refreshStations').subscribe((data: any) => {
         this.getStations();
         this.closeAllLists();
+    });
+    this.broadcaster.on('refreshTariffs').subscribe((data: any) => {
+      console.log('refreshed tariffs');
     });
   }
 
@@ -69,15 +79,29 @@ export class StationsComponent implements OnInit {
     // console.log(this.connectors);
   }
 
+  getTariffs() {
+    this.dataService.getTariffs().subscribe((data) => {
+        this.tariffs = data;
+        console.log(data);
+    });
+  }
+
+  getTariff(index) {
+    this.showTariffs = !this.showTariffs;
+    this.selectedTariffIndex = index;
+    console.log(index);
+  }
+
   closeAllLists() {
     this.showEvses = false;
     this.showConnectors = false;
+    this.showTariffs = false;
   }
 
-  addStationsDialog() {
+  addStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Add Locations',
-      childComponent: AddStationsModalDialogComponent,
+      childComponent: AddStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
         closeButtonTitle: 'Close',
@@ -86,10 +110,10 @@ export class StationsComponent implements OnInit {
     });
   }
 
-  updateStationsDialog() {
+  updateStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Update Location',
-      childComponent: UpdateStationsModalDialogComponent,
+      childComponent: UpdateStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
         closeButtonTitle: 'Close',
@@ -99,10 +123,50 @@ export class StationsComponent implements OnInit {
     });
   }
 
-  deleteStationsDialog() {
+  deleteStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Delete Location',
-      childComponent: DeleteStationsModalDialogComponent,
+      childComponent: DeleteStationModalDialogComponent,
+      settings: {
+        closeButtonClass: 'close',
+        closeButtonTitle: 'Close',
+        modalClass: 'delete-stations-modal'
+      },
+      data: this.selectedScId
+    });
+    console.log(this.selectedScId);
+  }
+
+
+  addTariffDialog() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Add Tariff',
+      childComponent: AddTariffModalDialogComponent,
+      settings: {
+        closeButtonClass: 'close',
+        closeButtonTitle: 'Close',
+        modalClass: 'add-stations-modal'
+      }
+    });
+  }
+
+  updateTariffDialog() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Update Tariff',
+      childComponent: UpdateTariffModalDialogComponent,
+      settings: {
+        closeButtonClass: 'close',
+        closeButtonTitle: 'Close',
+        modalClass: 'update-stations-modal'
+      },
+      data: this.selectedStation
+    });
+  }
+
+  deleteTariffDialog() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Delete Tariff',
+      childComponent: DeleteTariffModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
         closeButtonTitle: 'Close',

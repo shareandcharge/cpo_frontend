@@ -65,7 +65,6 @@ export class DataService {
     }
 
     putStation(params): Observable<any> {
-      console.log(params);
       return this.execPUTRequest(this.baseUrl + 'cpo/location', params);
     }
 
@@ -89,6 +88,23 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/completed');
     }
 
+    // Tariffs
+
+    getTariffs(): Observable<any> {
+      return this.execGETRequest(this.baseUrl + 'cpo/tariffs' );
+    }
+
+    editTarrif(params): Observable<any> {
+      return this.execPUTRequest(this.baseUrl + 'cpo/tariff', params);
+    }
+
+    newTarrif(params): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/tariff', params);
+    }
+
+    deletearrif(params): Observable<any> {
+      return this.execDELETERequest(this.baseUrl + 'cpo/tariff/' + params);
+    }
 
     /********************* Handling Requests ***********************/
 

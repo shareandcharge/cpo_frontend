@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddStationsModalDialogComponent } from './add-stations-dialog.component';
+import { AddStationModalDialogComponent } from './add-station-dialog.component';
 
 describe('ModalDialogComponent', () => {
-  let component: AddStationsModalDialogComponent;
-  let fixture: ComponentFixture<AddStationsModalDialogComponent>;
+  let component: AddStationModalDialogComponent;
+  let fixture: ComponentFixture<AddStationModalDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddStationsModalDialogComponent ]
+      declarations: [ AddStationModalDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddStationsModalDialogComponent);
+    fixture = TestBed.createComponent(AddStationModalDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

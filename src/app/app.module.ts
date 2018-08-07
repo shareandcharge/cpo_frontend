@@ -17,9 +17,12 @@ import { ServicesModule} from './common';
 
 // import { ModalDialogComponent } from './common/components/session-timeout/session-timeout-modal.component';
 
-import { AddStationsModalDialogComponent } from './stations/add-stations-dialog/add-stations-dialog.component';
-import { UpdateStationsModalDialogComponent } from './stations/update-stations-dialog/update-stations-dialog.component';
-import { DeleteStationsModalDialogComponent } from './stations/delete-stations-dialog/delete-stations-dialog.component';
+import { AddStationModalDialogComponent } from './stations/add-station-dialog/add-station-dialog.component';
+import { UpdateStationModalDialogComponent } from './stations/update-station-dialog/update-station-dialog.component';
+import { DeleteStationModalDialogComponent } from './stations/delete-station-dialog/delete-station-dialog.component';
+import { AddTariffModalDialogComponent } from './stations/add-tariff-dialog/add-tariff-dialog.component';
+import { UpdateTariffModalDialogComponent } from './stations/update-tariff-dialog/update-tariff-dialog.component';
+import { DeleteTariffModalDialogComponent } from './stations/delete-tariff-dialog/delete-tariff-dialog.component';
 
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
@@ -40,9 +43,12 @@ registerLocaleData(localeDE);
     PaymentComponent,
     MnemonicComponent,
     StationsComponent,
-    AddStationsModalDialogComponent,
-    UpdateStationsModalDialogComponent,
-    DeleteStationsModalDialogComponent
+    AddStationModalDialogComponent,
+    UpdateStationModalDialogComponent,
+    DeleteStationModalDialogComponent,
+    AddTariffModalDialogComponent,
+    UpdateTariffModalDialogComponent,
+    DeleteTariffModalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +67,12 @@ registerLocaleData(localeDE);
     { provide: LOCALE_ID, useValue: 'en-EN' }
   ],
   entryComponents: [
-        AddStationsModalDialogComponent,
-        UpdateStationsModalDialogComponent,
-        DeleteStationsModalDialogComponent
+        AddStationModalDialogComponent,
+        UpdateStationModalDialogComponent,
+        DeleteStationModalDialogComponent,
+        AddTariffModalDialogComponent,
+        UpdateTariffModalDialogComponent,
+        DeleteTariffModalDialogComponent
       ],
   bootstrap: [AppComponent]
 })

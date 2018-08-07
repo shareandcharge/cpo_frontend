@@ -1,73 +1,95 @@
 <h2 class="page-title">Stations</h2>
 
 <div class="stations-container-wrapper">
-  <span class="station-header">
-      <span class="name">Stations</span>
+  <span class="station-header station-header--tabs">
+      <span class="tab" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0;">Stations</span>
+      <span class="tab" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1;">Tariffs</span>
   </span>
-  <div *ngFor="let station of stations; let i = index;" class="stations-container">
-    <span (click)="getEvses(i)" class="station-row">{{station.data.name}}, {{station.data.address}}</span>
-    <div class="evse-container-wrapper" *ngIf="showEvses && selectedEvseIndex === i">
-      <div class="station-header">
-        <span class="name">
-          <i class="fas fa-chevron-left" (click)="showEvses = false"></i>
-          {{station.data.name}}
-        </span>
-        <span class="actions">
-          <!-- <i class="fas fa-info-circle"></i> -->
-          <i class="fas fa-pencil-alt" (click)="updateStationsDialog()"></i>
-          <i class="fas fa-trash-alt" (click)="deleteStationsDialog()"></i>
-        </span>
-      </div>
-      <div class="sub-title">Evses</div>
-      <div *ngFor="let evse of selectedEvse; let a = index;" [hidden]="selectedEvseIndex !== i" class="evse-container">
-        <span (click)="getConnectors(a)" class="station-row"><span class="evse-id">{{evse.evse_id}}</span><span class="evse-status">{{evse.status}}</span></span>
-        <div class="connectors-container-wrapper" *ngIf="showConnectors && selectedConnectorsIndex === a">
-            <div class="station-header">
-                <span class="name">
-                    <i class="fas fa-chevron-left" (click)="showConnectors = false"></i>
-                    {{evse.evse_id}}
-                  </span>
-                <!-- <span class="actions">
-                  <i class="fas fa-info-circle"></i>
-                  <i class="fas fa-pencil-alt"></i>
-                  <i class="fas fa-trash-alt"></i>
-                </span> -->
-              </div>
-              <div class="sub-title">Connectors</div>
-          <div *ngFor="let connector of connectors; let u = index;" [hidden]="selectedConnectorsIndex !== a" class="connectors-container">
-            <span class="station-row">
-              <span class="power-type">
-                <i class="fas fa-plug"></i>
-                {{connector.power_type}},
+
+  <div *ngIf="tabIndex === 0">
+    <div *ngFor="let station of stations; let i = index;" class="stations-container">
+      <span (click)="getEvses(i)" class="station-row">{{station.data.name}}, {{station.data.address}}</span>
+      <div class="evse-container-wrapper" *ngIf="showEvses && selectedEvseIndex === i">
+        <div class="station-header">
+          <span class="name">
+            <i class="fas fa-chevron-left" (click)="showEvses = false"></i>
+            {{station.data.name}}
+          </span>
+          <span class="actions">
+            <i class="fas fa-pencil-alt" (click)="updateStationDialog()"></i>
+            <i class="fas fa-trash-alt" (click)="deleteStationDialog()"></i>
+          </span>
+        </div>
+        <div class="sub-title">Evses</div>
+        <div *ngFor="let evse of selectedEvse; let a = index;" [hidden]="selectedEvseIndex !== i" class="evse-container">
+          <span (click)="getConnectors(a)" class="station-row"><span class="evse-id">{{evse.evse_id}}</span><span class="evse-status">{{evse.status}}</span></span>
+          <div class="connectors-container-wrapper" *ngIf="showConnectors && selectedConnectorsIndex === a">
+              <div class="station-header">
+                  <span class="name">
+                      <i class="fas fa-chevron-left" (click)="showConnectors = false"></i>
+                      {{evse.evse_id}}
+                    </span>
+                </div>
+                <div class="sub-title">Connectors</div>
+            <div *ngFor="let connector of connectors; let u = index;" [hidden]="selectedConnectorsIndex !== a" class="connectors-container">
+              <span class="station-row">
+                <span class="power-type">
+                  <i class="fas fa-plug"></i>
+                  {{connector.power_type}},
+                </span>
+                <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1'">Type 1,</span>
+                <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1_COMBO'">CHAdeMo,</span>
+                <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2'">Type 2,</span>
+                <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2_COMBO'">CCS,</span>
+                <span class="power-standard" *ngIf="connector.standard !== 'IEC_62196_T1' &&
+                                                    connector.standard !== 'IEC_62196_T1_COMBO' &&
+                                                    connector.standard !== 'IEC_62196_T2' &&
+                                                    connector.standard !== 'IEC_62196_T2_COMBO'">
+                  {{connector.standard}},
+                </span>
+                <span class="power-voltage">{{(connector.voltage * connector.voltage)/1000}} kW,</span>
+                <span class="power-tariff-id">{{connector.tariff_id}}</span>
               </span>
-              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1'">Type 1,</span>
-              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1_COMBO'">CHAdeMo,</span>
-              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2'">Type 2,</span>
-              <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2_COMBO'">CCS,</span>
-              <span class="power-standard" *ngIf="connector.standard !== 'IEC_62196_T1' &&
-                                                  connector.standard !== 'IEC_62196_T1_COMBO' &&
-                                                  connector.standard !== 'IEC_62196_T2' &&
-                                                  connector.standard !== 'IEC_62196_T2_COMBO'">
-                {{connector.standard}},
-              </span>
-              <span class="power-voltage">{{(connector.voltage * connector.voltage)/1000}} kW,</span>
-              <span class="power-tariff-id">{{connector.tariff_id}}</span>
-            </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div *ngIf="tabIndex === 1">
+      <div *ngFor="let station of [0,1,2,3,4,5]; let i = index;" class="stations-container">
+          <span (click)="getTariff(i)" class="station-row">Tarrif name</span>
+          <div class="evse-container-wrapper" *ngIf="showTariffs && selectedTariffIndex === i">
+            <div class="station-header">
+              <span class="name">
+                <i class="fas fa-chevron-left" (click)="showTariffs = false"></i>
+                Tarrif name {{i}}
+              </span>
+              <span class="actions">
+                <i class="fas fa-pencil-alt" (click)="updateTariffDialog()"></i>
+                <i class="fas fa-trash-alt" (click)="deleteTariffDialog()"></i>
+              </span>
+            </div>
+            <div class="sub-title">Tarrif details</div>
+            <div class="evse-container">
+                Tarrif details
+            </div>
+          </div>
+        </div>
+  </div>
+
   <div class="stations-buttons">
-    <button class="sc-button" (click)="addStationsDialog()">
-      <!-- <i class="fas fa-plus"></i>  -->
-      + Add new
+    <button class="sc-button" (click)="addStationDialog()" *ngIf="tabIndex === 0">
+      + Add new station
+    </button>
+    <button class="sc-button" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
+      + Add new tariff
     </button>
   </div>
 </div>
 
-<div class="stations-overlay" *ngIf="showEvses" (click)="closeAllLists()"></div>
+<div class="stations-overlay" *ngIf="showEvses || showTariffs" (click)="closeAllLists()"></div>
 
 
 

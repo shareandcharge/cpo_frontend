@@ -88,112 +88,11 @@ h2
   margin-bottom: 128px
   position: relative
 
-// modal
-
-.add-stations-modal .modal-content,
-.update-stations-modal .modal-content,
-.delete-stations-modal .modal-content,
-.ngx-modal .modal-content
-  position: fixed
-  top: 50%
-  left: 50%
-  width: 400px
-  margin-left: -200px
-  margin-top: -150px
-  background: #fff
-  z-index: 1034
-  visibility: hidden
-  opacity: 0
-  transition: opacity 0.7s ease-out
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13)
-  .modal-title
-    padding: 8px 16px 16px 16px
-    text-align: center
-    border-bottom: 1px solid rgba(0, 0, 1, 0.1)
-    font-weight: bold
-  .modal-body
-    padding: 4px 16px 16px 16px
-    p
-        margin: 10px 0
-  .modal-footer
-    padding: 8px 16px
-    border-top: 1px solid rgba(0, 0, 1, 0.1)
-    text-align: right
-    .modal-button
-      @include transition(all, 200ms, ease-in-out)
-      margin-left: 8px
-      &.modal-button-success
-
-.add-stations-modal .modal-content,
-.update-stations-modal .modal-content,
-.delete-stations-modal .modal-content,
-  width: 700px
-  margin-left: -350px
-  margin-top: -350px
-  .modal-body
-    textarea
-      font-family: monospace
-      width: 100%
-      height: 450px
-      border: 1px solid #004666
-      resize: vertical
-      padding: 8px
-    p
-      margin-bottom: 24px
-
-.delete-stations-modal .modal-content,
-  width: 400px
-  margin-left: -200px
-  margin-top: -200px
-  .modal-body
-    p
-      margin-bottom: 8px
-
-
-// Class Active
-
-.show
-  visibility: visible !important
-  opacity: 1 !important
-
-// When active class is added, that affects the modal class
-
-.show + .ngx-modal .modal-content
-.show + .add-stations-modal .modal-content,
-.show + .update-stations-modal .modal-content,
-.show + .delete-stations-modal .modal-content
-  visibility: visible
-  opacity: 1
-  transform: translateY(0)
-
-// Close Button
-
-.close
-  position: absolute
-  top: 0
-  right: 0
-  padding: 17px 20px
-  // background: #000
-  color: #fff
-  cursor: pointer
+input
   border: 0
-  &:after
-    content: 'x'
-  &:hover
-    background: #004666
 
-// The mask
-.modal-backdrop.show
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background: rgba(0, 0, 0, 0.6)
-  z-index: 1033
-  visibility: hidden
-  opacity: 0
-  transition: 0.7s
+input.ng-touched.ng-invalid
+  box-shadow: 0px -2px 0px 0px red inset
 
 .register-form
   width: 480px
@@ -227,12 +126,6 @@ h2
     &:hover,
     &:focus
       background-color: #fff
-
-input
-  border: 0
-
-input.ng-touched.ng-invalid
-  box-shadow: 0px -2px 0px 0px red inset
 
 input[type=text]
   font-size: 1rem
@@ -512,16 +405,6 @@ input[type=submit],
   div
     font-size: 16px
 
-.driver-detail-overlay
-  position: fixed
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  z-index: 1031
-
 .page-title
   display: inline-block
   min-width: 60px
@@ -529,7 +412,6 @@ input[type=submit],
   margin: 16px 0
   background: #fff
   padding: 16px
-  // box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12)
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
   i
     vertical-align: middle
@@ -543,7 +425,6 @@ footer
   position: fixed
   bottom: 0
   left: 0
-  // background-color: rgba(255, 255, 255, 0.6)
   background-color: #fff
   width: 100%
   padding: 8px 16px
@@ -557,307 +438,10 @@ footer
   top: 6px
   right: 0
 
-.ngx-table-button
-  height: 30px
-  position: relative
-  top: -5px
-  -webkit-transition-duration: 350ms
-  transition-duration: 350ms
-  -webkit-transition-property: all
-  transition-property: all
-  -webkit-transition-timing-function: ease
-  transition-timing-function: ease
-  font-size: .83333rem
-  line-height: 17px
-  display: -webkit-inline-box
-  display: -ms-inline-flexbox
-  display: inline-flex
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  align-items: center
-  min-width: 68px
-  max-width: 281px
-  margin: 0
-  padding: 0 20px
-  position: relative
-  vertical-align: middle
-  text-align: center
-  text-transform: uppercase
-  border: 1px solid #004666
-  background-color: #004666
-  color: #fff
-  font-family: "VWFS-Sans",sans-serif
-  font-weight: bold
-  text-decoration: none
-  cursor: pointer
-  border-radius: 0
-  &:hover,
-  &:focus
-    outline: none
-    border: 1px solid rgba(0, 70, 102, 0.9)
-    background-color: rgba(0, 70, 102, 0.9)
-    -webkit-box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
-    box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
-  i
-    margin-right: 8px
-
-
-.ngx-datatable.material
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-
-span.datatable-header-cell-label,
-.datatable-header-cell-template-wrap
-  text-transform: uppercase
-  font-size: 13px
-
-.ngx-datatable.material.striped .datatable-row-odd,
-.ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
-.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group
-  background: #E5ECEF !important
-
 .c-page-head
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13) !important
   background-color: white !important
 
-.ngx-datatable.material.single-selection .datatable-body-row.active,
-.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.material.multi-selection .datatable-body-row.active,
-.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group,
-.ngx-datatable.material.multi-click-selection .datatable-body-row.active,
-.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group
-  background-color: inherit
-
-// cpo
-
-.stations-overlay
-  position: fixed
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  z-index: 1031
-
-div.stations-container-wrapper
-  @extend %clearfix
-  width: 420px
-  position: relative
-  z-index: 1032
-  background: rgba(0,70,102,0.8)
-  color: #fff
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-  .station-header
-    @extend %clearfix
-    width: 100%
-    border-bottom: 1px solid #fff
-    padding: 8px 24px 10px 24px
-    display: block
-    i
-      cursor: pointer
-    .name
-      float: left
-      padding: 8px 16px 8px 0px
-      i:before
-        margin-right: 8px
-    .actions
-      float: right
-      i
-        padding: 8px 0px 8px 16px
-  .station-row
-    @extend %clearfix
-    width: 100%
-    padding: 24px
-    display: block
-    cursor: pointer
-    &:hover
-      background: rgba(0, 0, 0, 0.2)
-    .evse-id
-      float: left
-    .evse-status
-      float: right
-    // .power-type
-    //   width: 34%
-    //   float: left
-    // .power-standard
-    //   width: 33%
-    //   float: left
-    // .power-tariff-id
-    //   width: 10%
-    //   float: left
-    // .power-voltage
-    //   width: 23%
-    //   float: left
-  div.stations-container
-    position: relative
-    border-bottom: 1px solid #fff
-    span
-      display: inline-block
-    &:last-child
-      border-bottom: 0
-    .evse-container-wrapper
-      position: absolute
-      top: -16px
-      left: 405px
-      width: 420px
-      background: rgba(96, 0, 102, 0.8)
-      color: #fff
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-      margin: 16px
-      div.evse-container
-        position: relative
-        border-bottom: 1px solid #fff
-        &:last-child
-          border-bottom: 0
-        div.connectors-container-wrapper
-          position: absolute
-          top: -16px
-          left: 405px
-          width: 420px
-          background: rgba(0, 78, 102, 0.8)
-          color: #fff
-          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-          margin: 16px
-          .connectors-container
-            border-bottom: 1px solid #fff
-            &:last-child
-              border-bottom: 0
-  .stations-buttons
-    float: right
-    padding: 8px
-    font-size: 0
-    button
-      margin-left: 8px
-  .sub-title
-    padding: 8px 24px 12px 24px
-    border-bottom: 1px solid #fff
-
-.payment-page
-  @extend %clearfix
-  .payment-wallet-wrapper,
-  .payment-wallet-detail-wrapper
-    .section-row
-      width: 100%
-      display: block
-      cursor: pointer
-      border-bottom: 1px solid #fff
-      &:last-child
-        border-bottom: 0
-      &:hover
-        background: rgba(0, 0, 0, 0.2)
-      &.header
-        span
-          padding: 8px 8px
-          &:first-child
-            padding: 10px 8px 12px 24px
-          &:last-child
-            padding: 10px 24px 12px 8px
-      span
-        display: inline-block
-        font-size: 16px
-    .sub-title
-      padding: 17px 24px 17px 24px
-      border-bottom: 1px solid #fff
-      font-size: 16px
-      margin-top: 32px
-      &:first-child
-        margin-top: 0
-      i
-        margin-right: 4px
-
-.payment-wallet-wrapper
-  // width: 525px
-  width: 620px
-  float: left
-  position: relative
-  background: rgba(0, 70, 102, 0.8)
-  color: #fff
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-  .payment-wallet__inner
-    max-height: 550px
-    overflow-y: auto
-    font-size: 0
-    .section-row
-      span
-        padding: 24px 8px
-        &:first-child
-          padding: 24px 8px 24px 24px
-        &:last-child
-          padding: 24px 24px 24px 8px
-      &.header
-        cursor: default
-      .name
-        width: 30%
-      .transactions
-        width: 30%
-      .balance
-        width: 40%
-
-.payment-wallet-detail-wrapper
-  // width: 735px
-  width: 620px
-  float: left
-  position: relative
-  background: rgba(96, 0, 102, 0.8)
-  color: #fff
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-  .payment-wallet-detail__inner
-    max-height: 490px
-    overflow-y: auto
-    font-size: 0
-  .payment-wallet-detail__action-buttons
-    text-align: right
-    padding: 8px
-    border-top: 1px solid #fff
-    button
-      margin-left: 4px
-      span,
-      span:last-child
-        padding: 0
-  .section-row
-    padding: 13px 0
-    cursor: default !important
-    span
-      padding: 24px 8px
-      &:first-child
-        padding: 24px 8px 24px 24px
-      &:last-child
-        padding: 24px 24px 24px 8px
-    &.header
-      padding: 0
-    div
-      padding: 8px 24px !important
-      span
-        padding: 0 !important
-        max-width: 400px
-        white-space: nowrap
-        overflow: hidden
-        text-overflow: ellipsis
-        display: inline-block
-        vertical-align: middle
-        line-height: 22px
-        &:last-child
-          margin-left: 8px
-        a
-          text-decoration: none
-    span.transaction-details,
-    span.transaction-details:first-child
-      width: 100%
-      max-width: 100%
-      margin-left: 0
-      text-align: right
-      a
-        text-decoration: none
-        color: #fff
-        padding-top: 15px
-        &:hover
-          text-decoration: underline
-
-.evCoin
-  padding-left: 2px
 
 // blocking ui
 

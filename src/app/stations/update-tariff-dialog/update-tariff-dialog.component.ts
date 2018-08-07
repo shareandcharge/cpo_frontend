@@ -1,22 +1,22 @@
 import { Component, ComponentRef } from '@angular/core';
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
-import { DataService, Broadcaster} from '../../common';
+import { DataService, Broadcaster } from '../../common';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-modal-dialog',
-  templateUrl: './delete-stations-dialog.component.html'
+  templateUrl: './update-tariff-dialog.component.html'
 })
-export class DeleteStationsModalDialogComponent implements IModalDialog {
+export class UpdateTariffModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
-  actionButtons: any = [];
   modalInfo: any = [];
+  actionButtons: any = [];
   toasterService: any;
 
   constructor(private dataService: DataService,
-    toasterService: ToasterService,
-    private broadcaster: Broadcaster) {
+              toasterService: ToasterService,
+              private broadcaster: Broadcaster) {
     this.toasterService = toasterService;
     this.actionButtons = [
       {
@@ -29,11 +29,11 @@ export class DeleteStationsModalDialogComponent implements IModalDialog {
           }, 20);
         })
       }, {
-        text: 'Delete',
+        text: 'Update',
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {
-            this.deleteStation();
+            this.updateStation();
             resolve();
           }, 20);
         })
@@ -52,15 +52,18 @@ export class DeleteStationsModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    console.log(this.parentInfo);
+    this.modalInfo = JSON.stringify(this.parentInfo, null, 4);
   }
 
-  deleteStation() {
-    this.dataService.deleteStation(this.parentInfo).subscribe((data) => {
-        console.log(data);
-        this.broadcaster.broadcast('refreshStations', true);
-        this.toasterService.pop('success', 'Success', 'You have successfuly deleted this location.');
-    });
+  updateStation() {
+    console.log(JSON.parse(this.modalInfo));
+    this.modalInfo = JSON.parse(this.modalInfo);
+    console.log('added');
+    // this.dataService.putStation([this.modalInfo]).subscribe((data) => {
+    //     console.log(data);
+    this.broadcaster.broadcast('refreshTariffs', true);
+    //     this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
+    // });
   }
 
 }
