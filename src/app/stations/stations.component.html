@@ -2,8 +2,8 @@
 
 <div class="stations-container-wrapper">
   <span class="station-header station-header--tabs">
-      <span class="tab" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0;">Stations</span>
-      <span class="tab" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1;">Tariffs</span>
+      <span class="tab" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">Stations</span>
+      <span class="tab" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1; closeAllLists()">Tariffs</span>
   </span>
 
   <div *ngIf="tabIndex === 0">

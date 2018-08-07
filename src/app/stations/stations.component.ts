@@ -76,7 +76,6 @@ export class StationsComponent implements OnInit {
     this.connectors = this.selectedEvse[index].connectors;
     this.selectedConnectorsIndex = index;
     this.showConnectors = !this.showConnectors;
-    // console.log(this.connectors);
   }
 
   getTariffs() {
