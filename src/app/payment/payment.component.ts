@@ -12,6 +12,7 @@ export class PaymentComponent implements OnInit {
   paymentWalletCompleted: any = [];
   paymentWalletHistory: any = [];
   activePaymentWallet: any = [];
+  totalTime: number;
 
   constructor(private dataService: DataService) { }
 
@@ -35,6 +36,22 @@ export class PaymentComponent implements OnInit {
         this.paymentWalletHistory = data;
         console.log(data);
     });
+  }
+
+  calculateTotalTime(startDate, endDate) {
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    const totaltime =  endDate - startDate;
+    let day, hour, minute, seconds;
+    seconds = Math.floor(totaltime / 1000);
+    minute = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    hour = Math.floor(minute / 60);
+    minute = minute % 60;
+    day = Math.floor(hour / 24);
+    hour = hour % 24;
+
+    return day + ":" + hour + ":" + minute % 60 + ":" + seconds % 60;
   }
 
   getPaymentWalletPending() {

@@ -86,7 +86,7 @@
             </div>
             <div>
               <span class="bold">Tariff: </span>
-              <span></span>
+              <span>{{paymentWalletHistoryItem.tariff}}</span>
             </div>
             <div>
               <span class="bold">Total cost: </span>
@@ -98,7 +98,7 @@
             </div>
             <div>
               <span class="bold">Total time: </span>
-              <span></span>
+              <span>{{calculateTotalTime(paymentWalletHistoryItem.start, paymentWalletHistoryItem.end)}}</span>
             </div>
             <div>
               <span class="transaction-details">

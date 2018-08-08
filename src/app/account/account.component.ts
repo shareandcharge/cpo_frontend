@@ -44,4 +44,14 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  toFixedNotation(number) {
+    // const initialnumber = Number.parseFloat(number).toFixed();
+    // const formatedNumber = initialnumber.toString();
+    // return formatedNumber;
+    return number;
+  }
+
+
+
+
 }

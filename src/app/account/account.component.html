@@ -49,13 +49,17 @@
       <div>
           <h2>Recent Transactions: </h2>
           <ul class="transaction-list">
-              <li *ngFor="let historyItem of accountHistory">
+              <li *ngFor="let historyItem of accountHistory"  class="outgoing-{{this.accountInfo.wallet === historyItem.to_addr}}">
                 <span>
-                  <span>{{historyItem.amount / weiToEvCoin}}</span>
+                  <span>
+                      <i class="fas fa-plus-square" *ngIf="this.accountInfo.wallet === historyItem.to_addr"></i>
+                      <i class="fas fa-minus-square"*ngIf="this.accountInfo.wallet !== historyItem.to_addr"></i>
+                      {{toFixedNotation(historyItem.amount / weiToEvCoin)}}
+                  </span>
                   <span class="evCoin" *ngIf="historyItem.currency ===  'wei'">EV Coin</span>
                   <span class="evCoin" *ngIf="historyItem.currency !==  'wei'">{{historyItem.currency}}</span>
                 </span>
-                <span>{{(historyItem.created_at * 1000) | date:'medium' }}</span>
+                <span>{{(historyItem.created_at * 1000) | date:'medium' }} </span>
               </li>
           </ul>
       </div>
