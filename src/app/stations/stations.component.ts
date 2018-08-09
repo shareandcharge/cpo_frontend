@@ -34,6 +34,7 @@ export class StationsComponent implements OnInit {
   tariffs: any = [];
   selectedTariffIndex: any;
   showTariffs: boolean = false;
+  // tariffDetail: any = [];
 
   constructor(toasterService: ToasterService,
               private dataService: DataService,
@@ -51,8 +52,10 @@ export class StationsComponent implements OnInit {
         this.closeAllLists();
     });
     this.broadcaster.on('refreshTariffs').subscribe((data: any) => {
+      this.getTariffs();
       console.log('refreshed tariffs');
     });
+    this.getTariffs();
   }
 
   getStations() {
@@ -88,6 +91,9 @@ export class StationsComponent implements OnInit {
   getTariff(index) {
     this.showTariffs = !this.showTariffs;
     this.selectedTariffIndex = index;
+    // const formatTariffDetail = JSON.stringify(this.tariffs[index], null, 4);
+    // this.tariffDetail = JSON.stringify(JSON.parse(formatTariffDetail), null, 4);
+    // console.log(this.tariffDetail);
     console.log(index);
   }
 

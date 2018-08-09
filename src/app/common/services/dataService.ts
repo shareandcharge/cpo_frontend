@@ -80,6 +80,10 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/cdr/' + token);
     }
 
+    createReimbursement(walletId): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/wallet/generate/' + walletId);
+    }
+
     getPaymentWalletPending(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/pending' );
     }
@@ -94,16 +98,16 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/tariffs' );
     }
 
-    editTarrif(params): Observable<any> {
+    editTarif(params): Observable<any> {
       return this.execPUTRequest(this.baseUrl + 'cpo/tariff', params);
     }
 
-    newTarrif(params): Observable<any> {
+    newTariff(params): Observable<any> {
       return this.execPOSTRequest(this.baseUrl + 'cpo/tariff', params);
     }
 
-    deletearrif(params): Observable<any> {
-      return this.execDELETERequest(this.baseUrl + 'cpo/tariff/' + params);
+    deleteariff(): Observable<any> {
+      return this.execDELETERequest(this.baseUrl + 'cpo/tariff');
     }
 
     /********************* Handling Requests ***********************/

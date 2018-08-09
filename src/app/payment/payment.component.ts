@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../common';
+import { DataService } from '../common';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-payment',
@@ -13,6 +14,8 @@ export class PaymentComponent implements OnInit {
   paymentWalletHistory: any = [];
   activePaymentWallet: any = [];
   totalTime: number;
+  showReinbursementButtons: Boolean = false;
+  blockchainUrl = environment.blockchainExplorerUrl;
 
   constructor(private dataService: DataService) { }
 
@@ -36,6 +39,13 @@ export class PaymentComponent implements OnInit {
         this.paymentWalletHistory = data;
         console.log(data);
     });
+  }
+
+  createReimbursement() {
+    this.showReinbursementButtons = true;
+    // this.dataService.createReimbursement(this.activePaymentWallet).subscribe((data) => {
+    //     console.log(data);
+    // });
   }
 
   calculateTotalTime(startDate, endDate) {

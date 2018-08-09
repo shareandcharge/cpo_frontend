@@ -81,7 +81,7 @@
               <span>{{paymentWalletHistoryItem.evseId}}</span>
             </div>
             <div>
-              <span class="bold">S&C Address: </span>
+              <span class="bold">Driver: </span>
               <span>{{paymentWalletHistoryItem.scId}}</span>
             </div>
             <div>
@@ -102,7 +102,7 @@
             </div>
             <div>
               <span class="transaction-details">
-                <a href="http://18.185.85.20:3000/tx/{{paymentWalletHistoryItem.transactionHash}}" target="_blank">
+                <a href="{{blockchainUrl}}{{paymentWalletHistoryItem.transactionHash}}" target="_blank">
                     Transaction details
                 </a>
               </span>
@@ -125,15 +125,19 @@
       </div>
     </div>
     <div class="payment-wallet-detail__action-buttons">
-        <button class="sc-button white">
+
+        <button class="sc-button white" (click)="createReimbursement()" *ngIf="!showReinbursementButtons">
+            <span>Create Reimbursemnt</span>
+          </button>
+        <button class="sc-button white" *ngIf="showReinbursementButtons">
           <i class="fas fa-thumbs-up"></i>
           <span>Payment Recieved</span>
         </button>
-        <button class="sc-button white">
-          <i class="fas fa-download"></i>
-          <span>Invoice</span>
+        <button class="sc-button white" *ngIf="showReinbursementButtons">
+            <i class="fas fa-file-alt"></i>
+            <span>Invoice</span>
         </button>
-        <button class="sc-button white">
+        <button class="sc-button white" *ngIf="showReinbursementButtons">
           <i class="fas fa-download"></i>
           <span>Download</span>
         </button>

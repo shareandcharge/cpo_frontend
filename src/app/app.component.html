@@ -48,8 +48,8 @@
     <footer *ngIf="router.url !== '/register'">
       <div class="o-page-wrap">
         <p>{{accountInfo.name}}</p>
-        <p>{{accountInfo.address_1}}</p>
-        <p>{{accountInfo.town}}</p>
+        <p>{{accountInfo.address_1}} <span *ngIf="accountInfo.address_1">,</span> {{accountInfo.address_2}} {{accountInfo.postcode}}</p>
+        <p>{{accountInfo.postcode}} {{accountInfo.town}}</p>
         <img src="../../assets/img/share-and-charge.png" class="motionwerk-logo--footer">
       </div>
     </footer>

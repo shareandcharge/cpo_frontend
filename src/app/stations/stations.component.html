@@ -58,13 +58,13 @@
   </div>
 
   <div *ngIf="tabIndex === 1">
-      <div *ngFor="let station of [0,1,2,3,4,5]; let i = index;" class="stations-container">
-          <span (click)="getTariff(i)" class="station-row">Tarrif name</span>
+      <div *ngFor="let tariff of tariffs; let i = index;" class="stations-container">
+          <span (click)="getTariff(i)" class="station-row">ID {{tariff.id}}</span>
           <div class="evse-container-wrapper" *ngIf="showTariffs && selectedTariffIndex === i">
             <div class="station-header">
               <span class="name">
                 <i class="fas fa-chevron-left" (click)="showTariffs = false"></i>
-                Tarrif name {{i}}
+                ID {{tariff.id}}
               </span>
               <span class="actions">
                 <i class="fas fa-pencil-alt" (click)="updateTariffDialog()"></i>
@@ -73,7 +73,9 @@
             </div>
             <div class="sub-title">Tarrif details</div>
             <div class="evse-container">
-                Tarrif details
+                <div class="station-row preformat">
+                    {{tariff | json}}
+                </div>
             </div>
           </div>
         </div>

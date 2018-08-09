@@ -58,11 +58,11 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
   updateTariff() {
     console.log(JSON.parse(this.modalInfo));
     this.modalInfo = JSON.parse(this.modalInfo);
-    // this.dataService.putStation([this.modalInfo]).subscribe((data) => {
-    //     console.log(data);
-    //     this.broadcaster.broadcast('refreshStations', true);
-    //     this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
-    // });
+    this.dataService.putStation([this.modalInfo]).subscribe((data) => {
+        console.log(data);
+        this.broadcaster.broadcast('refreshStations', true);
+        this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
+    });
     console.log('updated');
   }
 
