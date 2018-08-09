@@ -1,10 +1,15 @@
-<h2 class="page-title">Stations</h2>
+<h2 class="page-title clickable" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">
+    <span class="tab">Stations</span>
+</h2>
+<h2 class="page-title clickable" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1; closeAllLists()">
+  <span class="tab">Tariffs</span>
+</h2>
 
 <div class="stations-container-wrapper">
-  <span class="station-header station-header--tabs">
+  <!-- <span class="station-header station-header--tabs">
       <span class="tab" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">Stations</span>
       <span class="tab" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1; closeAllLists()">Tariffs</span>
-  </span>
+  </span> -->
 
   <div *ngIf="tabIndex === 0">
     <div *ngFor="let station of stations; let i = index;" class="stations-container">
