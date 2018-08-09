@@ -4,6 +4,7 @@ import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster';
 import { DataService } from './common';
 import {Http, Response} from '@angular/http';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
     this.registeredFlag = localStorage.getItem('registeredCpo');
 
     if (this.registeredFlag !== 'true') {
-      this.http.get('http://52.57.155.233:9090/api/v1/cpo').subscribe(
+      this.http.get(environment.apiUrl + 'cpo').subscribe(
         data => {
           localStorage.setItem('registeredCpo', 'true');
           this.registeredFlag = localStorage.getItem('registeredCpo');
