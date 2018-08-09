@@ -60,6 +60,9 @@
   <div *ngIf="tabIndex === 1">
       <div *ngFor="let tariff of tariffs; let i = index;" class="stations-container">
           <span (click)="getTariff(i)" class="station-row">ID {{tariff.id}}</span>
+             <!-- £/Session (<-- for flatrate tariff);
+                  £/Time (<-- for time tariff);
+                  £/kWh (<-- for energy / kWh based) -->
           <div class="evse-container-wrapper" *ngIf="showTariffs && selectedTariffIndex === i">
             <div class="station-header">
               <span class="name">

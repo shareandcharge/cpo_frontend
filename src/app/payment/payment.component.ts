@@ -61,7 +61,7 @@ export class PaymentComponent implements OnInit {
     day = Math.floor(hour / 24);
     hour = hour % 24;
 
-    return day + ":" + hour + ":" + minute % 60 + ":" + seconds % 60;
+    return hour + 'h ' + minute % 60 + 'm ' + seconds % 60 + 's';
   }
 
   getPaymentWalletPending() {
