@@ -56,12 +56,11 @@ export class DeleteTariffModalDialogComponent implements IModalDialog {
   }
 
   deleteTariff() {
-    // this.dataService.deleteStation(this.parentInfo).subscribe((data) => {
-    //     console.log(data);
-   this.broadcaster.broadcast('refreshTariffs', true);
-    //     this.toasterService.pop('success', 'Success', 'You have successfuly deleted this location.');
-    // });
-    console.log('deleted');
+    this.dataService.deleteariff().subscribe((data) => {
+      console.log(data);
+      this.broadcaster.broadcast('refreshTariffs', true);
+      this.toasterService.pop('success', 'Success', 'You have successfuly deleted a tariff.');
+    });
   }
 
 }

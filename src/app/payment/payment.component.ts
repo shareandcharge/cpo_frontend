@@ -43,9 +43,9 @@ export class PaymentComponent implements OnInit {
 
   createReimbursement() {
     this.showReinbursementButtons = true;
-    // this.dataService.createReimbursement(this.activePaymentWallet).subscribe((data) => {
-    //     console.log(data);
-    // });
+    this.dataService.createReimbursement(this.activePaymentWallet).subscribe((data) => {
+        console.log(data);
+    });
   }
 
   calculateTotalTime(startDate, endDate) {

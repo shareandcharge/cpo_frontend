@@ -105,7 +105,7 @@ export class StationsComponent implements OnInit {
 
   addStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add Locations',
+      title: 'Add Stations',
       childComponent: AddStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
@@ -117,7 +117,7 @@ export class StationsComponent implements OnInit {
 
   updateStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Update Location',
+      title: 'Update Station',
       childComponent: UpdateStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
@@ -130,7 +130,7 @@ export class StationsComponent implements OnInit {
 
   deleteStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Delete Location',
+      title: 'Delete Station',
       childComponent: DeleteStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
@@ -151,7 +151,8 @@ export class StationsComponent implements OnInit {
         closeButtonClass: 'close',
         closeButtonTitle: 'Close',
         modalClass: 'add-stations-modal'
-      }
+      },
+      data: this.tariffs
     });
   }
 
@@ -164,7 +165,7 @@ export class StationsComponent implements OnInit {
         closeButtonTitle: 'Close',
         modalClass: 'update-stations-modal'
       },
-      data: this.selectedStation
+      data: this.tariffs
     });
   }
 
@@ -177,7 +178,7 @@ export class StationsComponent implements OnInit {
         closeButtonTitle: 'Close',
         modalClass: 'delete-stations-modal'
       },
-      data: this.selectedScId
+      data: this.tariffs
     });
     console.log(this.selectedScId);
   }

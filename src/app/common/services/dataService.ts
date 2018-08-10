@@ -98,7 +98,7 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/tariffs' );
     }
 
-    editTarif(params): Observable<any> {
+    updateTarif(params): Observable<any> {
       return this.execPUTRequest(this.baseUrl + 'cpo/tariff', params);
     }
 
@@ -107,7 +107,7 @@ export class DataService {
     }
 
     deleteariff(): Observable<any> {
-      return this.execDELETERequest(this.baseUrl + 'cpo/tariff');
+      return this.execDELETERequest(this.baseUrl + 'cpo/tariffs');
     }
 
     /********************* Handling Requests ***********************/

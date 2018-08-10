@@ -12,25 +12,13 @@ export class AddTariffModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = [{
-    "id": "12",
-    "currency": "EUR",
-    "elements": [{
-      "price_components": [{
-        "type": "TIME",
-        "price": 2.00,
-        "step_size": 300
-      }]
-    }]
-  }];
-  deleteObject: any = [{
         "id": "2",
         "currency": "EUR",
-        "elements": [
-            {
+        "elements": [{
                 "price_components": [
                     {
                         "type": "ENERGY",
-                        "price": 0.25,
+                        "price": 0.21,
                         "step_size": 1
                     }
                 ]
@@ -71,7 +59,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
                     }
                 ]
             }]
-         }];
+        }];
   toasterService: any;
 
   constructor(private dataService: DataService,
@@ -119,12 +107,11 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     console.log(JSON.parse(this.modalInfo));
     this.modalInfo = JSON.parse(this.modalInfo);
     this.dataService.deleteariff().subscribe((data) => {
-      // this.dataService.newTariff(this.modalInfo).subscribe((dataTariff) => {
-      //   console.log(dataTariff);
-      //   this.broadcaster.broadcast('refreshTariffs', true);
-      //   this.toasterService.pop('success', 'Success', 'You have successfuly added a new tariff.');
-      // });
-      console.log('deleted');
+      this.dataService.newTariff(this.modalInfo).subscribe((dataTariff) => {
+        console.log(dataTariff);
+        this.broadcaster.broadcast('refreshTariffs', true);
+        this.toasterService.pop('success', 'Success', 'You have successfuly added a new tariff.');
+      });
     });
   }
 

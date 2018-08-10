@@ -33,7 +33,7 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {
-            this.updateStation();
+            this.updateTarif();
             resolve();
           }, 20);
         })
@@ -55,15 +55,15 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
     this.modalInfo = JSON.stringify(this.parentInfo, null, 4);
   }
 
-  updateStation() {
+  updateTarif() {
     console.log(JSON.parse(this.modalInfo));
     this.modalInfo = JSON.parse(this.modalInfo);
     console.log('added');
-    // this.dataService.putStation([this.modalInfo]).subscribe((data) => {
-    //     console.log(data);
-    this.broadcaster.broadcast('refreshTariffs', true);
-    //     this.toasterService.pop('success', 'Success', 'You have successfuly updated this location.');
-    // });
+    this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
+      console.log(dataTariff);
+      this.broadcaster.broadcast('refreshTariffs', true);
+      this.toasterService.pop('success', 'Success', 'You have successfuly added a new tariff.');
+    });
   }
 
 }
