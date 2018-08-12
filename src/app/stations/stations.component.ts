@@ -128,7 +128,7 @@ export class StationsComponent implements OnInit {
         closeButtonTitle: 'Close',
         modalClass: 'update-stations-modal'
       },
-      data: this.selectedStation
+      data: this.selectedStation.data
     });
   }
 

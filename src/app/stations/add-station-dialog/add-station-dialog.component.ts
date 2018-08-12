@@ -11,7 +11,7 @@ export class AddStationModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
   actionButtons: any = [];
-  modalInfo: any = [{
+  modalInfo: any = {
       "id": "Motionwerk-25",
       "type": "OTHER",
       "name": "Motionwerk-25",
@@ -106,8 +106,7 @@ export class AddStationModalDialogComponent implements IModalDialog {
           }
         ]
       }
-    }
-  ];
+    };
   toasterService: any;
 
   constructor(private dataService: DataService,
