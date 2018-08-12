@@ -52,7 +52,7 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    this.modalInfo = JSON.stringify(this.parentInfo, null, 4);
+    this.modalInfo = JSON.stringify(this.parentInfo, null, '\t');
   }
 
   updateTarif() {

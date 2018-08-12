@@ -100,7 +100,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    this.modalInfo = JSON.stringify(this.modalInfo, null, 4);
+    this.modalInfo = JSON.stringify(this.modalInfo, null, '\t');
   }
 
   addTariff() {

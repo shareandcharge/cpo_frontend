@@ -64,10 +64,19 @@
 
   <div *ngIf="tabIndex === 1">
       <div *ngFor="let tariff of tariffs; let i = index;" class="stations-container">
-          <span (click)="getTariff(i)" class="station-row">ID {{tariff.id}}</span>
-             <!-- £/Session (<-- for flatrate tariff);
-                  £/Time (<-- for time tariff);
-                  £/kWh (<-- for energy / kWh based) -->
+          <span (click)="getTariff(i)" class="station-row">
+              <span class="evse-id">ID {{tariff.id}}</span>
+              <span class="evse-status">{{tariff.currency}}</span>
+          </span>
+          <!-- £/Session (<-- for flatrate tariff);
+          £/Time (<-- for time tariff);
+          £/kWh (<-- for energy / kWh based) -->
+          <!-- "ENERGY", "FLAT", "PARKING_TIME", "TIME" -->
+          <!--
+            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
+            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
+            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
+          -->
           <div class="evse-container-wrapper" *ngIf="showTariffs && selectedTariffIndex === i">
             <div class="station-header">
               <span class="name">
@@ -82,7 +91,7 @@
             <div class="sub-title">Tarrif details</div>
             <div class="evse-container">
                 <div class="station-row tariff-detail-row preformat">
-                    {{tariff | json}}
+                    {{tariffDetail}}
                 </div>
             </div>
           </div>
