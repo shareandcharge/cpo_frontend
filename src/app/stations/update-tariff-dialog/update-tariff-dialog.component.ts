@@ -62,7 +62,7 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
     this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
       console.log(dataTariff);
       this.broadcaster.broadcast('refreshTariffs', true);
-      this.toasterService.pop('success', 'Success', 'You have successfuly added a new tariff.');
+      this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
     });
   }
 
