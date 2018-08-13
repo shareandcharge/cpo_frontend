@@ -45,13 +45,9 @@ export class AccountComponent implements OnInit {
   }
 
   toFixedNotation(number) {
-    // const initialnumber = Number.parseFloat(number).toFixed();
-    // const formatedNumber = initialnumber.toString();
-    // return formatedNumber;
-    return number;
+    const initialnumber = Number.parseFloat(number).toFixed(2);
+    const formatedNumber = initialnumber.toString();
+    return formatedNumber;
   }
-
-
-
 
 }
