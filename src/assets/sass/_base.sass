@@ -273,96 +273,11 @@ input[type=submit],
   padding-bottom: 16px
   margin-bottom: 16px
   border-bottom: 2px solid #fff
-  &.wallet-info--driver-detail
-    position: relative
-    padding-bottom: 0
-    margin-bottom: 0
-    padding-top: 24px
-    margin-top: 16px
-    border-bottom: 0
-    border-top: 2px solid #fff
-    .wallet-info__buttons
-      position: absolute
-      right: 0
-      top: 0
-      .wallet-info__buttons__inner-wrapper
-        position: relative
-        .wallet-info__transactions,
-        .wallet-info__tokens
-          width: 360px
-          position: absolute
-          top: 0
-          top: 1px
-          left: 46px
-          z-index: 1032
-          padding: 24px
-          background-color: #fff
-          color: #000
-          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-        button
-          font-size: 20px
-          padding: 10px 12px 9px 12px
-          border: 1px solid #004666
-          background-color: #fff
-          color: #004666
-          cursor: pointer
-          border-radius: 0
-          display: block
-          margin: 16px 0
-          &:hover
-            outline: none
-            -webkit-box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
-            box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
-        .transaction-list
-          width: 100%
-          span
-            width: 20%
-            margin: 8px 0
-            display: inline-block
-            i
-              margin: 0 4px
-          span:first-child
-            width: 35%
-            text-align: left
-          span:last-child
-            width: 45%
-            text-align: right
-        .wallet-info__tokens
-          padding: 24px 48px
-          input
-            border: 1px solid #000
-            margin: 16px 0
-            text-align: center
-          button
-            width: 100px
-            float: right
-        .token-ammount__input-wrapper
-          @extend %clearfix
-          .token-ammount-wrapper
-            width: 100%
-            vertical-align: middle
-            display: inline-flex
-            margin: 0
-            button
-              width: 50%
-              float: inherit
-              margin: 4px 2px
-              display: inline-block
-            button:first-child
-              margin-left: 0
-            button:last-child
-              margin-right: 0
-          & + button
-            font-size: 14px
-            height: 44px
-            padding: 0 20px
-            background: #004666
-            color: #fff
-            text-transform: uppercase
   .wallet-info__ammount
-    font-size: 30px
+    font-size: 24px
     font-weight: bold
     margin: 10px 0
+
 .transaction-list
   max-height: 300px
   overflow-y: auto
@@ -380,29 +295,6 @@ input[type=submit],
       float: left
     span:last-child
       float: right
-
-.driver-detail-wrapper
-  width: 480px
-  background: rgba(0,70,102,0.8)
-  color: #fff
-  padding: 24px
-  font-size: 0
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-  span:first-child,
-  span:last-child
-    display: inline-block
-    font-size: 16px
-    vertical-align: middle
-  span:first-child
-    width: 30%
-    text-align: right
-    padding-right: 16px
-    margin: 8px 0
-  span:last-child
-    width: 70%
-    margin: 6px 0px
-  div
-    font-size: 16px
 
 .page-title
   display: inline-block
@@ -458,3 +350,107 @@ footer
   .block-ui-spinner,
   .block-ui-template
     display: none
+
+
+.tooltip
+  position: absolute
+  z-index: 1070
+  display: block
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif
+  font-size: 12px
+  font-style: normal
+  font-weight: 400
+  line-height: 1.42857143
+  text-align: left
+  text-align: start
+  text-decoration: none
+  text-shadow: none
+  text-transform: none
+  letter-spacing: normal
+  word-break: normal
+  word-spacing: normal
+  word-wrap: normal
+  white-space: normal
+  filter: alpha(opacity = 0)
+  opacity: 0
+  line-break: auto
+  &.in
+    filter: alpha(opacity = 90)
+    opacity: 0.9
+  &.top
+    padding: 5px 0
+    margin-top: -3px
+  &.right
+    padding: 0 5px
+    margin-left: 3px
+  &.bottom
+    padding: 5px 0
+    margin-top: 3px
+  &.left
+    padding: 0 5px
+    margin-left: -3px
+
+.tooltip-inner
+  max-width: 200px
+  padding: 3px 8px
+  color: #fff
+  text-align: center
+  background-color: #000
+  border-radius: 4px
+
+.tooltip-arrow
+  position: absolute
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+
+.tooltip
+  &.top .tooltip-arrow
+    bottom: 0
+    left: 50%
+    margin-left: -5px
+    border-width: 5px 5px 0
+    border-top-color: #000
+  &.top-left .tooltip-arrow
+    right: 5px
+    bottom: 0
+    margin-bottom: -5px
+    border-width: 5px 5px 0
+    border-top-color: #000
+  &.top-right .tooltip-arrow
+    bottom: 0
+    left: 5px
+    margin-bottom: -5px
+    border-width: 5px 5px 0
+    border-top-color: #000
+  &.right .tooltip-arrow
+    top: 50%
+    left: 0
+    margin-top: -5px
+    border-width: 5px 5px 5px 0
+    border-right-color: #000
+  &.left .tooltip-arrow
+    top: 50%
+    right: 0
+    margin-top: -5px
+    border-width: 5px 0 5px 5px
+    border-left-color: #000
+  &.bottom .tooltip-arrow
+    top: 0
+    left: 50%
+    margin-left: -5px
+    border-width: 0 5px 5px
+    border-bottom-color: #000
+  &.bottom-left .tooltip-arrow
+    top: 0
+    right: 5px
+    margin-top: -5px
+    border-width: 0 5px 5px
+    border-bottom-color: #000
+  &.bottom-right .tooltip-arrow
+    top: 0
+    left: 5px
+    margin-top: -5px
+    border-width: 0 5px 5px
+    border-bottom-color: #000
