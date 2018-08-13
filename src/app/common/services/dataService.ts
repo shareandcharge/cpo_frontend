@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import '../rxjs-operators';
 import {ToasterModule, ToasterService, ToasterContainerComponent} from 'angular2-toaster';
 import {Broadcaster} from './broadcasterService';
