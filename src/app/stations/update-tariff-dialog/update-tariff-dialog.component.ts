@@ -55,17 +55,6 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
     this.modalInfo = JSON.stringify(this.parentInfo, null, '\t');
   }
 
-  // updateTarif() {
-  //   console.log(JSON.parse(this.modalInfo));
-  //   this.modalInfo = JSON.parse(this.modalInfo);
-  //   console.log('added');
-  //   this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
-  //     console.log(dataTariff);
-  //     this.broadcaster.broadcast('refreshTariffs', true);
-  //     this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
-  //   });
-  // }
-
   updateTarif() {
 
     this.safelyParseJSON();

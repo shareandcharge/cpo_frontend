@@ -89,8 +89,14 @@ export class DataService {
     }
 
     getPaymentWalletCompleted(): Observable<any> {
-      return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/completed');
+      return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/complete');
     }
+
+    // setPaymentStatus(reimbursementId): Observable<any> {
+    //   return this.execPUTRequest(this.baseUrl + 'set_status/' + reimbursementId + '/complete');
+    // }
+
+    // {server_addr}}/cpo/payment/reimbursement/6c28d80d0927abba4816ca579478ed13a6ef3e88/complete
 
     // Tariffs
 

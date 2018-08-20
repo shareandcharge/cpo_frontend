@@ -19,8 +19,11 @@
             <span class="balance">Tokens</span>
         </div>
       <div *ngFor="let paymentWalletItem of paymentWallet; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i)">
-            <span class="name">{{paymentWalletItem.msp_name}}</span>
+            class="section-row" (click)="getPaymentWalletHistory(i, 'basic')">
+            <span class="name">
+              <!-- {{paymentWalletItem.msp_name}}  -->
+              Volkswagen Corporation
+            </span>
             <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
             <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
       </div>
@@ -34,9 +37,12 @@
             <span class="balance">Tokens</span>
         </div>
       <div *ngFor="let paymentWalletItem of paymentWalletPending; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i)">
-            <span class="name">{{paymentWalletItem.msp_name}}</span>
-            <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
+            class="section-row" (click)="getPaymentWalletHistory(i, 'pending')">
+            <span class="name">
+              <!-- {{paymentWalletItem.msp_name}}  -->
+              Volkswagen Corporation
+            </span>
+            <span class="transactions">{{paymentWalletItem.txs_number}} Transactions</span>
             <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
       </div>
 
@@ -50,9 +56,12 @@
           <span class="balance">Tokens</span>
       </div>
       <div *ngFor="let paymentWalletItem of paymentWalletCompleted; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i)">
-            <span class="name">{{paymentWalletItem.msp_name}}</span>
-            <span class="transactions">{{paymentWalletItem.total_transactions}} Transactions</span>
+            class="section-row" (click)="getPaymentWalletHistory(i, 'complete')">
+            <span class="name">
+              <!-- {{paymentWalletItem.msp_name}}  -->
+              Volkswagen Corporation
+            </span>
+            <span class="transactions">{{paymentWalletItem.txs_number}} Transactions</span>
             <span class="balance">{{paymentWalletItem.amount}} {{paymentWalletItem.currency}}</span>
       </div>
 
@@ -94,7 +103,7 @@
             </div>
             <div>
               <span class="bold">Total energy: </span>
-              <span></span>
+              <span>{{paymentWalletHistoryItem.chargedUnits}} kWh</span>
             </div>
             <div>
               <span class="bold">Total time: </span>
@@ -108,36 +117,22 @@
               </span>
             </div>
 
-
-
-            <!-- <div>
-              <span class="bold">Controller: </span>
-              <span>{{paymentWalletHistoryItem.controller}}</span>
-            </div>
-            <div>
-              <span class="bold">token contract: </span>
-              <span>{{paymentWalletHistoryItem.tokenContract}}</span>
-            </div>
-            <div>
-              <span class="bold">Transaction hash: </span>
-              <span>{{paymentWalletHistoryItem.transactionHash}}</span>
-            </div> -->
       </div>
     </div>
     <div class="payment-wallet-detail__action-buttons">
 
-        <button class="sc-button white" (click)="createReimbursement()" *ngIf="!showReinbursementButtons">
+        <button class="sc-button white" (click)="createReimbursement()" *ngIf="cdrListActive == 'basic'" >
             <span>Create Reimbursemnt</span>
           </button>
-        <button class="sc-button white" *ngIf="showReinbursementButtons">
+        <button class="sc-button white" >
           <i class="fas fa-thumbs-up"></i>
           <span>Payment Recieved</span>
         </button>
-        <button class="sc-button white" *ngIf="showReinbursementButtons">
+        <button class="sc-button white" >
             <i class="fas fa-file-alt"></i>
             <span>Invoice</span>
         </button>
-        <button class="sc-button white" *ngIf="showReinbursementButtons">
+        <button class="sc-button white">
           <i class="fas fa-download"></i>
           <span>Download</span>
         </button>

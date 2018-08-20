@@ -14,26 +14,28 @@ export class PaymentComponent implements OnInit {
   paymentWalletHistory: any = [];
   activePaymentWallet: any = [];
   totalTime: number;
-  showReinbursementButtons: Boolean = false;
+  cdrListActive: any;
+  // showReinbursementButtons: Boolean = false;
   blockchainUrl = environment.blockchainExplorerUrl;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.getPaymentWallet();
+    this.getPaymentWalletPending();
+    this.getPaymentWalletCompleted();
   }
 
   getPaymentWallet() {
     this.dataService.getPaymentWallet().subscribe((data) => {
         this.paymentWallet = data;
         console.log(data);
-        this.getPaymentWalletPending();
-        this.getPaymentWalletCompleted();
     });
   }
 
-  getPaymentWalletHistory(index) {
+  getPaymentWalletHistory(index, cdrListActive) {
     this.activePaymentWallet = this.paymentWallet[index].token_address;
+    this.cdrListActive = cdrListActive;
     console.log(this.activePaymentWallet);
     this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
         this.paymentWalletHistory = data;
@@ -42,7 +44,7 @@ export class PaymentComponent implements OnInit {
   }
 
   createReimbursement() {
-    this.showReinbursementButtons = true;
+    // this.showReinbursementButtons = true;
     this.dataService.createReimbursement(this.activePaymentWallet).subscribe((data) => {
         console.log(data);
     });

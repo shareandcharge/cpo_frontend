@@ -51,11 +51,12 @@ export class StationsComponent implements OnInit {
         this.getStations();
         this.closeAllLists();
     });
+    this.getTariffs();
     this.broadcaster.on('refreshTariffs').subscribe((data: any) => {
       this.getTariffs();
+      this.closeAllLists();
       console.log('refreshed tariffs');
     });
-    this.getTariffs();
   }
 
   getStations() {

@@ -11,102 +11,175 @@ export class AddStationModalDialogComponent implements IModalDialog {
 
   parentInfo: string;
   actionButtons: any = [];
+  // modalInfo: any = {
+  //     "id": "Motionwerk-25",
+  //     "type": "OTHER",
+  //     "name": "Motionwerk-25",
+  //     "address": "Rüttenscheider Str. 120",
+  //     "city": "Essen",
+  //     "postal_code": "45131",
+  //     "country": "DE",
+  //     "coordinates": {
+  //       "latitude": "59.434012",
+  //       "longitude": "2.00419"
+  //     },
+  //     "evses": [
+  //       {
+  //         "uid": "1",
+  //         "evse_id": "BB-5958-01",
+  //         "capabilities": [],
+  //         "connectors": [
+  //           {
+  //             "id": "1",
+  //             "standard": "IEC_62196_T2",
+  //             "format": "CABLE",
+  //             "power_type": "AC_3_PHASE",
+  //             "voltage": 224,
+  //             "amperage": 32,
+  //             "tariff_id": "1"
+  //           }
+  //         ],
+  //         "physical_reference": "1",
+  //         "floor_level": "3"
+  //       },
+  //       {
+  //         "uid": "2",
+  //         "evse_id": "BB-5983-31",
+  //         "capabilities": [],
+  //         "connectors": [
+  //           {
+  //             "id": "1",
+  //             "standard": "IEC_62196_T2",
+  //             "format": "CABLE",
+  //             "power_type": "AC_3_PHASE",
+  //             "voltage": 224,
+  //             "amperage": 32,
+  //             "tariff_id": "1"
+  //           }
+  //         ],
+  //         "physical_reference": "2",
+  //         "floor_level": "3"
+  //       }
+  //     ],
+  //     "operator": {
+  //       "name": "Motionwerk GmbH"
+  //     },
+  //     "opening_times": {
+  //       "regular_hours": [
+  //         {
+  //           "weekday": 1,
+  //           "period_begin": "08:00",
+  //           "period_end": "20:00"
+  //         },
+  //         {
+  //           "weekday": 2,
+  //           "period_begin": "08:00",
+  //           "period_end": "20:00"
+  //         },
+  //         {
+  //           "weekday": 3,
+  //           "period_begin": "08:00",
+  //           "period_end": "20:00"
+  //         },
+  //         {
+  //           "weekday": 4,
+  //           "period_begin": "08:00",
+  //           "period_end": "20:00"
+  //         },
+  //         {
+  //           "weekday": 5,
+  //           "period_begin": "08:00",
+  //           "period_end": "20:00"
+  //         }
+  //       ],
+  //       "twentyfourseven": false,
+  //       "exceptional_openings": [
+  //         {
+  //           "period_begin": "2014-06-21T09:00:00Z",
+  //           "period_end": "2014-06-21T12:00:00Z"
+  //         }
+  //       ],
+  //       "exceptional_closings": [
+  //         {
+  //           "period_begin": "2014-06-24T00:00:00Z",
+  //           "period_end": "2014-06-25T00:00:00Z"
+  //         }
+  //       ]
+  //     }
+  //   };
+
   modalInfo: any = {
-      "id": "Motionwerk-25",
-      "type": "OTHER",
-      "name": "Motionwerk-25",
-      "address": "Rüttenscheider Str. 120",
-      "city": "Essen",
-      "postal_code": "45131",
-      "country": "DE",
-      "coordinates": {
-        "latitude": "59.434012",
-        "longitude": "2.00419"
-      },
-      "evses": [
-        {
-          "uid": "1",
-          "evse_id": "BB-5958-01",
-          "capabilities": [],
-          "connectors": [
-            {
-              "id": "1",
-              "standard": "IEC_62196_T2",
-              "format": "CABLE",
-              "power_type": "AC_3_PHASE",
-              "voltage": 224,
-              "amperage": 32,
-              "tariff_id": "1"
-            }
-          ],
-          "physical_reference": "1",
-          "floor_level": "3"
-        },
-        {
-          "uid": "2",
-          "evse_id": "BB-5983-31",
-          "capabilities": [],
-          "connectors": [
-            {
-              "id": "1",
-              "standard": "IEC_62196_T2",
-              "format": "CABLE",
-              "power_type": "AC_3_PHASE",
-              "voltage": 224,
-              "amperage": 32,
-              "tariff_id": "1"
-            }
-          ],
-          "physical_reference": "2",
-          "floor_level": "3"
-        }
-      ],
-      "operator": {
-        "name": "Motionwerk GmbH"
-      },
-      "opening_times": {
-        "regular_hours": [
+       "id": "Motionwerk-1",
+       "type": "ON_STREET",
+       "name": "Gent Zuid",
+       "address": "F.Rooseveltlaan 3A",
+       "city": "Gent",
+       "postal_code": "9000",
+       "country": "BEL",
+       "coordinates": {
+          "latitude": "51.047599",
+          "longitude": "3.729944"
+       },
+       "evses": [
           {
-            "weekday": 1,
-            "period_begin": "08:00",
-            "period_end": "20:00"
+             "uid": "3256",
+             "evse_id": "BE-BEC-E041503001",
+             "status": "AVAILABLE",
+             "status_schedule": [
+             ],
+             "capabilities": [
+                "RESERVABLE"
+             ],
+             "connectors": [
+                {
+                   "id": "1",
+                   "standard": "IEC_62196_T2",
+                   "format": "CABLE",
+                   "power_type": "AC_3_PHASE",
+                   "voltage": 220,
+                   "amperage": 16,
+                   "tariff_id": "11"
+                },
+                {
+                   "id": "2",
+                   "standard": "IEC_62196_T2",
+                   "format": "SOCKET",
+                   "power_type": "AC_3_PHASE",
+                   "voltage": 220,
+                   "amperage": 16,
+                   "tariff_id": "11"
+                }
+             ],
+             "physical_reference": "1",
+             "floor_level": "-1"
           },
           {
-            "weekday": 2,
-            "period_begin": "08:00",
-            "period_end": "20:00"
-          },
-          {
-            "weekday": 3,
-            "period_begin": "08:00",
-            "period_end": "20:00"
-          },
-          {
-            "weekday": 4,
-            "period_begin": "08:00",
-            "period_end": "20:00"
-          },
-          {
-            "weekday": 5,
-            "period_begin": "08:00",
-            "period_end": "20:00"
+             "uid": "3257",
+             "evse_id": "BE-BEC-E041503002",
+             "status": "RESERVED",
+             "capabilities": [
+                "RESERVABLE"
+             ],
+             "connectors": [
+                {
+                   "id": "1",
+                   "standard": "IEC_62196_T2",
+                   "format": "SOCKET",
+                   "power_type": "AC_3_PHASE",
+                   "voltage": 220,
+                   "amperage": 16,
+                   "tariff_id": "12"
+                }
+             ],
+             "physical_reference": "2",
+             "floor_level": "-2"
           }
-        ],
-        "twentyfourseven": false,
-        "exceptional_openings": [
-          {
-            "period_begin": "2014-06-21T09:00:00Z",
-            "period_end": "2014-06-21T12:00:00Z"
-          }
-        ],
-        "exceptional_closings": [
-          {
-            "period_begin": "2014-06-24T00:00:00Z",
-            "period_end": "2014-06-25T00:00:00Z"
-          }
-        ]
-      }
+       ],
+       "operator": {
+          "name": "BeCharged"
+       }
     };
+
   toasterService: any;
 
   constructor(private dataService: DataService,
