@@ -12,76 +12,69 @@ export class AddStationModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = {
-       "id": "Motionwerk-1",
-       "type": "ON_STREET",
-       "name": "Gent Zuid",
-       "address": "F.Rooseveltlaan 3A",
-       "city": "Gent",
-       "postal_code": "9000",
-       "country": "BEL",
-       "coordinates": {
-          "latitude": "51.047599",
-          "longitude": "3.729944"
-       },
-       "evses": [
+    "id": "Motionwerk-1",
+    "type": "OTHER",
+    "name": "Motionwerk 1",
+    "directions": {
+      "language": "en",
+      "text": "go the second on the left, then the third on the right after you take a left turn"
+    },
+    "address": "Rüttenscheider Str. 120",
+    "city": "Essen",
+    "postal_code": "45131",
+    "country": "DE",
+    "coordinates": {
+      "latitude": "51.43232012",
+      "longitude": "7.0022419"
+    },
+    "evses": [
+      {
+        "uid": "1",
+        "evse_id": "BB-5958-0",
+        "status": "AVAILABLE",
+        "status_schedule": [],
+        "capabilities": [],
+        "connectors": [
           {
-             "uid": "3256",
-             "evse_id": "BE-BEC-E041503001",
-             "status": "AVAILABLE",
-             "status_schedule": [
-             ],
-             "capabilities": [
-                "RESERVABLE"
-             ],
-             "connectors": [
-                {
-                   "id": "1",
-                   "standard": "IEC_62196_T2",
-                   "format": "CABLE",
-                   "power_type": "AC_3_PHASE",
-                   "voltage": 220,
-                   "amperage": 16,
-                   "tariff_id": "11"
-                },
-                {
-                   "id": "2",
-                   "standard": "IEC_62196_T2",
-                   "format": "SOCKET",
-                   "power_type": "AC_3_PHASE",
-                   "voltage": 220,
-                   "amperage": 16,
-                   "tariff_id": "11"
-                }
-             ],
-             "physical_reference": "1",
-             "floor_level": "-1"
-          },
-          {
-             "uid": "3257",
-             "evse_id": "BE-BEC-E041503002",
-             "status": "RESERVED",
-             "capabilities": [
-                "RESERVABLE"
-             ],
-             "connectors": [
-                {
-                   "id": "1",
-                   "standard": "IEC_62196_T2",
-                   "format": "SOCKET",
-                   "power_type": "AC_3_PHASE",
-                   "voltage": 220,
-                   "amperage": 16,
-                   "tariff_id": "12"
-                }
-             ],
-             "physical_reference": "2",
-             "floor_level": "-2"
+            "id": "1",
+            "standard": "IEC_61851-1_T2",
+            "format": "CABLE",
+            "power_type": "AC_3_PHASE",
+            "voltage": 224,
+            "amperage": 32,
+            "tariff_id": "1"
           }
-       ],
-       "operator": {
-          "name": "BeCharged"
-       }
-    };
+        ],
+        "physical_reference": "1",
+        "floor_level": "3"
+      },
+      {
+        "uid": "2",
+        "evse_id": "BB-5983-3",
+        "status": "AVAILABLE",
+        "status_schedule": [],
+        "capabilities": [],
+        "connectors": [
+          {
+            "id": "1",
+            "standard": "IEC_61851-1_T2",
+            "format": "CABLE",
+            "power_type": "AC_3_PHASE",
+            "voltage": 224,
+            "amperage": 32,
+            "tariff_id": "1"
+          }
+        ],
+        "physical_reference": "2",
+        "floor_level": "3"
+      }
+    ],
+    "operator": {
+      "name": "Motionwerk GmbH"
+    }
+  };
+
+
 
   toasterService: any;
 

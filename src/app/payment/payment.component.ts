@@ -31,10 +31,7 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.getPaymentWallet();
-    this.getPaymentWalletPending();
-    this.getPaymentWalletComplete();
+    this.refreshWalletHistoryLists();
   }
 
   getPaymentWallet() {
@@ -52,6 +49,9 @@ export class PaymentComponent implements OnInit {
     console.log(this.activePaymentWallet, 'basic');
     this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
         this.paymentWalletHistory = data;
+        if (this.paymentWalletHistory.length === 0) {
+          this.toasterService.pop('info', 'Success', 'There are no new CDRs waiting to be reimbursed.');
+        }
         console.log(data);
     });
   }
@@ -64,10 +64,7 @@ export class PaymentComponent implements OnInit {
     console.log(this.activePaymentWallet, 'pending');
     this.serverAddress = this.paymentWalletPending[index].server_addr;
     this.reimbursementId = this.paymentWalletPending[index].reimbursement_id;
-    this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
-        this.paymentWalletHistory = data;
-        console.log(data);
-    });
+    this.paymentWalletHistory = JSON.parse(this.paymentWalletPending[index].cdr_records);
   }
 
   getPaymentWalletHistoryCompleted(index) {
@@ -76,20 +73,22 @@ export class PaymentComponent implements OnInit {
     this.cdrListActive = 'complete';
     this.activeMsp = this.paymentWalletCompleted[index].msp_address;
     console.log(this.activePaymentWallet, 'complete');
-    this.serverAddress = this.paymentWalletPending[index].server_addr;
-    this.reimbursementId = this.paymentWalletPending[index].reimbursement_id;
-    this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
-        this.paymentWalletHistory = data;
-        console.log(data);
-    });
+    this.serverAddress = this.paymentWalletCompleted[index].server_addr;
+    this.reimbursementId = this.paymentWalletCompleted[index].reimbursement_id;
+    console.log(this.paymentWalletCompleted[index].cdr_records);
+    this.paymentWalletHistory = JSON.parse(this.paymentWalletCompleted[index].cdr_records);
+  }
+
+  refreshWalletHistoryLists() {
+    this.getPaymentWallet();
+    this.getPaymentWalletPending();
+    this.getPaymentWalletComplete();
   }
 
   createReimbursement() {
     this.dataService.createReimbursement(this.activeMsp, this.activePaymentWallet).subscribe((data) => {
         this.getPaymentWalletHistory(this.mspIndexReinbursement);
-        this.getPaymentWallet();
-        this.getPaymentWalletPending();
-        this.getPaymentWalletComplete();
+        this.refreshWalletHistoryLists();
         console.log(data);
         this.toasterService.pop('success', 'Success', 'Reimbursement created.');
     });
@@ -128,9 +127,7 @@ export class PaymentComponent implements OnInit {
   setPaymentWalletComplete() {
     console.log(this.reimbursementId);
     this.dataService.setPaymentWalletComplete(this.reimbursementId).subscribe((data) => {
-      this.getPaymentWallet();
-      this.getPaymentWalletPending();
-      this.getPaymentWalletComplete();
+      this.refreshWalletHistoryLists();
       this.toasterService.pop('success', 'Success', 'Status of the reimbursement successfully changed to complete.');
       console.log(data);
     });

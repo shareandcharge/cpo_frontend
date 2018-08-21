@@ -3,10 +3,6 @@
 <div class="payment-page">
 
   <div class="payment-wallet-wrapper">
-    <!-- <div class="sub-title">
-      <i class="fas fa-wallet"></i>
-      <span>My Wallet</span>
-    </div> -->
     <div class="payment-wallet__inner">
 
       <div class="sub-title">
@@ -120,9 +116,8 @@
       </div>
     </div>
     <div class="payment-wallet-detail__action-buttons">
-
         <button class="sc-button white" (click)="createReimbursement()" *ngIf="cdrListActive === 'basic'">
-            <span>Create Reimbursemnt</span>
+            <span>Create Reimbursement</span>
           </button>
         <button class="sc-button white" *ngIf="cdrListActive === 'pending'" (click)="setPaymentWalletComplete()">
           <i class="fas fa-thumbs-up"></i>

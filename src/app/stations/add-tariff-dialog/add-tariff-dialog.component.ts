@@ -12,54 +12,29 @@ export class AddTariffModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = [{
-        "id": "2",
-        "currency": "EUR",
-        "elements": [{
-                "price_components": [
-                    {
-                        "type": "ENERGY",
-                        "price": 0.21,
-                        "step_size": 1
-                    }
-                ]
-            },
+      "id": "1",
+      "currency": "EUR",
+      "elements": [
+        {
+          "price_components": [
             {
-                "price_components": [
-                    {
-                        "type": "FLAT",
-                        "price": 5.1,
-                        "step_size": 0
-                    }
-                ]
-            },
+              "type": "ENERGY",
+              "price": 0.20,
+              "step_size": 1
+            }
+          ]
+        },
+        {
+          "price_components": [
             {
-                "price_components": [
-                    {
-                        "type": "PARKING_TIME",
-                        "price": 1,
-                        "step_size": 3600
-                    }
-                ]
-            },
-            {
-                "price_components": [
-                    {
-                        "type": "TIME",
-                        "price": 2.5,
-                        "step_size": 3600
-                    }
-                ]
-            },
-            {
-                "price_components": [
-                    {
-                        "type": "FLAT",
-                        "price": 0,
-                        "step_size": 0
-                    }
-                ]
-            }]
-        }];
+              "type": "FLAT",
+              "price": 3.5,
+              "step_size": 0
+            }
+          ]
+        }
+      ]
+    }];
   toasterService: any;
 
   constructor(private dataService: DataService,
