@@ -8,6 +8,7 @@ import { environment } from './../../environments/environment';
 })
 export class PaymentComponent implements OnInit {
 
+  baseUrl = environment.apiUrl;
   paymentWallet: any = [];
   paymentWalletPending: any = [];
   paymentWalletCompleted: any = [];
@@ -15,15 +16,18 @@ export class PaymentComponent implements OnInit {
   activePaymentWallet: any = [];
   totalTime: number;
   cdrListActive: any;
-  // showReinbursementButtons: Boolean = false;
   blockchainUrl = environment.blockchainExplorerUrl;
+  activeMsp: any = [];
+  mspIndexReinbursement: any = [];
+  serverAddress: any;
+  reimbursementId: any;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.getPaymentWallet();
     this.getPaymentWalletPending();
-    this.getPaymentWalletCompleted();
+    this.getPaymentWalletComplete();
   }
 
   getPaymentWallet() {
@@ -33,10 +37,40 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  getPaymentWalletHistory(index, cdrListActive) {
+  getPaymentWalletHistory(index) {
+    this.mspIndexReinbursement = index;
     this.activePaymentWallet = this.paymentWallet[index].token_address;
-    this.cdrListActive = cdrListActive;
-    console.log(this.activePaymentWallet);
+    this.cdrListActive = 'basic';
+    this.activeMsp = this.paymentWallet[index].msp_address;
+    console.log(this.activePaymentWallet, 'basic');
+    this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
+        this.paymentWalletHistory = data;
+        console.log(data);
+    });
+  }
+
+  getPaymentWalletHistoryPending(index) {
+    this.mspIndexReinbursement = index;
+    this.activePaymentWallet = this.paymentWalletPending[index].token_address;
+    this.cdrListActive = 'pending';
+    this.activeMsp = this.paymentWalletPending[index].msp_address;
+    console.log(this.activePaymentWallet, 'pending');
+    this.serverAddress = this.paymentWalletPending[index].server_addr;
+    this.reimbursementId = this.paymentWalletPending[index].reimbursement_id;
+    this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
+        this.paymentWalletHistory = data;
+        console.log(data);
+    });
+  }
+
+  getPaymentWalletHistoryCompleted(index) {
+    this.mspIndexReinbursement = null;
+    this.activePaymentWallet = this.paymentWalletCompleted[index].token_address;
+    this.cdrListActive = 'complete';
+    this.activeMsp = this.paymentWalletCompleted[index].msp_address;
+    console.log(this.activePaymentWallet, 'complete');
+    this.serverAddress = this.paymentWalletPending[index].server_addr;
+    this.reimbursementId = this.paymentWalletPending[index].reimbursement_id;
     this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
         this.paymentWalletHistory = data;
         console.log(data);
@@ -44,8 +78,11 @@ export class PaymentComponent implements OnInit {
   }
 
   createReimbursement() {
-    // this.showReinbursementButtons = true;
-    this.dataService.createReimbursement(this.activePaymentWallet).subscribe((data) => {
+    this.dataService.createReimbursement(this.activeMsp, this.activePaymentWallet).subscribe((data) => {
+        this.getPaymentWalletHistory(this.mspIndexReinbursement);
+        this.getPaymentWallet();
+        this.getPaymentWalletPending();
+        this.getPaymentWalletComplete();
         console.log(data);
     });
   }
@@ -73,11 +110,22 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  getPaymentWalletCompleted() {
-    this.dataService.getPaymentWalletCompleted().subscribe((data) => {
+  getPaymentWalletComplete() {
+    this.dataService.getPaymentWalletComplete().subscribe((data) => {
         this.paymentWalletCompleted = data;
         console.log(data);
     });
   }
+
+  setPaymentWalletComplete() {
+    console.log(this.reimbursementId);
+    this.dataService.setPaymentWalletComplete(this.reimbursementId).subscribe((data) => {
+      this.getPaymentWallet();
+      this.getPaymentWalletPending();
+      this.getPaymentWalletComplete();
+      console.log(data);
+    });
+  }
+
 
 }

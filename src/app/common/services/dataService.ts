@@ -64,8 +64,8 @@ export class DataService {
       return this.execPOSTRequest(this.baseUrl + 'cpo/location', params);
     }
 
-    putStation(params): Observable<any> {
-      return this.execPUTRequest(this.baseUrl + 'cpo/location', params);
+    putStation(params, walletId): Observable<any> {
+      return this.execPUTRequest(this.baseUrl + 'cpo/location/' + walletId, params);
     }
 
     deleteStation(scId): Observable<any> {
@@ -80,23 +80,24 @@ export class DataService {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/cdr/' + token);
     }
 
-    createReimbursement(walletId): Observable<any> {
-      return this.execPOSTRequest(this.baseUrl + 'cpo/wallet/generate/' + walletId);
-    }
-
     getPaymentWalletPending(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/pending' );
     }
 
-    getPaymentWalletCompleted(): Observable<any> {
+    getPaymentWalletComplete(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo/payment/reimbursements/complete');
     }
 
-    // setPaymentStatus(reimbursementId): Observable<any> {
-    //   return this.execPUTRequest(this.baseUrl + 'set_status/' + reimbursementId + '/complete');
-    // }
+    createReimbursement(mspAddress, tokenContract): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/payment/reimbursement/' + mspAddress + '?tokenContract=' + tokenContract);
+    }
 
-    // {server_addr}}/cpo/payment/reimbursement/6c28d80d0927abba4816ca579478ed13a6ef3e88/complete
+    setPaymentWalletComplete(reimbursementId): Observable<any> {
+      return this.execPUTRequest(this.baseUrl + 'cpo/payment/reimbursement/' + reimbursementId + '/complete');
+    }
+
+    // reimbursement_id server_addr
+    // {{server_addr}}/cpo/payment/reimbursement/6c28d80d0927abba4816ca579478ed13a6ef3e88/complete
 
     // Tariffs
 
@@ -150,7 +151,7 @@ export class DataService {
             .catch((error: any) => this.handleError(error));
     }
 
-    private execPUTRequest(url: string, params): Observable<any> {
+    private execPUTRequest(url: string, params: Object = {}): Observable<any> {
       this.broadcaster.broadcast('httpRequest', true);
       this.blockUI.start();
       return this.http.put(url, params)

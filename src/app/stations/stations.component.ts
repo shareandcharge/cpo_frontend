@@ -94,11 +94,6 @@ export class StationsComponent implements OnInit {
     this.selectedTariffIndex = index;
     const formatTariffDetail = JSON.stringify(this.tariffs[index], null, '\t').trim();
     this.tariffDetail = formatTariffDetail;
-    // this.tariffDetail = JSON.stringify(JSON.parse(formatTariffDetail), null, 4);
-    // console.log(this.tariffDetail);
-
-    // JSON.stringify(JSON.parse(body));
-
     console.log(index);
   }
 
@@ -129,7 +124,7 @@ export class StationsComponent implements OnInit {
         closeButtonTitle: 'Close',
         modalClass: 'update-stations-modal'
       },
-      data: this.selectedStation.data
+      data: this.selectedStation
     });
   }
 

@@ -31,7 +31,9 @@ export class RegisterComponent implements OnInit {
       'vat_number': this.accountInfo.vatNumber
     }).subscribe((data) => {
         this.generateWallet();
-        this.router.navigate(['mnemonic']);
+        setTimeout(() => {
+          this.router.navigate(['mnemonic']);
+        }, 500);
         console.log(this.accountInfo);
     });
   }

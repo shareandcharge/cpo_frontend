@@ -19,7 +19,7 @@
             <span class="balance">Tokens</span>
         </div>
       <div *ngFor="let paymentWalletItem of paymentWallet; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i, 'basic')">
+            class="section-row" (click)="getPaymentWalletHistory(i)">
             <span class="name">
               <!-- {{paymentWalletItem.msp_name}}  -->
               Volkswagen Corporation
@@ -37,7 +37,7 @@
             <span class="balance">Tokens</span>
         </div>
       <div *ngFor="let paymentWalletItem of paymentWalletPending; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i, 'pending')">
+            class="section-row" (click)="getPaymentWalletHistoryPending(i)">
             <span class="name">
               <!-- {{paymentWalletItem.msp_name}}  -->
               Volkswagen Corporation
@@ -56,7 +56,7 @@
           <span class="balance">Tokens</span>
       </div>
       <div *ngFor="let paymentWalletItem of paymentWalletCompleted; let i = index;"
-            class="section-row" (click)="getPaymentWalletHistory(i, 'complete')">
+            class="section-row" (click)="getPaymentWalletHistoryCompleted(i)">
             <span class="name">
               <!-- {{paymentWalletItem.msp_name}}  -->
               Volkswagen Corporation
@@ -86,8 +86,8 @@
               <span>{{paymentWalletHistoryItem.end | date:'medium' }}</span>
             </div>
             <div>
-              <span class="bold">Station: </span>
-              <span>{{paymentWalletHistoryItem.evseId}}</span>
+              <span class="bold">Location: </span>
+              <span>{{paymentWalletHistoryItem.location_name}}<span *ngIf="paymentWalletHistoryItem.location_name">,</span> {{paymentWalletHistoryItem.location_address}}</span>
             </div>
             <div>
               <span class="bold">Driver S&C Address: </span>
@@ -121,22 +121,32 @@
     </div>
     <div class="payment-wallet-detail__action-buttons">
 
-        <button class="sc-button white" (click)="createReimbursement()" *ngIf="cdrListActive == 'basic'" >
+        <button class="sc-button white" (click)="createReimbursement()" *ngIf="cdrListActive === 'basic'">
             <span>Create Reimbursemnt</span>
           </button>
-        <button class="sc-button white" >
+        <button class="sc-button white" *ngIf="cdrListActive === 'pending'" (click)="setPaymentWalletComplete()">
           <i class="fas fa-thumbs-up"></i>
           <span>Payment Recieved</span>
         </button>
-        <button class="sc-button white" >
-            <i class="fas fa-file-alt"></i>
-            <span>Invoice</span>
-        </button>
-        <button class="sc-button white">
-          <i class="fas fa-download"></i>
-          <span>Download</span>
-        </button>
+        <a href="{{serverAddress}}/static/invoice_{{reimbursementId}}.pdf" download target="_blank"  *ngIf="cdrListActive !== 'basic'">
+          <button class="sc-button white">
+              <i class="fas fa-file-alt"></i>
+              <span>Invoice</span>
+          </button>
+        </a>
+        <a href="{{baseUrl}}view_cdrs/{{reimbursementId}}" download target="_blank"  *ngIf="cdrListActive !== 'basic'">
+          <button class="sc-button white">
+            <i class="fas fa-download"></i>
+            <span>CDR</span>
+          </button>
+        </a>
     </div>
   </div>
 
 </div>
+
+
+<!-- POST {{server_addr}}/cpo/payment/reimbursement/0xf60b71a4d360a42ec9d4e7977d8d9928fd7c8365?tokenContract=0x682F10b5e35bA3157E644D9e7c7F3C107EB46305
+where first part is the msp address
+and then it's the tokenContract
+you get them from {{server_addr}}/cpo/payment/wallet -->

@@ -9,10 +9,11 @@ import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angula
 })
 export class UpdateStationModalDialogComponent implements IModalDialog {
 
-  parentInfo: string;
+  parentInfo: any;
   modalInfo: any = [];
   actionButtons: any = [];
   toasterService: any;
+  scID: any;
 
   constructor(private dataService: DataService,
               toasterService: ToasterService,
@@ -52,7 +53,8 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    this.modalInfo = JSON.stringify(this.parentInfo, null, '\t');
+    this.modalInfo = JSON.stringify(this.parentInfo.data, null, '\t');
+    this.scID = this.parentInfo.scId;
   }
 
   updateStation() {
@@ -70,7 +72,7 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
         this.modalInfo.evses && this.modalInfo.evses.length > 0 &&
         this.checkConnectors()) {
           // console.log('Works');
-          this.dataService.putStation(this.modalInfo).subscribe((data) => {
+          this.dataService.putStation(this.modalInfo, this.scID).subscribe((data) => {
               console.log(data);
               this.broadcaster.broadcast('refreshStations', true);
               this.toasterService.pop('success', 'Success', 'You have successfuly updated this station.');
