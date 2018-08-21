@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../common';
 import { environment } from './../../environments/environment';
+import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
 @Component({
   selector: 'app-payment',
@@ -9,6 +10,7 @@ import { environment } from './../../environments/environment';
 export class PaymentComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
+  private toasterService: ToasterService;
   paymentWallet: any = [];
   paymentWalletPending: any = [];
   paymentWalletCompleted: any = [];
@@ -22,9 +24,14 @@ export class PaymentComponent implements OnInit {
   serverAddress: any;
   reimbursementId: any;
 
-  constructor(private dataService: DataService) { }
+
+  constructor(private dataService: DataService,
+    toasterService: ToasterService) {
+    this.toasterService = toasterService;
+  }
 
   ngOnInit() {
+
     this.getPaymentWallet();
     this.getPaymentWalletPending();
     this.getPaymentWalletComplete();
@@ -84,6 +91,7 @@ export class PaymentComponent implements OnInit {
         this.getPaymentWalletPending();
         this.getPaymentWalletComplete();
         console.log(data);
+        this.toasterService.pop('success', 'Success', 'Reimbursement created.');
     });
   }
 
@@ -123,6 +131,7 @@ export class PaymentComponent implements OnInit {
       this.getPaymentWallet();
       this.getPaymentWalletPending();
       this.getPaymentWalletComplete();
+      this.toasterService.pop('success', 'Success', 'Status of the reimbursement successfully changed to complete.');
       console.log(data);
     });
   }
