@@ -9,6 +9,7 @@ import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angula
 })
 export class AddStationModalDialogComponent implements IModalDialog {
 
+  toasterService: any;
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = {
@@ -19,35 +20,15 @@ export class AddStationModalDialogComponent implements IModalDialog {
       "language": "en",
       "text": "go the second on the left, then the third on the right after you take a left turn"
     },
-    "address": "Rüttenscheider Str. 120",
+    "address": "Ruttenscheider Str. 120",
     "city": "Essen",
     "postal_code": "45131",
     "country": "DE",
     "coordinates": {
-      "latitude": "51.43232012",
-      "longitude": "7.0022419"
+      "latitude": "51.41232012",
+      "longitude": "7.0122419"
     },
     "evses": [
-      {
-        "uid": "1",
-        "evse_id": "BB-5958-0",
-        "status": "AVAILABLE",
-        "status_schedule": [],
-        "capabilities": [],
-        "connectors": [
-          {
-            "id": "1",
-            "standard": "IEC_61851-1_T2",
-            "format": "CABLE",
-            "power_type": "AC_3_PHASE",
-            "voltage": 224,
-            "amperage": 32,
-            "tariff_id": "1"
-          }
-        ],
-        "physical_reference": "1",
-        "floor_level": "3"
-      },
       {
         "uid": "2",
         "evse_id": "BB-5983-3",
@@ -72,11 +53,7 @@ export class AddStationModalDialogComponent implements IModalDialog {
     "operator": {
       "name": "Motionwerk GmbH"
     }
-  };
-
-
-
-  toasterService: any;
+};
 
   constructor(private dataService: DataService,
     private broadcaster: Broadcaster,
