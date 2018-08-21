@@ -10,7 +10,8 @@ import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angula
 export class PaymentComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
-  private toasterService: ToasterService;
+  blockchainUrl = environment.blockchainExplorerUrl;
+  toasterService: ToasterService;
   paymentWallet: any = [];
   paymentWalletPending: any = [];
   paymentWalletCompleted: any = [];
@@ -18,7 +19,6 @@ export class PaymentComponent implements OnInit {
   activePaymentWallet: any = [];
   totalTime: number;
   cdrListActive: any;
-  blockchainUrl = environment.blockchainExplorerUrl;
   activeMsp: any = [];
   mspIndexReinbursement: any = [];
   serverAddress: any;
@@ -37,7 +37,6 @@ export class PaymentComponent implements OnInit {
   getPaymentWallet() {
     this.dataService.getPaymentWallet().subscribe((data) => {
         this.paymentWallet = data;
-        console.log(data);
     });
   }
 
@@ -46,13 +45,11 @@ export class PaymentComponent implements OnInit {
     this.activePaymentWallet = this.paymentWallet[index].token_address;
     this.cdrListActive = 'basic';
     this.activeMsp = this.paymentWallet[index].msp_address;
-    console.log(this.activePaymentWallet, 'basic');
     this.dataService.getPaymentWalletHistory(this.activePaymentWallet).subscribe((data) => {
         this.paymentWalletHistory = data;
         if (this.paymentWalletHistory.length === 0) {
           this.toasterService.pop('info', 'Success', 'There are no new CDRs waiting to be reimbursed.');
         }
-        console.log(data);
     });
   }
 
@@ -61,7 +58,6 @@ export class PaymentComponent implements OnInit {
     this.activePaymentWallet = this.paymentWalletPending[index].token_address;
     this.cdrListActive = 'pending';
     this.activeMsp = this.paymentWalletPending[index].msp_address;
-    console.log(this.activePaymentWallet, 'pending');
     this.serverAddress = this.paymentWalletPending[index].server_addr;
     this.reimbursementId = this.paymentWalletPending[index].reimbursement_id;
     this.paymentWalletHistory = JSON.parse(this.paymentWalletPending[index].cdr_records);
@@ -72,10 +68,8 @@ export class PaymentComponent implements OnInit {
     this.activePaymentWallet = this.paymentWalletCompleted[index].token_address;
     this.cdrListActive = 'complete';
     this.activeMsp = this.paymentWalletCompleted[index].msp_address;
-    console.log(this.activePaymentWallet, 'complete');
     this.serverAddress = this.paymentWalletCompleted[index].server_addr;
     this.reimbursementId = this.paymentWalletCompleted[index].reimbursement_id;
-    console.log(this.paymentWalletCompleted[index].cdr_records);
     this.paymentWalletHistory = JSON.parse(this.paymentWalletCompleted[index].cdr_records);
   }
 
@@ -89,7 +83,6 @@ export class PaymentComponent implements OnInit {
     this.dataService.createReimbursement(this.activeMsp, this.activePaymentWallet).subscribe((data) => {
         this.getPaymentWalletHistory(this.mspIndexReinbursement);
         this.refreshWalletHistoryLists();
-        console.log(data);
         this.toasterService.pop('success', 'Success', 'Reimbursement created.');
     });
   }
@@ -113,25 +106,20 @@ export class PaymentComponent implements OnInit {
   getPaymentWalletPending() {
     this.dataService.getPaymentWalletPending().subscribe((data) => {
         this.paymentWalletPending = data;
-        console.log(data);
     });
   }
 
   getPaymentWalletComplete() {
     this.dataService.getPaymentWalletComplete().subscribe((data) => {
         this.paymentWalletCompleted = data;
-        console.log(data);
     });
   }
 
   setPaymentWalletComplete() {
-    console.log(this.reimbursementId);
     this.dataService.setPaymentWalletComplete(this.reimbursementId).subscribe((data) => {
       this.refreshWalletHistoryLists();
       this.toasterService.pop('success', 'Success', 'Status of the reimbursement successfully changed to complete.');
-      console.log(data);
     });
   }
-
 
 }

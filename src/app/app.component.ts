@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.getAccountInfo();
     this.registeredFlag = localStorage.getItem('registeredCpo');
-
     if (this.registeredFlag !== 'true') {
       this.http.get(environment.apiUrl + 'cpo').subscribe(
         data => {

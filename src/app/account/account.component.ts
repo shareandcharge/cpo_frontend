@@ -26,21 +26,18 @@ export class AccountComponent implements OnInit {
          this.accountInfo = data;
          this.getWallet(data.wallet);
          this.getHistory(data.wallet);
-         console.log(this.accountInfo);
     });
   }
 
   getWallet(walletID) {
     this.dataService.getWallet(walletID).subscribe((data) => {
          this.accountWallet = data;
-         console.log(this.accountWallet);
     });
   }
 
   getHistory(walletID) {
     this.dataService.getHistory(walletID).subscribe((data) => {
         this.accountHistory = data;
-        console.log(this.accountHistory);
     });
   }
 

@@ -96,11 +96,6 @@ export class DataService {
       return this.execPUTRequest(this.baseUrl + 'cpo/payment/reimbursement/' + reimbursementId + '/complete');
     }
 
-    // reimbursement_id server_addr
-    // {{server_addr}}/cpo/payment/reimbursement/6c28d80d0927abba4816ca579478ed13a6ef3e88/complete
-
-    // Tariffs
-
     getTariffs(): Observable<any> {
       return this.execGETRequest(this.baseUrl + 'cpo/tariffs' );
     }

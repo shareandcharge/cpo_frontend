@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['mnemonic']);
         }, 500);
-        console.log(this.accountInfo);
     });
   }
 

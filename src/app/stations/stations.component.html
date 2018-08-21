@@ -6,10 +6,6 @@
 </h2>
 
 <div class="stations-container-wrapper">
-  <!-- <span class="station-header station-header--tabs">
-      <span class="tab" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">Stations</span>
-      <span class="tab" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1; closeAllLists()">Tariffs</span>
-  </span> -->
 
   <div *ngIf="tabIndex === 0">
     <div *ngFor="let station of stations; let i = index;" class="stations-container">
@@ -68,15 +64,6 @@
               <span class="evse-id">ID {{tariff.id}}</span>
               <span class="evse-status">{{tariff.currency}}</span>
           </span>
-          <!-- £/Session (<-- for flatrate tariff);
-          £/Time (<-- for time tariff);
-          £/kWh (<-- for energy / kWh based) -->
-          <!-- "ENERGY", "FLAT", "PARKING_TIME", "TIME" -->
-          <!--
-            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
-            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
-            <span (click)="getTariff(i)" class="station-row" *ngIf="tariff.type === ''">ID {{tariff.id}}</span>
-          -->
           <div class="evse-container-wrapper" *ngIf="showTariffs && selectedTariffIndex === i">
             <div class="station-header">
               <span class="name">

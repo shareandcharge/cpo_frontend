@@ -52,12 +52,10 @@ export class DeleteStationModalDialogComponent implements IModalDialog {
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
-    console.log(this.parentInfo);
   }
 
   deleteStation() {
     this.dataService.deleteStation(this.parentInfo).subscribe((data) => {
-        console.log(data);
         this.broadcaster.broadcast('refreshStations', true);
         this.toasterService.pop('success', 'Success', 'You have successfuly deleted this station.');
     });

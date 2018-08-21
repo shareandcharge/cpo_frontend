@@ -55,14 +55,12 @@ export class StationsComponent implements OnInit {
     this.broadcaster.on('refreshTariffs').subscribe((data: any) => {
       this.getTariffs();
       this.closeAllLists();
-      console.log('refreshed tariffs');
     });
   }
 
   getStations() {
     this.dataService.getStations().subscribe((data) => {
         this.stations = data;
-        console.log(data);
     });
   }
 
@@ -73,7 +71,6 @@ export class StationsComponent implements OnInit {
     this.selectedScId = this.stations[index].scId;
     this.showEvses = !this.showEvses;
     this.showConnectors = false;
-    console.log(this.selectedEvse);
   }
 
   getConnectors(index) {
@@ -85,7 +82,6 @@ export class StationsComponent implements OnInit {
   getTariffs() {
     this.dataService.getTariffs().subscribe((data) => {
         this.tariffs = data;
-        console.log(data);
     });
   }
 
@@ -94,7 +90,6 @@ export class StationsComponent implements OnInit {
     this.selectedTariffIndex = index;
     const formatTariffDetail = JSON.stringify(this.tariffs[index], null, '\t').trim();
     this.tariffDetail = formatTariffDetail;
-    console.log(index);
   }
 
   closeAllLists() {
@@ -139,7 +134,6 @@ export class StationsComponent implements OnInit {
       },
       data: this.selectedScId
     });
-    console.log(this.selectedScId);
   }
 
 
@@ -180,7 +174,6 @@ export class StationsComponent implements OnInit {
       },
       data: this.tariffs
     });
-    console.log(this.selectedScId);
   }
 
 

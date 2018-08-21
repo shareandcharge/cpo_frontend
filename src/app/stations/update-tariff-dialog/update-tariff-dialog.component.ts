@@ -56,16 +56,13 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
   }
 
   updateTarif() {
-
     this.safelyParseJSON();
 
     if (this.modalInfo[0].id && typeof this.modalInfo[0].id === 'string' &&
         this.modalInfo[0].currency && typeof this.modalInfo[0].currency === 'string' &&
         this.modalInfo[0].elements && this.modalInfo[0].elements.length > 0 &&
         this.checkpriceComponents()) {
-          // console.log('Works');
           this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
-            console.log(dataTariff);
             this.broadcaster.broadcast('refreshTariffs', true);
             this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
           });
@@ -78,39 +75,32 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
     let i;
     const priceComponentsCheck = [];
     for (i = 0; i < this.modalInfo[0].elements.length; i++) {
-      // console.log(this.modalInfo[0].elements[i].price_components);
       if (!this.modalInfo[0].elements[i].price_components) {
         priceComponentsCheck.push(false);
-        // console.log('false');
       } else {
-        // priceComponentsCheck.push(true);
-
           if (typeof this.modalInfo[0].elements[i].price_components[0].type !== 'string' ||
               typeof this.modalInfo[0].elements[i].price_components[0].price !== 'number' ||
               typeof this.modalInfo[0].elements[i].price_components[0].step_size !== 'number') {
                 priceComponentsCheck.push(false);
-                // console.log('false');
           } else {
-            // console.log('true');
             priceComponentsCheck.push(true);
           }
-
         }
   }
-  // console.log(priceComponentsCheck);
+
   if (priceComponentsCheck.includes(false)) {
-    return false;
-  } else {
-    return true;
+      return false;
+    } else {
+      return true;
+    }
   }
-}
 
   safelyParseJSON () {
     let parsed;
     try {
       parsed =  this.modalInfo = JSON.parse(this.modalInfo);
     } catch (e) {
-      // console.log('Does not work');
+
     }
     return parsed;
   }

@@ -71,9 +71,7 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
         this.modalInfo.coordinates.longitude && typeof this.modalInfo.coordinates.longitude === 'string' &&
         this.modalInfo.evses && this.modalInfo.evses.length > 0 &&
         this.checkConnectors()) {
-          // console.log('Works');
           this.dataService.putStation(this.modalInfo, this.scID).subscribe((data) => {
-              console.log(data);
               this.broadcaster.broadcast('refreshStations', true);
               this.toasterService.pop('success', 'Success', 'You have successfuly updated this station.');
           });
@@ -89,10 +87,8 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
     for (i = 0; i < this.modalInfo.evses.length; i++) {
         if (!this.modalInfo.evses[i].connectors || this.modalInfo.evses[i].connectors.length === 0) {
           connectorsCheck.push(false);
-          // console.log('false');
         } else {
           for (e = 0; e < this.modalInfo.evses[i].connectors.length; e++) {
-            // console.log(e);
             if (!this.modalInfo.evses[i].connectors[e].id || typeof this.modalInfo.evses[i].connectors[e].id !== 'string' ||
                 !this.modalInfo.evses[i].connectors[e].standard || typeof this.modalInfo.evses[i].connectors[e].standard !== 'string' ||
                 !this.modalInfo.evses[i].connectors[e].format || typeof this.modalInfo.evses[i].connectors[e].format !== 'string' ||
@@ -101,13 +97,9 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
                 typeof this.modalInfo.evses[i].connectors[e].amperage !== 'number' ||
                 !this.modalInfo.evses[i].connectors[e].tariff_id || typeof this.modalInfo.evses[i].connectors[e].tariff_id !== 'string') {
                   connectorsCheck.push(false);
-                  // console.log('false');
             } else {
               connectorsCheck.push(true);
-              // console.log('true');
             }
-            // console.log(connectorsCheck);
-            // console.log(this.modalInfo.evses[i].connectors[e].id);
           }
         }
     }
@@ -123,7 +115,7 @@ export class UpdateStationModalDialogComponent implements IModalDialog {
     try {
       parsed =  this.modalInfo = JSON.parse(this.modalInfo);
     } catch (e) {
-      // console.log('Does not work');
+
     }
     return parsed;
   }
