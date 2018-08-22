@@ -112,6 +112,10 @@ export class DataService {
       return this.execDELETERequest(this.baseUrl + 'cpo/tariffs');
     }
 
+    sendTokensToMsp(reimbursementId): Observable<any> {
+      return this.execPOSTRequest(this.baseUrl + 'cpo/payment/send_tokens_to_msp/' + reimbursementId);
+    }
+
     /********************* Handling Requests ***********************/
 
     handleError(error: any, disabledToast?: boolean): Observable<Error> {

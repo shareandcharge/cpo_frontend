@@ -122,4 +122,11 @@ export class PaymentComponent implements OnInit {
     });
   }
 
+  sendTokensToMsp() {
+    this.dataService.sendTokensToMsp(this.reimbursementId).subscribe((data) => {
+      this.refreshWalletHistoryLists();
+      this.toasterService.pop('success', 'Success', 'Tokens sent to the MSP.');
+    });
+  }
+
 }

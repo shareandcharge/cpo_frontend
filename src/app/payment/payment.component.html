@@ -117,11 +117,15 @@
     </div>
     <div class="payment-wallet-detail__action-buttons">
         <button class="sc-button white" (click)="createReimbursement()" *ngIf="cdrListActive === 'basic'">
-            <span>Create Reimbursement</span>
-          </button>
+          <span>Create Reimbursement</span>
+        </button>
         <button class="sc-button white" *ngIf="cdrListActive === 'pending'" (click)="setPaymentWalletComplete()">
           <i class="fas fa-thumbs-up"></i>
           <span>Payment Recieved</span>
+        </button>
+        <button class="sc-button white" *ngIf="cdrListActive === 'complete'" (click)="sendTokensToMsp()">
+          <i class="fas fa-coins"></i>
+          <span>Send Tokens to MSP</span>
         </button>
         <a href="{{serverAddress}}/static/invoice_{{reimbursementId}}.pdf" download target="_blank"  *ngIf="cdrListActive !== 'basic'">
           <button class="sc-button white">

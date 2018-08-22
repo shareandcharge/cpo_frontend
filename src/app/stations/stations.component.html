@@ -33,7 +33,7 @@
                 </div>
                 <div class="sub-title">Connectors</div>
             <div *ngFor="let connector of connectors; let u = index;" [hidden]="selectedConnectorsIndex !== a" class="connectors-container">
-              <span class="station-row">
+              <span class="station-row not-clickable">
                 <span class="power-type">
                   <i class="fas fa-plug"></i>
                   {{connector.power_type}},
