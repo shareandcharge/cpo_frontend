@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
   getAccountInfo() {
     this.dataService.getAccountInfo().subscribe((data) => {
          this.accountInfo = data;
+         document.title = this.accountInfo.name + " CPO Dashboard";
     });
   }
 
