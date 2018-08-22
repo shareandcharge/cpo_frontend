@@ -52,7 +52,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
           }, 20);
         })
       }, {
-        text: 'Add',
+        text: 'Update',
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {

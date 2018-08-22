@@ -38,6 +38,7 @@
                   <i class="fas fa-plug"></i>
                   {{connector.power_type}},
                 </span>
+
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1'">Type 1,</span>
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1_COMBO'">CHAdeMo,</span>
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2'">Type 2,</span>
@@ -90,7 +91,7 @@
       + Add new station
     </button>
     <button class="sc-button" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
-      + Add new tariff
+      + Update tariff
     </button>
   </div>
 </div>

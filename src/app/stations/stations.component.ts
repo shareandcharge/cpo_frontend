@@ -139,7 +139,7 @@ export class StationsComponent implements OnInit {
 
   addTariffDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add Tariff',
+      title: 'Update Tariff',
       childComponent: AddTariffModalDialogComponent,
       settings: {
         closeButtonClass: 'close',
