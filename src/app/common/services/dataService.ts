@@ -37,7 +37,7 @@ export class DataService {
     }
 
     setAccountInfo(params): Observable<any> {
-        return this.execPOSTRequest(this.baseUrl + 'cpo');
+        return this.execPOSTRequest(this.baseUrl + 'cpo', params);
     }
 
     getWallet(walletId): Observable<any> {
