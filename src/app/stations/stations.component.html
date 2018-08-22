@@ -43,10 +43,12 @@
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T1_COMBO'">CHAdeMo,</span>
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2'">Type 2,</span>
                 <span class="power-standard" *ngIf="connector.standard === 'IEC_62196_T2_COMBO'">CCS,</span>
+                <span class="power-standard" *ngIf="connector.standard === 'TESLA_S'">TESLA,</span>
                 <span class="power-standard" *ngIf="connector.standard !== 'IEC_62196_T1' &&
                                                     connector.standard !== 'IEC_62196_T1_COMBO' &&
                                                     connector.standard !== 'IEC_62196_T2' &&
-                                                    connector.standard !== 'IEC_62196_T2_COMBO'">
+                                                    connector.standard !== 'IEC_62196_T2_COMBO' &&
+                                                    connector.standard !== 'TESLA_S'">
                   {{connector.standard}},
                 </span>
                 <span class="power-voltage">{{(connector.voltage * connector.voltage)/1000}} kW,</span>
