@@ -14,6 +14,7 @@ export class AccountComponent implements OnInit {
   };
   accountHistory = [];
   weiToEvCoin = Math.pow(10, 18);
+  calculatedAmount = 0;
 
   constructor(private dataService: DataService) { }
 
@@ -38,15 +39,29 @@ export class AccountComponent implements OnInit {
   getHistory(walletID) {
     this.dataService.getHistory(walletID).subscribe((data) => {
         this.accountHistory = data;
+        let i;
+        let totalAmount = 0;
+        for (i = 0; i < this.accountHistory.length; i++) {
+          if (this.accountInfo.wallet ===  this.accountHistory[i].to_addr) {
+            totalAmount = totalAmount + this.accountHistory[i].amount;
+          } else {
+            totalAmount = totalAmount - this.accountHistory[i].amount;
+          }
+          if (this.accountHistory.length === (i + 1)) {
+            this.calculatedAmount = totalAmount;
+          }
+        }
     });
   }
 
-  toFixedNotation(number) {
-    // disabled
-    // const initialnumber = Number.parseFloat(number).toFixed(4);
-    // const formatedNumber = initialnumber.toString();
-    // return formatedNumber;
-    return number;
+  truncateToDecimals(num, dec = 4) {
+    const calcDec = Math.pow(10, dec);
+    return Math.trunc(num * calcDec) / calcDec;
+  }
+
+  formatNumber(number) {
+    const truncatedNumber = this.truncateToDecimals(number);
+    return truncatedNumber;
   }
 
 }

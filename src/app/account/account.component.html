@@ -42,7 +42,7 @@
 
       <div class="wallet-info">
         <h2>Wallet: </h2>
-        <p class="wallet-info__ammount">{{toFixedNotation(accountWallet.balance)}} {{accountWallet.currency}}</p>
+        <p class="wallet-info__ammount">{{formatNumber(accountWallet.balance)}} {{accountWallet.currency}}</p>
       </div>
       <div>
           <h2>Recent Transactions: </h2>
@@ -52,7 +52,7 @@
                   <span>
                       <i class="fas fa-plus-square" *ngIf="this.accountInfo.wallet === historyItem.to_addr"></i>
                       <i class="fas fa-minus-square"*ngIf="this.accountInfo.wallet !== historyItem.to_addr"></i>
-                      {{toFixedNotation(historyItem.amount / weiToEvCoin)}}
+                      {{formatNumber(historyItem.amount / weiToEvCoin)}}
                   </span>
                   <span class="evCoin" *ngIf="historyItem.currency ===  'wei'">EV Coin</span>
                   <span class="evCoin" *ngIf="historyItem.currency !==  'wei'">{{historyItem.currency}}</span>
