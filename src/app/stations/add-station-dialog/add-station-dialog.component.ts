@@ -38,7 +38,7 @@ export class AddStationModalDialogComponent implements IModalDialog {
         "connectors": [
           {
             "id": "1",
-            "standard": "IEC_61851-1_T2",
+            "standard": "IEC_62196_T2",
             "format": "CABLE",
             "power_type": "AC_3_PHASE",
             "voltage": 224,
