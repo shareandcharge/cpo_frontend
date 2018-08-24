@@ -123,10 +123,10 @@
           <i class="fas fa-thumbs-up"></i>
           <span>Payment Recieved</span>
         </button>
-        <button class="sc-button white" *ngIf="cdrListActive === 'complete'" (click)="sendTokensToMsp()">
+        <!-- <button class="sc-button white" *ngIf="cdrListActive === 'complete'" (click)="sendTokensToMsp()">
           <i class="fas fa-coins"></i>
           <span>Send Tokens to MSP</span>
-        </button>
+        </button> -->
         <a href="{{serverAddress}}/static/invoice_{{reimbursementId}}.pdf" download target="_blank"  *ngIf="cdrListActive !== 'basic'">
           <button class="sc-button white">
               <i class="fas fa-file-alt"></i>
