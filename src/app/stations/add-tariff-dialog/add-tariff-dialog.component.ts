@@ -85,7 +85,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     if (this.modalInfo[0].id && typeof this.modalInfo[0].id === 'string' &&
         this.modalInfo[0].currency && typeof this.modalInfo[0].currency === 'string' &&
         this.modalInfo[0].elements && this.modalInfo[0].elements.length > 0 &&
-        this.checkpriceComponents()) {
+        this.checkpriceComponents()) {     
           this.dataService.deleteariff().subscribe((data) => {
             this.dataService.newTariff(this.modalInfo).subscribe((dataTariff) => {
               this.broadcaster.broadcast('refreshTariffs', true);
@@ -96,7 +96,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
       this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
     }
   }
-
+  
   checkpriceComponents() {
     let i;
     const priceComponentsCheck = [];
@@ -118,7 +118,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     } else {
       return true;
     }
-  }
+  } 
 
   safelyParseJSON () {
     let parsed;

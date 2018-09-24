@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tariff schema",
+    "description": "Schema used to validate the JSON for tariffs",
+    "required": [
+        "id",
+        "currency",
+        "elements"
+    ],
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "minimum": 1
+        },
+        "currency": {
+            "type": "string",
+            "minLength": 1
+        },
+        "elements": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "price_components": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "number"
+                                        },
+                                        "step_size": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "price",
+                                        "step_size"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "required": [
+                        "price_components"
+                    ]
+                }
+            ]
+        }
+    }
+}

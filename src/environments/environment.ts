@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://52.57.155.233:9090/api/v1/',
+  apiUrl: 'http://52.58.199.125:9090/api/v1/',
   apiUrl_: 'https://innogy-api.shareandcharge.com/api/v1/',
   blockchainExplorerUrl: 'http://18.185.85.20:3000/tx/'
 };

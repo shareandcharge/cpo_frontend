@@ -3,6 +3,11 @@ import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { DataService, Broadcaster } from '../../common';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
+import * as Ajv from 'ajv';
+import * as data from '../../../assets/schemas/schema.json';
+const ajv = new Ajv({allErrors: true});
+const schema = (<any>data);
+
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: './update-tariff-dialog.component.html'
@@ -57,6 +62,10 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
 
   updateTarif() {
     this.safelyParseJSON();
+    
+    const valid = ajv.validate(schema, this.modalInfo[0]);
+    console.log("valid = ", valid);
+    console.log("errors: ", ajv.errors);
 
     if (this.modalInfo[0].id && typeof this.modalInfo[0].id === 'string' &&
         this.modalInfo[0].currency && typeof this.modalInfo[0].currency === 'string' &&
