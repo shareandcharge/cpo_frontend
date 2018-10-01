@@ -17,6 +17,27 @@
             "type": "string",
             "minLength": 1
         },
+        "tariff_alt_text": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "language": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "language",
+                    "text"
+                ]
+            }
+        },
+        "tariff_alt_url": {
+            "type": "string"
+        },
         "elements": {
             "type": "array",
             "items": [
@@ -52,6 +73,29 @@
                         "price_components"
                     ]
                 }
+            ]
+        },
+        "energy_mix": {
+            "type": "object",
+            "properties": {
+                "is_green_energy": {
+                    "type": "boolean"
+                },
+                "energy_sources": {
+                    "type": "object"
+                },
+                "environ_impact": {
+                    "type": "object"
+                },
+                "supplier_name": {
+                    "type": "string"
+                },
+                "energy_product_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "is_green_energy"
             ]
         }
     }
