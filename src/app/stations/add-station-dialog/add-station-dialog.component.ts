@@ -74,7 +74,7 @@ export class AddStationModalDialogComponent implements IModalDialog {
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {
-            // this.addStation();
+            this.addStation();
             resolve();
           }, 20);
         })
