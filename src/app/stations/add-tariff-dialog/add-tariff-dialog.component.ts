@@ -17,28 +17,35 @@ export class AddTariffModalDialogComponent implements IModalDialog {
   parentInfo: string;
   actionButtons: any = [];
   modalInfo: any = [{
-      "id": "1",
-      "currency": "EUR",
-      "elements": [
-        {
-          "price_components": [
+        "id": "1",
+        "currency": "EUR",
+                "tariff_alt_text": [
+                    {
+                        "language": "en",
+                        "text": "input text here"
+                    }
+                 ],
+                "tariff_alt_url": "http://link.com",
+        "elements": [
             {
-              "type": "ENERGY",
-              "price": 0.20,
-              "step_size": 1
-            }
-          ]
-        },
-        {
-          "price_components": [
+                "price_components": [
+                    {
+                        "type": "ENERGY",
+                        "price": 0.2,
+                        "step_size": 1
+                    }
+                ]
+            },
             {
-              "type": "FLAT",
-              "price": 3.5,
-              "step_size": 0
+                "price_components": [
+                    {
+                        "type": "TIME",
+                        "price": 0.2,
+                        "step_size": 1
+                    }
+                ]
             }
-          ]
-        }
-      ]
+        ]
     }];
   toasterService: any;
 
@@ -90,7 +97,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     if(!valid) {
       this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
     }
-    
+
     // for now we are checking only first object inside modalInfo
     this.dataService.updateTarif(this.modalInfo).subscribe(() => {
       this.broadcaster.broadcast('refreshTariffs', true);
