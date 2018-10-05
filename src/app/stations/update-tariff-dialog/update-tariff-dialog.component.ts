@@ -3,6 +3,11 @@ import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { DataService, Broadcaster } from '../../common';
 import { ToasterModule, ToasterService, ToasterContainerComponent } from 'angular2-toaster';
 
+import * as Ajv from 'ajv';
+import * as data from '../../../assets/schemas/schema.json';
+const ajv = new Ajv({allErrors: true});
+const schema = (<any>data);
+
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: './update-tariff-dialog.component.html'
@@ -57,43 +62,55 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
 
   updateTarif() {
     this.safelyParseJSON();
+    const valid = ajv.validate(schema, this.modalInfo[0]);
 
-    if (this.modalInfo[0].id && typeof this.modalInfo[0].id === 'string' &&
-        this.modalInfo[0].currency && typeof this.modalInfo[0].currency === 'string' &&
-        this.modalInfo[0].elements && this.modalInfo[0].elements.length > 0 &&
-        this.checkpriceComponents()) {
-          this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
-            this.broadcaster.broadcast('refreshTariffs', true);
-            this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
-          });
-    } else {
+    if(!valid) {
       this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
     }
+
+    // for now we are checking only first object inside modalInfo
+    // same thing for adding new tariff
+    this.dataService.updateTarif(this.modalInfo).subscribe(() => {
+      this.broadcaster.broadcast('refreshTariffs', true);
+      this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
+    });
+
+    // if (this.modalInfo[0].id && typeof this.modalInfo[0].id === 'string' &&
+    //     this.modalInfo[0].currency && typeof this.modalInfo[0].currency === 'string' &&
+    //     this.modalInfo[0].elements && this.modalInfo[0].elements.length > 0 &&
+    //     this.checkpriceComponents()) {
+    //       this.dataService.updateTarif(this.modalInfo).subscribe((dataTariff) => {
+    //         this.broadcaster.broadcast('refreshTariffs', true);
+    //         this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
+    //       });
+    // } else {
+    //   this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
+    // }
   }
 
-  checkpriceComponents() {
-    let i;
-    const priceComponentsCheck = [];
-    for (i = 0; i < this.modalInfo[0].elements.length; i++) {
-      if (!this.modalInfo[0].elements[i].price_components) {
-        priceComponentsCheck.push(false);
-      } else {
-          if (typeof this.modalInfo[0].elements[i].price_components[0].type !== 'string' ||
-              typeof this.modalInfo[0].elements[i].price_components[0].price !== 'number' ||
-              typeof this.modalInfo[0].elements[i].price_components[0].step_size !== 'number') {
-                priceComponentsCheck.push(false);
-          } else {
-            priceComponentsCheck.push(true);
-          }
-        }
-  }
+  // checkpriceComponents() {
+  //   let i;
+  //   const priceComponentsCheck = [];
+  //   for (i = 0; i < this.modalInfo[0].elements.length; i++) {
+  //     if (!this.modalInfo[0].elements[i].price_components) {
+  //       priceComponentsCheck.push(false);
+  //     } else {
+  //         if (typeof this.modalInfo[0].elements[i].price_components[0].type !== 'string' ||
+  //             typeof this.modalInfo[0].elements[i].price_components[0].price !== 'number' ||
+  //             typeof this.modalInfo[0].elements[i].price_components[0].step_size !== 'number') {
+  //               priceComponentsCheck.push(false);
+  //         } else {
+  //           priceComponentsCheck.push(true);
+  //         }
+  //       }
+  // }
 
-  if (priceComponentsCheck.includes(false)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // if (priceComponentsCheck.includes(false)) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   safelyParseJSON () {
     let parsed;
