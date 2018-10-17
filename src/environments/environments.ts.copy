@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://test-cpo.shareandcharge.com/api_proxy/',
-  apiUrl_: 'https://innogy-api.shareandcharge.com/api/v1/',
-  blockchainExplorerUrl: 'http://18.185.85.20:3000/tx/'
+  blockchainExplorerUrl: 'http://tobalaba.slock.it/tx'
+
 };
