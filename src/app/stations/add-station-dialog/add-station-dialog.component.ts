@@ -16,14 +16,14 @@ export class AddStationModalDialogComponent implements IModalDialog {
     "id": "Motionwerk-1",
     "type": "OTHER",
     "name": "Motionwerk 1",
-    "directions": {
+    "directions": [{
       "language": "en",
       "text": "go the second on the left, then the third on the right after you take a left turn"
-    },
+    }],
     "address": "Ruttenscheider Str. 120",
     "city": "Essen",
     "postal_code": "45131",
-    "country": "DE",
+    "country": "DEU",
     "coordinates": {
       "latitude": "51.41232012",
       "longitude": "7.0122419"
