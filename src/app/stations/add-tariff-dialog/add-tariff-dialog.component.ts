@@ -40,8 +40,8 @@ export class AddTariffModalDialogComponent implements IModalDialog {
                 "price_components": [
                     {
                         "type": "TIME",
-                        "price": 0.2,
-                        "step_size": 1
+                        "price": 1.2,
+                        "step_size": 3600
                     }
                 ]
             }
@@ -64,7 +64,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
           }, 20);
         })
       }, {
-        text: 'Update',
+        text: 'Add',
         buttonClass: 'sc-button modal-button modal-button-success',
         onAction: () => new Promise((resolve: any) => {
           setTimeout(() => {
@@ -101,7 +101,7 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     // for now we are checking only first object inside modalInfo
     this.dataService.updateTarif(this.modalInfo).subscribe(() => {
       this.broadcaster.broadcast('refreshTariffs', true);
-      this.toasterService.pop('success', 'Success', 'You have successfuly updated this tariff.');
+      this.toasterService.pop('success', 'Success', 'You have successfuly added this tariff.');
     });
   }
 
