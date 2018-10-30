@@ -1,91 +1,422 @@
-<h2>Add new station</h2>
-<!-- <p>
-  To add a new station, edit the values in the JSON.  <br>
-  You have to at least change ID, latitude and longitude. <br>
-  For more info about stations, visit <a href="https://github.com/ocpi/ocpi/blob/master/mod_locations.md#3-object-description">here</a>.
-</p>
-<textarea [(ngModel)]='modalInfo'></textarea> -->
-<p>Test</p>
-
-<div>1
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Upload JSON File</button>
-    <button>Pull Data from Backend</button>
-    <button>Manually add single station</button>
+<div *ngIf="formStep === 'selection'">
+  <h2 class="modal-step-headline">Adding charging stations to the S&C Network</h2>
+  <div class="modal-content-buttons">
+    <button class="sc-button" (click)="formStep = 'uploadJsonFile'; actionButtonText = 'Add' ">Upload JSON</button>
+    <button class="sc-button" (click)="formStep = 'pullDataFromBackend'" disabled>Pull Data from Backend</button>
+    <button class="sc-button" (click)="formStep = 'addingStations'">Add single station</button>
   </div>
 </div>
 
-<div>2
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
+<div *ngIf="formStep === 'addingStations'">
+  <h2 class="modal-step-headline">Adding charging stations to the S&C Network</h2>
+  <div class="modal-content-buttons">
+    <button *ngIf="newStation" class="sc-button" (click)="formStep = 'stationBaseInfo'; useSavedData()">Use saved data</button>
+    <button class="sc-button" (click)="formStep = 'stationBaseInfo'; addNewData()">Add new</button>
   </div>
 </div>
 
-<div>3
-  <p>Station name & ID</p>
-  <p>How do you want to name your station? This name will appear in the S&C TestApp as title of the station.
+<div *ngIf="formStep === 'stationBaseInfo'">
+  <h2 class="modal-step-headline">Station name, ID and location</h2>
+
+  <form #stationsInfo="ngForm" (ngSubmit)="onStationsInfoSubmit()">
+    <p>How do you want to name your station? This name will appear in the S&C TestApp as title of the station.</p>
+    <div class="sc-input-wrapper">
+      <input type='text' [(ngModel)]="newStation.name" name="stationName" #stationName="ngModel" required placeholder="Station Name" class="sc-input">
+    </div>
+
+    <p>What ioptionals the ID of your station in your backend? This field is, if you don‘t have an ID.
+    </p>
+    <div class="sc-input-wrapper">
+      <input type='text' [(ngModel)]="newStation.id" name="stationId" #stationId="ngModel" required placeholder="Station Id" class="sc-input">
+    </div>
+
+    <p>Where is the station located?</p>
+    <div class="sc-input-wrapper">
+      <input type='text' [(ngModel)]="newStation.street" name="stationStreet" #stationStreet="ngModel" required placeholder="Street" class="sc-input-50">
+      <input type='text' [(ngModel)]="newStation.city" name="stationCity" #stationCity="ngModel" required placeholder="City" class="sc-input-50">
+      <input type='text' [(ngModel)]="newStation.postalCode" name="stationPostalCode" #stationPostalCode="ngModel" required placeholder="Postal Code" class="sc-input-50">
+      <input type='text' [(ngModel)]="newStation.country" name="stationCountry" #stationCountry="ngModel" required placeholder="Country" class="sc-input-50">
+      <input type='text' [(ngModel)]="newStation.latitude" name="stationLatitude" #stationLatitude="ngModel" required maxlength="9" placeholder="Latitude" class="sc-input-50">
+      <input type='text' [(ngModel)]="newStation.longitude" name="stationLongitude" #stationLongitude="ngModel" required maxlength="9" placeholder="Longitude" class="sc-input-50">
+    </div>
+
+    <div class="modal-steps" >
+      <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+      <button class="sc-button modal-button modal-button-success" type="submit" [disabled]="!stationsInfo.form.valid">Next</button>
+    </div>
+  </form>
+
+</div>
+
+<div *ngIf="formStep === 'stationDescriptions'">
+  <h2 class="modal-step-headline">Directions</h2>
+
+    <div *ngFor="let language of newStation.language; index as i;">
+        <select name="stationLanguage" [(ngModel)]="language.langCode">
+          <option value="" selected disabled>Select Language</option>
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="fr">French</option>
+          <option value="it">Italian</option>
+          <option value="nl">Dutch</option>
+          <option value="fi">Finnish</option>
+          <option value="sv">Swedish</option>
+          <option value="no">Norwegian</option>
+          <option value="ja">Japanese</option>
+          <option value="zh">Chinese</option>
+          <option value="cs">Czech</option>
+          <option value="da">Danish</option>
+          <option value="es">Spanish</option>
+        </select>
+        <textarea name="stationDescription" placeholder="Description" [(ngModel)]="language.description"></textarea>
+
+      </div>
+  <button class="sc-button" (click)="addLanguageItem()">Add more languages</button>
+
+  <div class="modal-steps" >
+    <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+    <button class="sc-button modal-button modal-button-success" (click)="nextStep()" [disabled]="!newStation.language[0].description">Next</button>
+  </div>
+
+</div>
+
+<div *ngIf="formStep === 'openingHoursQuestion'">
+  <h2 class="modal-step-headline">Opening Hours</h2>
+  <p>The times when the EVSEs at the location can be accessed for charging.</p>
+  <p>Is the charging station available 24 hours, 7 days a week?</p>
+  <select [(ngModel)]="hoursQuestion" name="stationHoursQuestion" #stationHoursQuestion="ngModel" required>
+    <option value="true">Yes</option>
+    <option value="false">No</option>
+  </select>
+
+  <div class="modal-steps" >
+      <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+      <button class="sc-button modal-button modal-button-success" (click)="nextStep()">Next</button>
+    </div>
+</div>
+
+<div *ngIf="formStep === 'openingHoursSelection'">
+    <h2 class="modal-step-headline">Opening Hours</h2>
+  <form #openingHoursSelection="ngForm" (ngSubmit)="onopeningHoursSubmit()">
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Monday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[0].period_begin" name="openingHoursMondayBegin" #openingHoursMondayBegin="ngModel" required>
+            <option value="" selected disabled>Select time</option>
+            <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+              {{hour}}
+            </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[0].period_end" name="openingHoursMondayEnd" #openingHoursMondayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Tuesday</p>
+        <div class="sc-input-wrapper">
+            <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[1].period_begin" name="openingHoursTuesdayBegin" #openingHoursTuesdayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[1].period_end" name="openingHoursTuesdayEnd" #openingHoursTuesdayEnd="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Wednesday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[2].period_begin" name="openingHoursWednesdayBegin" #openingHoursWednesdayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[2].period_end" name="openingHoursWednesdayEnd" #openingHoursWednesdayEnd="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Thursday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[3].period_begin" name="openingHoursThursdayBegin" #openingHoursThursdayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[3].period_end" name="openingHoursThursdayEnd" #openingHoursThursdayEnd="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Friday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[4].period_begin" name="openingHoursFridayBegin" #openingHoursFridayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[4].period_end" name="openingHoursFridayEnd" #openingHoursFridayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Saturday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[5].period_begin" name="openingHoursSaturdayBegin" #openingHoursSaturdayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[5].period_end" name="openingHoursSaturdayEnd" #openingHoursSaturdayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+    <div class="opening-hours-wrapper">
+        <p class="form-label">Sunday</p>
+        <div class="sc-input-wrapper">
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[6].period_begin" name="openingHoursSundayBegin" #openingHoursSundayBegin="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+          <select  [(ngModel)]="openingHoursObject.opening_times.regular_hours[6].period_end" name="openingHoursSundayEnd" #openingHoursSundayEnd="ngModel" required>
+              <option value="" selected disabled>Select time</option>
+              <option *ngFor="let hour of openingHours; index as i;" [value]="hour">
+                {{hour}}
+              </option>
+          </select>
+        </div>
+    </div>
+
+  <div class="modal-steps" >
+    <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+    <button class="sc-button modal-button modal-button-success" type="submit" [disabled]="!openingHoursSelection.form.valid">Next</button>
+  </div>
+</form>
+</div>
+
+<div *ngIf="formStep === 'evsesAndConnectors'">
+  <h2 class="modal-step-headline">EVSEs and Connectors</h2>
+  <p>Each charging station has one or more EVSEs. Please make sure that the EVSE ID matches the EVSE ID in your backend.
   </p>
-  <input type="text">
-  <p>What ioptionals the ID of your station in your backend? This field is, if you don‘t have an ID.
+
+  <div class="new-station-evses-wrapper">
+    <div *ngFor="let evse of evsesObject.evses; index as i;" class="new-station-evse">
+      <p class="form-label">EVSEs</p>
+      <div class="sc-input-wrapper">
+        <input [(ngModel)]="evsesObject.evses[i].evse_id" type="text" placeholder="EVSE ID" class="sc-input">
+      </div>
+      <p class="form-label">Connectors</p>
+      <div *ngFor="let connector of evse.connectors; index as a;">
+        <div class="sc-input-wrapper">
+          <select class="sc-input-33" [(ngModel)]="connector.power_type">
+            <option value="" selected disabled>Connector type</option>
+            <option value="IEC_62196_T1">IEC_62196_T1</option>
+            <option value="IEC_62196_T2">IEC_62196_T2</option>
+            <option value="IEC_62196_T2_COMBO">IEC_62196_T2_COMBO</option>
+            <option value="CHADEMO">CHADEMO</option>
+          </select>
+          <input [(ngModel)]="connector.voltage" type="text" placeholder="Voltage" class="sc-input-33">
+          <input [(ngModel)]="connector.amperage" type="text" placeholder="Amperage" class="sc-input-33">
+        </div>
+      </div>
+      <button class="sc-button" (click)="addConnector(i)">Add more Connectors</button>
+    </div>
+    <button class="sc-button" (click)="addEvse()">Add more EVSEs</button>
+  </div>
+
+  <div class="modal-steps" >
+    <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+    <button class="sc-button modal-button modal-button-success" (click)="nextStep()"
+     [disabled]="!(evsesObject.evses[0].evse_id &&
+                   evsesObject.evses[0].connectors[0].power_type &&
+                   evsesObject.evses[0].connectors[0].voltage &&
+                   evsesObject.evses[0].connectors[0].amperage)">
+        Next
+    </button>
+  </div>
+
+</div>
+
+<div *ngIf="formStep === 'tariffs'">
+  <h2 class="modal-step-headline">Tariffs</h2>
+  <p>Decide which tariff applies to which station. </p>
+
+  <div *ngFor="let evse of evsesObject.evses; index as i;" class="modal-asign-tariff">
+      <p class="form-label">{{evse.evse_id}} connectors</p>
+      <div>
+        <div *ngFor="let connector of evse.connectors; index as a">
+            <span>Connector ID {{a + 1}} </span>
+            <span>{{connector.power_type}} </span>
+            <span class="kWh">kWh </span>
+            <select [(ngModel)]="connector.tariff_id">
+              <option value="" selected disabled>Select Tariff</option>
+              <option *ngFor="let tariffID of tariffObject; index as i;" value="tariffID.id">
+                ID {{tariffID.id}}
+              </option>
+            </select>
+        </div>
+      </div>
+  </div>
+
+  <button class="sc-button" (click)="formStep = 'addTariffs'">Edit Tariffs</button>
+
+  <div class="modal-steps" >
+    <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+    <button class="sc-button modal-button modal-button-success" (click)="nextStep()">Next</button>
+  </div>
+</div>
+
+<div *ngIf="formStep === 'addTariffs'">
+    <h2 class="modal-step-headline">Edit Tariffs</h2>
+    <p class="form-label">Define the tariffs that your customers can choose from. They can be used on different stations as well.</p>
+
+    <div *ngFor="let tariffElement of tariffObject[0].elements; index as i;">
+        <div *ngFor="let tariff of tariffElement.price_components; index as a;">
+
+        <div class="sc-input-wrapper">
+          <select [(ngModel)]="tariff.type" class="sc-input-33">
+            <option value="" selected disabled>Tariff type</option>
+            <option value="ENERGY">ENERGY</option>
+            <option value="FLAT">FLAT</option>
+            <option value="TIME">TIME</option>
+          </select>
+          <input type="text" [(ngModel)]="tariff.price" placeholder="Price" class="sc-input-33">
+          <input type="text" [(ngModel)]="tariff.step_size" placeholder="Step Size" class="sc-input-33">
+          <!-- <input *ngIf="tariff.type !== 'FLAT'" type="text" [(ngModel)]="tariff.step_size" placeholder="Step Size" class="sc-input-33"> -->
+        </div>
+      </div>
+      </div>
+      <button class="sc-button" (click)="addTariff()">Add more Tariffs</button>
+
+    <div class="modal-steps" >
+      <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+      <button class="sc-button modal-button modal-button-success" (click)="nextStep()"
+          [disabled]="!(tariffObject[0].elements[0].price_components[0].type &&
+                      tariffObject[0].elements[0].price_components[0].price &&
+                      tariffObject[0].elements[0].price_components[0].step_size)">
+              Next
+      </button>
+    </div>
+</div>
+
+<div *ngIf="formStep === 'stationSummary'">
+  <h2 class="modal-step-headline">Station Summary</h2>
+
+  <div>
+    <agm-map [latitude]="newStation.latitude" [longitude]="newStation.longitude" class="station-map">
+      <agm-marker [latitude]="newStation.latitude" [longitude]="newStation.longitude"></agm-marker>
+    </agm-map>
+
+    <div class="station-summary">
+        <div class="summary-item">
+          <span class="bold">Station name: </span>
+          <span>{{newStation.name}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Station ID: </span>
+          <span>{{newStation.id}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Street: </span>
+          <span>{{newStation.street}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">City: </span>
+          <span>{{newStation.city}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Postal Code: </span>
+          <span>{{newStation.postalCode}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Country: </span>
+          <span>{{newStation.country}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Location: </span>
+          <span>{{newStation.latitude}}, {{newStation.longitude}}</span>
+          <i class="far fa-edit" (click)="formStep = 'stationBaseInfo'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">EVSEs (Connectors): </span>
+          <span *ngFor="let evse of evsesObject.evses; index as i;">
+            <span>{{evse.evse_id}}</span> (
+              <span *ngFor="let connector of evse.connectors; index as a;">
+                <span>Connector {{a + 1}} </span>
+                <span [hidden]="a === (evse.connectors.length - 1)">, </span>
+              </span>
+            )
+            <span [hidden]="i === (evsesObject.evses.length - 1)">, </span>
+          </span>
+          <i class="far fa-edit" (click)="formStep = 'evsesAndConnectors'"></i>
+        </div>
+        <div class="summary-item">
+          <span class="bold">Tariffs: </span>
+          <span *ngFor="let tariffID of tariffObject; index as i">
+            <span> ID {{tariffID.id}}</span>
+            <span [hidden]="i === (tariffObject.length - 1)">, </span>
+          </span>
+          <i class="far fa-edit" (click)="formStep = 'tariffs'"></i>
+        </div>
+    </div>
+
+    <div class="modal-steps" >
+        <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
+        <button class="sc-button modal-button modal-button-success" (click)="nextStep()">Add</button>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="formStep === 'uploadJsonFile'">
+  <h2 class="modal-step-headline">Upload JSON</h2>
+  <p>
+    To add a new station, edit the values in the JSON.  <br>
+    You have to at least change ID, latitude and longitude. <br>
+    For more info about stations, visit <a href="https://github.com/ocpi/ocpi/blob/master/mod_locations.md#3-object-description">here</a>.
   </p>
-  <input type="text">
-
-  <p>Address</p>
-  <p>Where is the station located?</p>
-  <input type="text">
-  <input type="text">
-  <input type="text">
-  <input type="text">
-
+  <textarea [(ngModel)]='modalInfo' class="json-textarea"></textarea>
+  <button class="sc-button" (click)="addStation()">Add</button>
 </div>
 
-<!--
-<div>4
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
-  </div>
+<div *ngIf="formStep === 'pullDataFromBackend'">
+  <h2 class="modal-step-headline">Pull from Back End</h2>
+  <p>This section would call the back end and if succesfull, would redirect to the next one with the prepopulated info.</p>
 </div>
-
-
-<div>5
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
-  </div>
-</div>
-
-
-<div>6
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
-  </div>
-</div>
-
-
-<div>7
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
-  </div>
-</div>
-
-
-<div>8
-  <p>Adding charging stations to the S&C Network</p>
-  <div>
-    <button>Use saved data</button>
-    <button>Add new</button>
-  </div>
-</div>
-
- -->
-
