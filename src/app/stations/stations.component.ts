@@ -294,7 +294,7 @@ export class StationsComponent implements OnInit {
       {
         "evse_id": "",
         "uid": "",
-        "status": "AVAILABLE",
+        "status": "",
         "connectors": [{
             "id": "",
             "standard": "",
@@ -302,7 +302,7 @@ export class StationsComponent implements OnInit {
             "voltage": 0,
             "amperage": 0,
             "tariff_id": "",
-            "format": "CABLE"
+            "format": ""
           }
         ]
       }
@@ -318,7 +318,7 @@ export class StationsComponent implements OnInit {
         "voltage": "",
         "amperage": "",
         "tariff_id": "",
-        format: "CABLE"
+        format: ""
       }
     );
     console.log(this.evsesObject.evses);
@@ -510,12 +510,12 @@ export class StationsComponent implements OnInit {
         {
           "evse_id": "",
           "uid": "",
-          "status": "AVAILABLE",
+          "status": "",
           "connectors": [
             {
               "id": "1",
               "standard": "",
-              "format": "CABLE",
+              "format": "",
               "power_type": "",
               "voltage": "",
               "amperage": "",
@@ -606,6 +606,7 @@ export class StationsComponent implements OnInit {
       id: '',
       address: '',
       country: '',
+      type: '',
       city: '',
       postalCode: '',
       latitude: '',

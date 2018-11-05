@@ -57,7 +57,7 @@ html
     // height: 100%
     @include background-image-cover('../src/assets/img/bg.jpg')
     background-attachment: fixed
-    font-family: $lato
+    font-family: 'sdUiDisplayLight'
 
 *,
 *:before,
@@ -77,13 +77,34 @@ p
 
 h1,h2,h3,h4,h5,h6
   margin: 8px 0
+  font-family: 'dinCondensed'
 
-h2
+h2, h4
   font-size: 20px
   line-height: 22px
 
 a
   text-decoration: none
+
+@font-face
+  font-family: 'dinCondensed'
+  src: url('../src/assets/fonts/din-condensed.ttf') format('truetype')
+  font-weight: 300
+  font-style: normal
+
+@font-face
+  font-family: 'dinCondensedLight'
+  src: url('../src/assets/fonts/din-condensed-light.ttf') format('truetype')
+  font-weight: 300
+  font-style: normal
+
+@font-face
+    font-family: 'sdUiDisplayLight'
+    src: url('../src/assets/fonts/sf-ui-display-light.otf') format("opentype")
+
+@font-face
+    font-family: 'sdUiDisplaySemibold'
+    src: url('../src/assets/fonts/sf-ui-display-semibold.otf') format("opentype")
 
 .main-wrapper
   @extend %clearfix
@@ -100,7 +121,7 @@ input.ng-touched.ng-invalid
 .register-form
   width: 480px
   float: right
-  background: rgba(0,70,102,0.8)
+  background: rgba(0,110,241,0.7)
   padding: 24px
   font-size: 0
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13)
@@ -124,31 +145,6 @@ input.ng-touched.ng-invalid
     width: 140px !important
     float: right
     margin-top: 16px
-    background-color: #fff
-    color: #004666
-    &:hover,
-    &:focus
-      background-color: #fff
-
-input[type=text],
-select
-  font-size: 1rem
-  line-height: 44px
-  -webkit-transition-duration: 350ms
-  transition-duration: 350ms
-  -webkit-transition-property: all
-  transition-property: all
-  -webkit-transition-timing-function: ease
-  transition-timing-function: ease
-  display: inline-block
-  width: 100%
-  height: 44px
-  padding: 0 10px
-  vertical-align: middle
-  color: #4c5356
-  background: #fff
-  -webkit-box-shadow: none
-  box-shadow: none
 
 input[type=submit],
 .sc-button
@@ -178,31 +174,32 @@ input[type=submit],
   vertical-align: middle
   text-align: center
   text-transform: uppercase
-  border: 1px solid #004666
-  background-color: #004666
   color: #fff
-  font-family: "VWFS-Sans",sans-serif
-  font-weight: bold
+  // font-weight: bold
   text-decoration: none
   cursor: pointer
-  border-radius: 0
+  // border-radius: 0
+
+  background-color: #006ef1
+  border: 2px solid #006ef1
+  border-radius: 8px 8px 8px 8px
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.13)
   &:hover,
   &:focus
     outline: none
-    border: 1px solid rgba(0, 70, 102, 0.9)
-    background-color: rgba(0, 70, 102, 0.9)
-    -webkit-box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
-    box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
+    // border: 1px solid rgba(0,110,241,0.7)
+    // background-color: rgba(0,110,241,0.7)
+    // -webkit-box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
+    // box-shadow: 0 2px 5px 1px rgba(0,0,0,0.4)
   i
     margin-right: 4px
 
+input[type=submit].white,
 .sc-button.white
-  background-color: #fff
-  color: #004666
-  border-color: #fff
-
-select
-  border: 1px solid #4c5356
+  background: transparent
+  border: 2px solid #fff
+  -webkit-border-radius: 6px
+  border-radius: 6px
 
 .motionwerk-logo
   width: 200px
@@ -211,7 +208,8 @@ select
   vertical-align: middle
 
 .pilot-project-wrapper
-  background: rgba(0,70,102,0.8)
+  // background: rgba(0,110,241,0.7)
+  background-image: linear-gradient(90deg,rgba(164, 110, 241, 0.7) 0%,rgba(0, 110, 241, 0.7) 100%)
   display: inline-block
   padding: 24px
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13)
@@ -247,7 +245,8 @@ select
 .account-info-list
   width: 480px
   float: left
-  background: rgba(0,70,102,0.8)
+  // background: rgba(0,110,241,0.7)
+  background-image: linear-gradient(90deg,rgba(164, 110, 241, 0.7) 0%,rgba(0, 110, 241, 0.7) 100%)
   padding: 24px
   font-size: 0
   color: #fff
@@ -269,7 +268,7 @@ select
 .wallet-wrapper
   width: 480px
   float: right
-  background: rgba(0,70,102,0.8)
+  background: rgba(0,110,241,0.7)
   padding: 24px
   color: #fff
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13)
@@ -319,7 +318,7 @@ select
     &.first-name
       margin-right: 2px
   &.active
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0px 2px 0px 0px #004666, 0px -1px 0px 0px #004666 inset
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0px 2px 0px 0px #006ef1, 0px -1px 0px 0px #006ef1 inset
 
 
 footer
@@ -339,10 +338,6 @@ footer
   width: 150px
   top: 6px
   right: 0
-
-.c-page-head
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13) !important
-  background-color: white !important
 
 .evCoin
   padding-left: 2px
@@ -462,3 +457,22 @@ footer
     border-width: 0 5px 5px
     border-bottom-color: #000
 
+
+// fix this
+
+input,
+select,
+textarea
+  padding: 12px
+  font-size: 16px
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16)
+  transition: .5s
+  background-color: #fff
+  border-width: 0px 0px 0px 0px
+  border-radius: 8px 8px 8px 8px
+  font-size: 0.707em
+  // font-family: "San Francisco", Sans-serif
+  font-size: 1em
+  font-weight: 300
+  // border: 1px solid #fff
+  color: #9d9d9d

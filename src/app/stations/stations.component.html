@@ -91,13 +91,10 @@
   </div>
 
   <div class="stations-buttons">
-    <button class="sc-button" (click)="showStationModal = true" *ngIf="tabIndex === 0">
+    <button class="sc-button white" (click)="showStationModal = true" *ngIf="tabIndex === 0">
         + Add new station
     </button>
-    <!-- <button class="sc-button" (click)="addStationDialog()" *ngIf="tabIndex === 0">
-      + Add new station
-    </button> -->
-    <button class="sc-button" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
+    <button class="sc-button white" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
       + Update tariff
     </button>
   </div>
@@ -143,10 +140,22 @@
                             <input type='text' [(ngModel)]="newStation.name" name="stationName" #stationName="ngModel" required placeholder="Station Name" class="sc-input">
                           </div>
 
-                          <p>What ioptionals the ID of your station in your backend? This field is, if you don‘t have an ID.
+                          <p>What is the ID of your station in your backend? This field is optional, if you don‘t have an ID.
                           </p>
                           <div class="sc-input-wrapper">
-                            <input type='text' [(ngModel)]="newStation.id" name="stationId" #stationId="ngModel" required placeholder="Station Id" class="sc-input">
+                            <input type='text' [(ngModel)]="newStation.id" name="stationId" #stationId="ngModel" placeholder="Station Id" class="sc-input">
+                          </div>
+
+                          <div class="sc-input-wrapper">
+                            <select class="sc-input-100" [(ngModel)]="newStation.type" name="stationType" #stationType="ngModel" required>
+                              <option value="" selected disabled>Station type</option>
+                              <option value="ON_STREET">On Street</option>
+                              <option value="PARKING_GARAGE">Parking Garage</option>
+                              <option value="UNDERGROUND_GARAGE">Underground Garage</option>
+                              <option value="PARKING_LOT">Parking Lot</option>
+                              <option value="OTHER">Other</option>
+                              <option value="UNKNOWN">Unknown</option>
+                            </select>
                           </div>
 
                           <p>Where is the station located?</p>
@@ -372,6 +381,18 @@
                               <div class="sc-input-wrapper">
                                 <input [(ngModel)]="evsesObject.evses[i].evse_id" type="text" placeholder="EVSE ID"  name="evseId" #evseId="ngModel" required class="sc-input-33">
                                 <input [(ngModel)]="evsesObject.evses[i].uid" type="text" placeholder="EVSE UID"  name="evseUid" #evseUid="ngModel" required class="sc-input-33">
+                                <select class="sc-input-33" [(ngModel)]="evsesObject.evses[i].status" name="evseStatus" #evseStatus="ngModel" required>
+                                  <option value="" selected disabled>Set status</option>
+                                  <option value="AVAILABLE">Available</option>
+                                  <option value="BLOCKED">Blocked</option>
+                                  <option value="CHARGING">Charging</option>
+                                  <option value="INOPERATIVE">Inoperative</option>
+                                  <option value="OUTOFORDER">Out of order</option>
+                                  <option value="PLANNED">Planned</option>
+                                  <option value="REMOVED">Removed</option>
+                                  <option value="RESERVED">Reserved</option>
+                                  <option value="UNKNOWN">Unknown</option>
+                                </select>
                               </div>
                               <p class="form-label">Connectors</p>
                               <div *ngFor="let connector of evse.connectors; index as a;">
@@ -389,6 +410,11 @@
                                       <option value="AC_1_PHASE">AC_1_PHASE</option>
                                       <option value="AC_3_PHASE">AC_3_PHASE</option>
                                       <option value="DC">DC</option>
+                                  </select>
+                                  <select class="sc-input-33" [(ngModel)]="connector.format" name="connectorFormat" #connectorFormat="ngModel" required>
+                                    <option value="" selected disabled>Connector format</option>
+                                    <option value="SOCKET">SOCKET</option>
+                                    <option value="CABLE">Cable</option>
                                   </select>
                                 </div>
                                 <div class="sc-input-wrapper">
@@ -410,7 +436,8 @@
                                          evsesObject.evses[0].connectors[0].amperage)">
                               Next
                           </button> -->
-                          <button class="sc-button modal-button modal-button-success" type="submit" [disabled]="!evsesForm.form.valid" (click)="nextStep()">Next</button>
+                          <!-- <button class="sc-button modal-button modal-button-success" type="submit" [disabled]="!evsesForm.form.valid" (click)="nextStep()">Next</button> -->
+                          <button class="sc-button modal-button modal-button-success" type="button" (click)="nextStep()">Next</button>
                         </div>
                       <!-- </form> -->
                       </div>
