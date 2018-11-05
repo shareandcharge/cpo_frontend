@@ -7,5 +7,4 @@ export const environment = {
   production: false,
   apiUrl: 'http://test-cpo.shareandcharge.com/api_proxy/',
   blockchainExplorerUrl: 'http://tobalaba.slock.it/tx'
-
 };

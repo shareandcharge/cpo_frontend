@@ -94,10 +94,9 @@ export class AddTariffModalDialogComponent implements IModalDialog {
     this.safelyParseJSON();
     const valid = ajv.validate(schema, this.modalInfo[0]);
 
-    if(!valid) {
+    if (!valid) {
       this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
     }
-
     // for now we are checking only first object inside modalInfo
     this.dataService.updateTarif(this.modalInfo).subscribe(() => {
       this.broadcaster.broadcast('refreshTariffs', true);

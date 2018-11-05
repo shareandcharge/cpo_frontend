@@ -64,7 +64,7 @@ export class UpdateTariffModalDialogComponent implements IModalDialog {
     this.safelyParseJSON();
     const valid = ajv.validate(schema, this.modalInfo[0]);
 
-    if(!valid) {
+    if (!valid) {
       this.toasterService.pop('error', 'Error', 'Please provide a valid Tariffs JSON object.');
     }
 

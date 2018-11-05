@@ -10,24 +10,27 @@ a
   transition-property: all
   -webkit-transition-timing-function: ease
   transition-timing-function: ease
-  color: #004666
+  font-style: normal
+  font-weight: 300
+  letter-spacing: 1px
+  color: #000
   &:hover
-    color: #4c5356
+    color: #000
 
 .c-brand-logo
   display: inline-block
-  width: 180px
-  height: 108px
-  padding-left: 20px
-  padding-right: 20px
   position: absolute
   top: 0
   left: 0
-  background-image: linear-gradient(45deg, #003b57 0%, #0b6e8e 100%)
+  // background-image: linear-gradient(45deg, #003b57 0%, #0b6e8e 100%)
+  background-image: none
   svg
     width: 140px
     height: 108px
     fill: #fff
+  img
+    height: 42px
+    margin: 24px 0px
 
 @media (max-width: 45em)
   .c-brand-logo
@@ -53,8 +56,11 @@ a
   top: 0
   left: 0
   z-index: 1030
-  height: 68px
-  background-color: rgba(255, 255, 255, 0.6)
+  height: 95px
+  // background-color: rgba(255, 255, 255, 0.6)
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13) !important
+  background-color: white !important
+  font-family: 'dinCondensedLight'
   &.c-page-head--no-hero
     position: relative
     height: 164px
@@ -79,8 +85,10 @@ a
   margin: 0
   text-align: right
   text-transform: uppercase
-  font-weight: bold
+  // font-weight: bold
   list-style: none
+  font-size: 24px
+  line-height: 32px
   &::after
     content: "" !important
     display: block !important
@@ -112,10 +120,8 @@ a
     position: static
 
 .c-page-head-nav__link
-  font-size: .83333rem
-  line-height: 68px
   display: block
-  line-height: 68px
+  line-height: 95px
   text-decoration: none
   &:hover .c-page-head-nav__link-text::after,
   &:focus .c-page-head-nav__link-text::after,
@@ -124,35 +130,6 @@ a
 
 a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
   width: 100%
-
-@media (min-width: 30.01em)
-  .c-page-head-nav__link
-    font-size: .83333rem
-    line-height: 68px
-
-@media (min-width: 45.01em)
-  .c-page-head-nav__link
-    font-size: .83333rem
-    line-height: 68px
-
-@media (min-width: 60.01em)
-  .c-page-head-nav__link
-    font-size: .83333rem
-    line-height: 68px
-
-@media (min-width: 80.01em)
-  .c-page-head-nav__link
-    font-size: .83333rem
-    line-height: 68px
-
-@media (min-width: 120.0725em)
-  .c-page-head-nav__link
-    font-size: 1rem
-    line-height: 68px
-
-@media (max-width: 45em)
-  .c-page-head-nav__link
-    line-height: 48px
 
 .c-page-head-nav__link-text
   display: inline-block
@@ -179,6 +156,7 @@ a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
     content: ""
   i
     margin-right: 4px
+    display: none
 
 .c-page-head-nav__link-text::after
   -webkit-transition-duration: 350ms
@@ -188,14 +166,15 @@ a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
   -webkit-transition-timing-function: ease
   transition-timing-function: ease
   display: block
-  height: 1px
+  height: 2px
   width: 0
   position: absolute
   top: calc(50% + 9px)
-  left: 50%
-  -webkit-transform: translateX(-50%)
-  transform: translateX(-50%)
-  background-color: currentColor
+  left: 0
+  -webkit-transform: translateX(0%)
+  transform: translateX(0%)
+  background-color: #006ef1
+  margin-top: 8px
   content: ""
 
 .o-page-wrap
@@ -213,25 +192,6 @@ a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
 @media (min-width: 120.0725em)
   .o-page-wrap
     max-width: 1640px
-
-.c-brand-logo
-  display: inline-block
-  width: 180px
-  height: 108px
-  padding-left: 20px
-  padding-right: 20px
-  position: absolute
-  top: 0
-  left: 0
-  // background-image: linear-gradient(45deg, #003b57 0%, #0b6e8e 100%)
-  background-image: none
-  svg
-    width: 140px
-    height: 108px
-    fill: #fff
-  img
-    height: 48px
-    margin: 10px 0px
 
 @media (max-width: 45em)
   .c-brand-logo
@@ -260,7 +220,7 @@ a.c-page-head-nav__link.is-active .c-page-head-nav__link-text::after
   top: 0
   left: 0
   z-index: 1033
-  height: 68px
+  height: 95px
   background-color: rgba(255, 255, 255, 0.6)
   &.c-page-head--no-hero
     position: relative

@@ -13,10 +13,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { BlockUIModule } from 'ng-block-ui';
 import { TooltipModule } from 'ngx-tooltip';
+import { AgmCoreModule } from '@agm/core';
 
 import { ServicesModule} from './common';
-
-// import { ModalDialogComponent } from './common/components/session-timeout/session-timeout-modal.component';
 
 import { AddStationModalDialogComponent } from './stations/add-station-dialog/add-station-dialog.component';
 import { UpdateStationModalDialogComponent } from './stations/update-station-dialog/update-station-dialog.component';
@@ -63,7 +62,10 @@ registerLocaleData(localeDE);
     ModalDialogModule.forRoot(),
     NgxDatatableModule,
     BlockUIModule.forRoot(),
-    TooltipModule
+    TooltipModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCX7S0HaTM_bRLY3QBAR4V7qGyeU31tCPk'
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-EN' }
