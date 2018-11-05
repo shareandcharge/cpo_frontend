@@ -412,17 +412,18 @@
                                       <option value="AC_3_PHASE">AC_3_PHASE</option>
                                       <option value="DC">DC</option>
                                   </select>
-                                  <select class="sc-input-33" [(ngModel)]="connector.format" name="connectorFormat" #connectorFormat="ngModel" required>
-                                    <option value="" selected disabled>Connector format</option>
-                                    <option value="SOCKET">SOCKET</option>
-                                    <option value="CABLE">Cable</option>
-                                  </select>
                                 </div>
                                 <div class="sc-input-wrapper">
+                                    <select class="sc-input-33" [(ngModel)]="connector.format" name="connectorFormat" #connectorFormat="ngModel" required>
+                                      <option value="" selected disabled>Connector format</option>
+                                      <option value="SOCKET">Socket</option>
+                                      <option value="CABLE">Cable</option>
+                                    </select>
                                     <input [(ngModel)]="connector.voltage" type="number" placeholder="Voltage" pattern="^[0-9]\d*$" name="connectorVoltage" #connectorVoltage="ngModel" required class="sc-input-33">
                                     <input [(ngModel)]="connector.amperage" type="number" placeholder="Amperage" pattern="^[0-9]\d*$" name="connectorAmperage" #connectorAmperage="ngModel" required class="sc-input-33">
                                   </div>
                               </div>
+                              <br>
                               <button class="sc-button" type="button" (click)="addConnector(i)">Add more Connectors</button>
                             </div>
                             <button class="sc-button" type="button" (click)="addEvse()">Add more EVSEs</button>
