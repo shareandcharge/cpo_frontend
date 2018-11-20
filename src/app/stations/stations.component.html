@@ -1,11 +1,11 @@
-<!-- <h2 class="page-title clickable" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">
+<h2 class="page-title clickable" [ngClass]="{'active': tabIndex === 0}" (click)="tabIndex = 0; closeAllLists()">
     <span class="tab">Stations</span>
 </h2>
 <h2 class="page-title clickable" [ngClass]="{'active': tabIndex === 1}" (click)="tabIndex = 1; closeAllLists()">
   <span class="tab">Tariffs</span>
-</h2> -->
+</h2>
 
-<h2 class="page-title">Stations</h2>
+<!-- <h2 class="page-title">Stations</h2> -->
 
 <div class="stations-container-wrapper">
 
@@ -90,13 +90,13 @@
         </div>
   </div>
 
-  <div class="stations-buttons">
+  <div class="stations-buttons" [ngClass]="{'tariff-active': tabIndex === 1}">
     <button class="sc-button white" (click)="showStationModal = true" *ngIf="tabIndex === 0">
         + Add new station
     </button>
-    <button class="sc-button white" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
+    <!-- <button class="sc-button white" (click)="addTariffDialog()" *ngIf="tabIndex === 1">
       + Update tariff
-    </button>
+    </button> -->
   </div>
 </div>
 
@@ -107,7 +107,7 @@
         <div  class="modal-dialog modal-dialog-centered">
             <div  class="modal-content">
                 <div  class="modal-header">
-                  <h4  class="modal-title">Add Stations</h4>
+                  <h4  class="modal-title">Add Station</h4>
                 </div>
                 <div class="modal-body">
 

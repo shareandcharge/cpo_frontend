@@ -106,7 +106,7 @@ export class StationsComponent implements OnInit {
 
   addStationDialog() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add Stations',
+      title: 'Add Station',
       childComponent: AddStationModalDialogComponent,
       settings: {
         closeButtonClass: 'close',

@@ -53,6 +53,8 @@ div.stations-container-wrapper
   div.stations-container
     position: relative
     border-bottom: 1px solid #fff
+    &:last-child
+      border-bottom: 0
     span
       display: inline-block
       vertical-align: middle
@@ -89,6 +91,12 @@ div.stations-container-wrapper
     float: right
     padding: 8px
     font-size: 0
+    border-top: 1px solid #fff
+    width: 100%
+    text-align: right
+    &.tariff-active
+      padding: 0
+      border-top: 0
     button
       margin-left: 8px
   .sub-title
