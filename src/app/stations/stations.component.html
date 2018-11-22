@@ -132,7 +132,7 @@
                       </div>
 
                       <div *ngIf="formStep === 'stationBaseInfo'">
-                        <h2 class="modal-step-headline">Station name, ID and location</h2>
+                        <h2 class="modal-step-headline">Station name, ID, type and location</h2>
 
                         <form #stationsInfo="ngForm" (ngSubmit)="onStationsInfoSubmit()">
                           <p>How do you want to name your station? This name will appear in the S&C TestApp as title of the station.</p>
@@ -165,20 +165,20 @@
                             <input type='text' [(ngModel)]="newStation.city" name="stationCity" #stationCity="ngModel" required placeholder="City" class="sc-input-50">
                             <input type='text' [(ngModel)]="newStation.postalCode" name="stationPostalCode" #stationPostalCode="ngModel" required placeholder="Postal Code" class="sc-input-50">
                             <select name="stationCountry" [(ngModel)]="newStation.country" #stationCountry="ngModel" required class="sc-input-50">
-                                <option value="" selected disabled>Select Language</option>
-                                <option value="eng">English</option>
-                                <option value="deu">German</option>
-                                <option value="fra">French</option>
-                                <option value="ita">Italian</option>
-                                <option value="nld">Dutch</option>
-                                <option value="fin">Finnish</option>
-                                <option value="sve">Swedish</option>
-                                <option value="nor">Norwegian</option>
-                                <option value="jpn">Japanese</option>
-                                <option value="zho">Chinese</option>
-                                <option value="cze">Czech</option>
-                                <option value="dan">Danish</option>
-                                <option value="spa">Spanish</option>
+                                <option value="" selected disabled>Select Country</option>
+                                <option value="eng">England</option>
+                                <option value="deu">Germany</option>
+                                <option value="fra">France</option>
+                                <option value="ita">Italy</option>
+                                <option value="nld">Nederlands</option>
+                                <option value="fin">Finland</option>
+                                <option value="sve">Sweden</option>
+                                <option value="nor">Norway</option>
+                                <option value="jpn">Japan</option>
+                                <option value="zho">China</option>
+                                <option value="cze">Czech Republic</option>
+                                <option value="dan">Denmark</option>
+                                <option value="spa">Spain</option>
                             </select>
                             <input type='text' [(ngModel)]="newStation.latitude" name="stationLatitude" #stationLatitude="ngModel" required maxlength="9" placeholder="Latitude" class="sc-input-50">
                             <input type='text' [(ngModel)]="newStation.longitude" name="stationLongitude" #stationLongitude="ngModel" required maxlength="9" placeholder="Longitude" class="sc-input-50">
@@ -195,7 +195,10 @@
                       <div *ngIf="formStep === 'stationDescriptions'">
                         <h2 class="modal-step-headline">Directions</h2>
 
-                          <div *ngFor="let direction of newStation.directions; index as i;">
+                        <p>This field allows you to add human-readable directions on how to reach the location or other
+                          instructions. This is displayed in the Share&Charge Whitelabel App. This field is optional.</p>
+                        
+                          <div *ngFor="let direction of newStation.directions; index as i; let first = first; let last = last" class="relative">
                               <select name="stationLanguage" [(ngModel)]="direction.language">
                                 <option value="" selected disabled>Select Language</option>
                                 <option value="en">English</option>
@@ -215,7 +218,8 @@
                               <textarea name="stationDescription" placeholder="Description" [(ngModel)]="direction.text"></textarea>
 
                             </div>
-                        <button class="sc-button" (click)="addLanguageItem()">Add more languages</button>
+                        <button class="sc-button" (click)="addLanguageItem()">Add more directions</button>
+                        <button class="sc-button" *ngIf="newStation.directions.length > 1" (click)="deleteLanguageItem()">Delete Last Description</button>
 
                         <div class="modal-steps">
                           <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
@@ -240,7 +244,8 @@
                       </div>
 
                       <div *ngIf="formStep === 'openingHoursSelection'">
-                          <h2 class="modal-step-headline">Opening Hours</h2>
+                        <h2 class="modal-step-headline">The times when the EVSEs at the location can be accessed for charging.</h2>
+                        
                         <form #openingHoursSelection="ngForm" (ngSubmit)="onOpeningHoursSubmit()">
                           <div class="opening-hours-wrapper">
                               <p class="form-label">Monday</p>
@@ -371,14 +376,17 @@
 
                       <div *ngIf="formStep === 'evsesAndConnectors'">
                         <h2 class="modal-step-headline">EVSEs and Connectors</h2>
-                        <p>Each charging station has one or more EVSEs. Please make sure that the EVSE ID matches the EVSE ID in your backend.
+                        <p>An EVSE describes the part that controls the power supply to a single EV in a single session. <br>
+                          A connector is the socket or cable available for the EV to use.
+                          A single EVSE may provide multiple connectors but only one of them can be in use at the same time.  <br>
+                          Please make sure that the UID matches the UID in your backend, as this is the 'technical' identification of the EVSE.  <br>
+                          Otherwise the Share&Charge protocol is not able to control your charging station. The EVSE ID optional.
                         </p>
 
-                        <!-- <form #evsesForm="ngForm" (ngSubmit)="onEvsesSubmit()"> -->
                         <div>
                           <div class="new-station-evses-wrapper">
-                            <div *ngFor="let evse of evsesObject.evses; index as i;" class="new-station-evse">
-                              <p class="form-label">EVSEs</p>
+                            <div *ngFor="let evse of evsesObject.evses; index as i; let last = last" class="new-station-evse relative">
+                              <p class="form-label">EVSE</p>
                               <div class="sc-input-wrapper">
                                 <input [(ngModel)]="evsesObject.evses[i].evse_id" type="text" placeholder="EVSE ID"  name="evseId" #evseId="ngModel" required class="sc-input-33">
                                 <input [(ngModel)]="evsesObject.evses[i].uid" type="text" placeholder="EVSE UID"  name="evseUid" #evseUid="ngModel" required class="sc-input-33">
@@ -396,7 +404,7 @@
                                 </select>
                               </div>
                               <p class="form-label">Connectors</p>
-                              <div *ngFor="let connector of evse.connectors; index as a;">
+                              <div *ngFor="let connector of evse.connectors; index as a; let last = last" class="relative">
                                 <div class="sc-input-wrapper">
                                   <input [(ngModel)]="connector.id" type="text" placeholder="Connector ID" name="connectorId" #connectorId="ngModel" required class="sc-input-33">
                                   <select class="sc-input-33" [(ngModel)]="connector.standard" name="evseStandard" #evseStandard="ngModel" required>
@@ -425,8 +433,10 @@
                               </div>
                               <br>
                               <button class="sc-button" type="button" (click)="addConnector(i)">Add more Connectors</button>
+                              <button class="sc-button" (click)="deleteConnector(i)" *ngIf="evse.connectors.length > 1">Delete Last Connector</button>
                             </div>
                             <button class="sc-button" type="button" (click)="addEvse()">Add more EVSEs</button>
+                            <button class="sc-button" (click)="deleteEvse()" *ngIf="evsesObject.evses.length > 1">Delete Last EVSE</button>
                           </div>
 
                         <div class="modal-steps" >
@@ -448,20 +458,23 @@
 
                       <div *ngIf="formStep === 'tariffs'">
                         <h2 class="modal-step-headline">Tariffs</h2>
-                        <p>Decide which tariff applies to which station. </p>
+                        <p> Tariffs define the price that an EV must pay to charge at your EVSEs and Connectors. Tariffs are
+                          defined globally, which means that they can be applied to different stations of your Share&Charge
+                          account. Select a tariff, if already available, or press edit tariffs to add more tariffs. </p>
 
                         <div *ngFor="let evse of evsesObject.evses; index as i;" class="modal-asign-tariff">
-                            <p class="form-label">{{evse.evse_id}} connectors</p>
+                            <p class="form-label">EVSE {{evse.evse_id}}</p>
                             <div>
+                              <p class="form-label">Connectors</p>
                               <div *ngFor="let connector of evse.connectors; index as a">
-                                  <span>Connector ID {{a + 1}} </span>
-                                  <span>{{connector.power_type}} </span>
-                                  <span *ngIf="connector.power_type === 'AC_1_PHASE' || connector.power_type === 'DC'" class="kWh">
+                                  <span>ID {{connector.id}} </span>
+                                  <!-- <span>{{connector.power_type}} </span> -->
+                                  <!-- <span *ngIf="connector.power_type === 'AC_1_PHASE' || connector.power_type === 'DC'" class="kWh">
                                       {{connector.voltage * connector.amperage}} kWh
                                   </span>
                                   <span *ngIf="connector.power_type === 'AC_3_PHASE'" class="kWh">
                                       {{connector.voltage * connector.amperage * 1.73}} kWh
-                                  </span>
+                                  </span> -->
                                   <select [(ngModel)]="connector.tariff_id">
                                     <option value="" selected disabled>Select Tariff</option>
                                     <option *ngFor="let tariffID of tariffObject; index as i;" value="{{tariffID.id}}">
@@ -482,13 +495,30 @@
 
                       <div *ngIf="formStep === 'addTariffs'">
                           <h2 class="modal-step-headline">Edit Tariffs</h2>
-                          <p class="form-label">Define the tariffs that your customers can choose from. They can be used on different stations as well.</p>
+                          <p>
+                            Define the tariffs that your customers can choose from. <br>
+                            Tariffs are defined globally, which means that they can be applied to different stations of your Share&Charge account.  <br>
+                            A Tariff consists of a list of one or more price components, which can further be specified by choosing the tariff type, a price and a step size.  <br>
+                            Further details about how to use the step size can be found <a href="https://github.com/ocpi/ocpi/blob/master/mod_tariffs.md">here</a>.
+                          </p>
 
 
                           <div *ngFor="let tariff of tariffObject; index as e;" class="new-station-evse">
                                 <p class="form-label">Tariff</p>
                                 <div class="sc-input-wrapper">
                                   <input type="text" [(ngModel)]="tariff.currency" placeholder="Currency" class="sc-input-33">
+                                  <select [(ngModel)]="tariff.currency" class="sc-input-33">
+                                      <option value="" selected disabled>Currency</option>
+                                      <option value="EUR">EUR</option>
+                                      <option value="SEK">SEK</option>
+                                      <option value="GBP">GBP</option>
+                                      <option value="NOK">NOK</option>
+                                      <option value="CHF">CHF</option>
+                                      <option value="USD">USD</option>
+                                      <option value="CZK">CZK</option>
+                                      <option value="JPY">JPY</option>
+                                      <option value="DKK">DKK</option>                                      
+                                    </select>   
                                   <input type="text" [(ngModel)]="tariff.id" placeholder="ID" class="sc-input-33">
                                 </div>
 
@@ -510,8 +540,10 @@
                                     </div>
                                 </div>
                                 <button class="sc-button" (click)="addPriceComponent(e)">Add Price Component</button>
+                                <button class="sc-button" (click)="deletePriceComponent(e)">Delete Last Price Component</button>
                               </div>
                               <button class="sc-button" (click)="addTariff()">Add Tariff</button>
+                              <button class="sc-button" (click)="deleteTariff()">Delete Last Tariff</button>
 
                           <div class="modal-steps" >
                             <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
@@ -611,8 +643,6 @@
                         <h2 class="modal-step-headline">Pull from Back End</h2>
                         <p>This section would call the back end and if succesfull, would redirect to the next one with the prepopulated info.</p>
                       </div>
-
-
 
                 </div>
                 <div class="modal-footer">

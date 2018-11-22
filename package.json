@@ -32,7 +32,7 @@
     "ngx-modal-dialog": "^3.0.0",
     "ngx-tabs": "0.0.13",
     "ngx-tooltip": "0.0.9",
-    "npm-check-updates": "^2.14.2",
+    "npm-check-updates": "^2.14.3",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
     "zone.js": "^0.8.26"

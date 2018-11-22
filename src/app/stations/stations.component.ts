@@ -35,9 +35,8 @@ export class StationsComponent implements OnInit {
   selectedTariffIndex: any;
   showTariffs: boolean = false;
   tariffDetail: any = [];
-
   showStationModal: boolean = false;
-  hoursQuestion: boolean = true;
+  hoursQuestion: string = 'true';
   formStep: any = 'selection';
   openingHours: any = [];
   evsesObject: any = {};
@@ -195,7 +194,7 @@ export class StationsComponent implements OnInit {
     } else if (this.formStep === 'tariffs') {
       this.formStep = 'evsesAndConnectors';
     } else if (this.formStep === 'evsesAndConnectors') {
-      if (this.hoursQuestion === true) {
+      if (this.hoursQuestion === 'true') {
         this.formStep = 'openingHoursQuestion';
       } else {
         this.formStep = 'openingHoursSelection';
@@ -236,7 +235,7 @@ export class StationsComponent implements OnInit {
       }
       this.formStep = 'openingHoursQuestion';
     } else if (this.formStep === 'openingHoursQuestion') {
-      if (this.hoursQuestion === true) {
+      if (this.hoursQuestion === 'true') {
         this.formStep = 'evsesAndConnectors';
         this.openingHoursObject.opening_times.twentyfourseven = true;
       } else {
@@ -291,6 +290,10 @@ export class StationsComponent implements OnInit {
     console.log(this.newStation.directions);
   }
 
+  deleteLanguageItem() {
+    this.newStation.directions.splice(-1,1);
+  }
+
   addEvse() {
     this.evsesObject.evses.push(
       {
@@ -301,8 +304,8 @@ export class StationsComponent implements OnInit {
             "id": "",
             "standard": "",
             "power_type": "",
-            "voltage": 0,
-            "amperage": 0,
+            "voltage": "",
+            "amperage": "",
             "tariff_id": "",
             "format": ""
           }
@@ -310,6 +313,10 @@ export class StationsComponent implements OnInit {
       }
     );
     console.log(this.evsesObject.evses);
+  }
+
+  deleteEvse(evseIndex) {
+    this.evsesObject.evses.splice(-1,1);
   }
 
   addConnector(evseIndex) {
@@ -324,6 +331,10 @@ export class StationsComponent implements OnInit {
       }
     );
     console.log(this.evsesObject.evses);
+  }
+
+  deleteConnector(evseIndex) {
+    this.evsesObject.evses[evseIndex].connectors.splice(-1,1);
   }
 
   getTariffs() {
@@ -352,6 +363,10 @@ export class StationsComponent implements OnInit {
   console.log(this.tariffObject);
   }
 
+  deleteTariff() {
+    this.tariffObject.splice(-1,1);
+  }
+
   addPriceComponent(index) {
     this.tariffObject[index].elements.push({
         "price_components": [
@@ -366,11 +381,15 @@ export class StationsComponent implements OnInit {
   console.log(this.tariffObject);
   }
 
+  deletePriceComponent(index) {
+    this.tariffObject[index].elements.splice(-1,1);
+  }
+
   addNewStation() {
     this.dataService.postStation(
       {
         id: this.newStation.id,
-        type: 'OTHER',
+        type: this.newStation.type,
         name: this.newStation.name,
         directions:  this.newStation.directions,
         address: this.newStation.address,
@@ -515,7 +534,7 @@ export class StationsComponent implements OnInit {
           "status": "",
           "connectors": [
             {
-              "id": "1",
+              "id": "",
               "standard": "",
               "format": "",
               "power_type": "",
@@ -572,7 +591,7 @@ export class StationsComponent implements OnInit {
     };
 
     this.tariffObject = [{
-      "id": "1",
+      "id": "",
       "currency": "",
       "elements": [
         {
@@ -588,8 +607,8 @@ export class StationsComponent implements OnInit {
     }];
 
     this.priceComponentObject = [{
-      "id": "1",
-      "currency": "EUR",
+      "id": "",
+      "currency": "",
       "elements": [
         {
           "price_components": [
