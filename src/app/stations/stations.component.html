@@ -539,13 +539,15 @@
                                       </div>
                                     </div>
                                 </div>
+                                <br>
                                 <button class="sc-button" (click)="addPriceComponent(e)">Add Price Component</button>
-                                <button class="sc-button" (click)="deletePriceComponent(e)">Delete Last Price Component</button>
+                                <button class="sc-button" (click)="deletePriceComponent(e)" *ngIf="tariffObject[e].elements.length > 1">Delete Last Price Component</button>
                               </div>
+                              <br>
                               <button class="sc-button" (click)="addTariff()">Add Tariff</button>
-                              <button class="sc-button" (click)="deleteTariff()">Delete Last Tariff</button>
+                              <button class="sc-button" (click)="deleteTariff()" *ngIf="tariffObject.length > 1">Delete Last Tariff</button>
 
-                          <div class="modal-steps" >
+                          <div class="modal-steps">
                             <button class="sc-button modal-button modal-button-success" (click)="previousStep()">Previous </button>
                             <button class="sc-button modal-button modal-button-success" (click)="nextStep()">
                                     Next
